@@ -1,1 +1,15 @@
+$light-shade: #d8d8e0;
+$light-accent: #73c1ce;
+$main-brand: #6153ae;
+$dark-accent: #87aecf;
+$dark-shade: #133c8f;
+
+$theme-colors: (
+    "light-shade": $light-shade,
+    "light-accent": $light-accent,
+    "main-brand": $main-brand,
+    "dark-accent": $dark-accent,
+    "dark-shade": $dark-shade
+);
+
 @import '~bootstrap/scss/bootstrap';
