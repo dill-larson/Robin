@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
 
 export default class Home extends React.Component {
     validationSchema = yup.object({
@@ -12,10 +13,19 @@ export default class Home extends React.Component {
     
     constructor(props) {
         super(props);
+        this.state = {
+            response: ''
+        }
     }
 
     handleSubmit(value) {
         console.log(value);
+        //Fake RESTful API
+        axios.get(`https://jsonplaceholder.typicode.com/posts/1`)
+            .then(res => {
+            const response = res.data;
+            this.setState({ response });
+            });
     }
 
     render() {
@@ -54,6 +64,8 @@ export default class Home extends React.Component {
                         </Form>
                     )}
                 </Formik>
+                <h6>Response:</h6>
+                <p>{JSON.stringify(this.state.response)}</p>
             </Container>
         );
     }
