@@ -11,3 +11,11 @@
 ## View the frontend
 
 Open [http://localhost:3000](http://localhost:3000)
+
+# Testing
+
+## Cypress
+
+The cypress install command has been added to the docker file.
+
+To open cypress run the command in the frontend folder  :  `npx cypress open`
