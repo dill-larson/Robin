@@ -82,7 +82,6 @@ def crawl(url, keywords, job_list):
 		return crawl(job_list[len(job_list) - random_offset]["Link"], keywords, job_list)
 
 
-
 app = Flask(_name_)
 
 
