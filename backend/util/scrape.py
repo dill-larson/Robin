@@ -1,8 +1,6 @@
 import requests
 import random
-import xlwt
 from bs4 import BeautifulSoup
-from xlwt import Workbook
 
 MAX_ENTRIES = 20
 UNWANTED_KEYWORDS = ['jobs']
@@ -79,3 +77,9 @@ def crawl(url, keywords, job_list):
 		print("\n")
 
 		return crawl(job_list[len(job_list) - random_offset]["Link"], keywords, job_list)
+
+if __name__ == '__main__':
+	job_list = []
+	keywords = ['Software', 'data science', 'Data Science', 'Data science', 'software', 'machine learing', 'intern', 'backend', 'frontend', 'ios', 'android', 'flutter']
+
+	crawl('https://www.linkedin.com/jobs/view/2346070467/?alternateChannel=search&refId=7GYFSHaW65JkJD4QvM059w%3D%3D&trackingId=vqQohV0mcM6%2BGeGhQwDKfg%3D%3D', keywords, job_list)
