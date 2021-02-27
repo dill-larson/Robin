@@ -19,8 +19,12 @@ export default class Home extends React.Component {
     }
 
     handleSubmit(value) {
-        console.log(value);
-        axios.get(value)
+        console.log(value.url);
+        axios.get('http://127.0.0.1:5000/scrape', {
+            params: {
+                url: value.url
+            }
+        })
             .then(res => {
                 const response = res.data;
                 this.setState({ response });
