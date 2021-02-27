@@ -1,4 +1,5 @@
 from flask import *
+from flask_cors import CORS
 import requests
 import random
 import json
@@ -82,8 +83,8 @@ def crawl(url, keywords, job_list):
 		return crawl(job_list[len(job_list) - random_offset]["Link"], keywords, job_list)
 
 
-app = Flask(_name_)
-
+app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def home():
@@ -102,5 +103,5 @@ def scrape():
     crawl(request.args["url"], keywords, job_list)
     return json.dumps(job_list)
 
-if _name_ == "_main_": 
+if __name__ == "__main__": 
     app.run()
