@@ -43,8 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "file-loader": "^6.2.0",
-    "webpack": "^5.24.2"
-  }
+  "devDependencies": {}
 }

@@ -16,9 +16,6 @@ RUN npm install formik --silent
 RUN npm install yup --silent
 RUN npm install axios --silent
 RUN npm install cypress --save-dev
-RUN npm install webpack --save-dec --silent
-RUN npm install file-loader --save-dev --silent
-
 
 COPY . ./
 
