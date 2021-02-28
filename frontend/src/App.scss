@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/nny3ayf.css"); //futura pt font
+
 $light-shade: #d8d8e0;
 $light-accent: #73c1ce;
 $main-brand: #6153ae;
@@ -24,4 +26,7 @@ $theme-colors: (
 
 body {
     background-color: $gray-white;
+    font-family: futura-pt, sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
