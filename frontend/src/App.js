@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route,Link } from 'react-router-dom';
 import {Row} from 'react-bootstrap';
 import './App.scss';
-import Home from './home/Home';
+
+import Home from './Home/Home';
+import SignUp from './SignUp/SignUp';
 import Login from './login/Login'
 
 function App() {
@@ -16,7 +18,8 @@ function App() {
         </ul>
       </Row>
         <Switch>
-          <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/login" component={Login}/>
         </Switch>
     </Router>
