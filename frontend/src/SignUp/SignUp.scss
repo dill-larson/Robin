@@ -1,0 +1,45 @@
+@import '../App.scss'; //for custom colors
+
+.form-signup {
+    margin-top: 2rem;
+    padding: 1rem 3rem;
+    background-color: $dark-accent;
+    border-radius: 1rem;
+}
+
+.form-header {
+    color: $white;
+}
+
+.form-label {
+    color: $white;
+}
+
+.form-input {
+    border-color: $white;
+    border-radius: 0.75rem;
+}
+
+//Override bootstrap invalid color
+.form-control.is-invalid { 
+    border-color: $brand-danger;
+}
+
+.form-error {
+    color: $brand-danger;
+}
+
+.form-submit {
+    font-weight: bolder;
+    color: $dark-shade;
+    background-color: $white;
+    border: 0;
+    border-radius: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.form-submit:hover {
+    color: $white;
+    background-color: $dark-shade;
+}
