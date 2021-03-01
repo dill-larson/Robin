@@ -29,6 +29,15 @@
     color: $brand-danger;
 }
 
+.form-link {
+    color: $main-brand;
+    font-weight: bold;
+}
+
+.form-link:hover, .form-link:active {
+    color: darken($main-brand, 15%);
+}
+
 .form-submit {
     font-weight: bolder;
     color: $dark-shade;
@@ -37,6 +46,7 @@
     border-radius: 2rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    margin-left: 155px;
 }
 
 .form-submit:hover {
