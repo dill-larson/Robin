@@ -3,9 +3,11 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import Nav from "../Components/Nav"
 import './SignUp.scss';
 
 import Page from '../Page/Page';
+import Logo from "../illustrations/Logo"
 import Checklist from '../illustrations/Checklist';
 
 export default class SignUp extends React.Component {
@@ -41,9 +43,12 @@ export default class SignUp extends React.Component {
         return (
         <Page>
             <Row>
+                <Col>
+                <Logo size="12rem"></Logo>
                 <div className="illustration">
                     <Checklist  size="25rem"/>
                 </div>
+                </Col>
                 <Col>
                     <Formik
                         initialValues={{
@@ -132,7 +137,7 @@ export default class SignUp extends React.Component {
                                     <Form.Text className="form-error">{touched.tos && errors.tos}</Form.Text>
                                 </Form.Group> */}
                                 <Row>
-                                    <p className="text-white">I already have an account - <Link to="/login" className="form-link">login</Link></p>
+                                    <p className="text-white">I already have an account - <Link to="/login" className="form-link">Login</Link></p>
                                     <Button variant="dark-shade" className="form-submit" type="submit">Next</Button>
                                 </Row>
                             </Form>

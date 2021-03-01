@@ -3,6 +3,7 @@ import { Button, Container, Form, Table } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import Nav from "../Components/Nav"
 
 export default class Home extends React.Component {
     validationSchema = yup.object({
@@ -37,6 +38,7 @@ export default class Home extends React.Component {
     render() {
         return(
             <Container>
+                <Nav></Nav>
                 <Formik
                     initialValues={{
                         url: ''

@@ -1,13 +1,13 @@
-@import '../App.scss'; //for custom colors
+@import '../App/App.scss';//for custom colors
 
 .illustration {
-    margin-top: 4.5rem;
-    margin-right: 4rem;
-    margin-left: 8rem;
+    //margin-top: 4.5rem;
+    margin-right: 5rem;
+    margin-left: 4rem;
 }
 
 .form-signup {
-    margin-top: 2rem;
+    margin-top: 6rem;
     padding: 1rem 3rem;
     background-color: $dark-accent;
     border-radius: 1rem;
@@ -56,7 +56,6 @@ input[type="checkbox"] {
 
 .form-link {
     color: $main-brand;
-    font-weight: bold;
 }
 
 .form-link:hover, .form-link:active {

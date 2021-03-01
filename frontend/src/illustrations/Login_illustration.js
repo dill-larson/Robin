@@ -1,6 +1,6 @@
 import React from 'react';
 
-import illustration from './login_illustration.svg';
+import illustration from '../svgs/login_illustration.svg';
 
 export default function Logo(props) {
     return(
