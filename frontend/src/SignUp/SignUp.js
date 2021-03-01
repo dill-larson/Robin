@@ -25,8 +25,8 @@ export default class SignUp extends React.Component {
                 [yup.ref('password'), null],
                 "Passwords must match"
             ),
-        tos: yup.bool()
-            .required("Required")
+        // tos: yup.bool()
+        //     .required("Required")
     });
 
     constructor(props) {
@@ -41,9 +41,9 @@ export default class SignUp extends React.Component {
         return (
         <Page>
             <Row>
-                <Col>
-                    <Checklist size="20rem"/>
-                </Col>
+                <div className="illustration">
+                    <Checklist  size="25rem"/>
+                </div>
                 <Col>
                     <Formik
                         initialValues={{
@@ -51,7 +51,7 @@ export default class SignUp extends React.Component {
                             email: '',
                             password: '',
                             confirm_password: '',
-                            tos: false
+                            // tos: false
                         }}
                         validationSchema={this.validationSchema}
                         onSubmit={(values) => (this.handleSubmit(values))}
@@ -105,7 +105,7 @@ export default class SignUp extends React.Component {
                                     />
                                     <Form.Text className="form-error">{touched.password && errors.password}</Form.Text>
                                 </Form.Group>
-                                <Form.Group controlId="cofirm_password">
+                                <Form.Group controlId="confirm_password">
                                     <Form.Label className="form-label">Cofirm Password</Form.Label>
                                     <Form.Control
                                         className="form-input"
@@ -118,27 +118,22 @@ export default class SignUp extends React.Component {
                                     />
                                     <Form.Text className="form-error">{touched.confirm_password && errors.confirm_password}</Form.Text>
                                 </Form.Group>
-                                <Form.Group controlId="tos">
+                                {/* ToDo: Create custom checkbox because you can't style the default */}
+                                {/* <Form.Group controlId="tos">
                                     <Form.Check 
-                                        type="checkbox" 
-                                        className="text-white"
+                                        type="checkbox"
                                         value={values.tos}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         isValid={touched.tos && !errors.tos}
                                         isInvalid={touched.tos && errors.tos}
-                                    >
-                                        I've read the <a href='#' className="text-main-brand font-weight-bold">Terms of Service</a> and <a href='#' className="text-main-brand font-weight-bold">Privacy Policy</a>
-                                    </Form.Check>
+                                    />
+                                    <Form.Label className="text-white">I've read the <a href='#' className="form-link">Terms of Service</a> and <a href='#' className="form-link">Privacy Policy</a></Form.Label>
                                     <Form.Text className="form-error">{touched.tos && errors.tos}</Form.Text>
-                                </Form.Group>
+                                </Form.Group> */}
                                 <Row>
-                                    <Col>
-                                        <p className="text-white">I already have an account - <Link to="/login" className="text-main-brand font-weight-bold">login</Link></p>
-                                    </Col>
-                                    <Col>
-                                        <Button variant="dark-shade" className="form-submit mr-auto" type="submit">Next</Button>
-                                    </Col>
+                                    <p className="text-white">I already have an account - <Link to="/login" className="form-link">login</Link></p>
+                                    <Button variant="dark-shade" className="form-submit" type="submit">Next</Button>
                                 </Row>
                             </Form>
                         )}
