@@ -17,7 +17,6 @@ RUN npm install yup --silent
 RUN npm install axios --silent
 RUN npm install cypress --save-dev
 
-
 COPY . ./
 
 CMD ["npm", "start"]
