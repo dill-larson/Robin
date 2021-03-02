@@ -10,7 +10,7 @@ export default class Home extends React.Component {
             .url("Invalid URL")
             .required("Required"),
     });
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -88,7 +88,7 @@ export default class Home extends React.Component {
                                 <td>{index+1}</td>
                                 <td>{requisition.Company}</td>
                                 <td>{requisition.Position}</td>
-                                <td><a href={requisition.Link}>Opportunity at {requisition.Company}</a></td>
+                                <td><a href={requisition.Link}>Apply at {requisition.Company}</a></td>
                                 <td>{requisition.Time}</td>
                             </tr>)
                         })}

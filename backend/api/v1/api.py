@@ -6,7 +6,7 @@ import json
 from bs4 import BeautifulSoup
 
 
-MAX_ENTRIES = 20
+MAX_ENTRIES = 200
 UNWANTED_KEYWORDS = ['jobs']
 UNWANTED_STRING_IN_COMPANY_NAME = '><'
 MAX_COMPANY_NAME_LENGTH = 30
@@ -89,7 +89,7 @@ CORS(app)
 @app.route("/")
 def home():
     print("reached")
-    return '''<html> 
+    return '''<html>
     <head> </head>
     <body> home </body>
      </html>'''
@@ -103,5 +103,5 @@ def scrape():
     crawl(request.args["url"], keywords, job_list)
     return json.dumps(job_list)
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     app.run()
