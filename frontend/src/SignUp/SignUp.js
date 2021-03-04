@@ -9,6 +9,7 @@ import './SignUp.scss';
 import Page from '../Page/Page';
 import Logo from "../illustrations/Logo"
 import Checklist from '../illustrations/Checklist';
+import UserPool from '../UserPool';
 
 export default class SignUp extends React.Component {
     validationSchema = yup.object({
@@ -36,7 +37,10 @@ export default class SignUp extends React.Component {
     }
 
     handleSubmit(value) {
-        console.log(value);
+      UserPool.signUp(value.email, value.password, [], null, (err, data) => {
+  if (err) console.error(err);
+  console.log(data);
+});
     }
 
     render() {
@@ -125,7 +129,7 @@ export default class SignUp extends React.Component {
                                 </Form.Group>
                                 {/* ToDo: Create custom checkbox because you can't style the default */}
                                 {/* <Form.Group controlId="tos">
-                                    <Form.Check 
+                                    <Form.Check
                                         type="checkbox"
                                         value={values.tos}
                                         onChange={handleChange}
