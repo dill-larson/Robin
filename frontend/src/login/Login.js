@@ -7,6 +7,8 @@ import axios from 'axios';
 import Logo from "../illustrations/Logo"
 import Nav from "../Components/Nav"
 import Illustration from "../illustrations/Login_illustration"
+import UserPool from '../UserPool';
+import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
 const pageStyle = {
     height:"100%",
@@ -28,22 +30,43 @@ export default class Login extends React.Component{
     }
 
     handleSubmit(value) {
-        console.log(value);
+      const user = new CognitoUser({
+    Username: value.email,
+    Pool: UserPool
+  });
+  const authDetails = new AuthenticationDetails({
+    Username: value.email,
+    Password: value.password
+  });
+
+  user.authenticateUser(authDetails, {
+    onSuccess: data => {
+      console.log("onSuccess:", data);
+    },
+
+    onFailure: err => {
+      console.error("onFailure:", err);
+    },
+
+    newPasswordRequired: data => {
+      console.log("newPasswordRequired:", data);
+    }
+  });
     }
     render(){
         return (
             <div style={pageStyle}>
                 <Container >
-                <Row >            
+                <Row >
                     <Col>
                      <Logo size="12rem"></Logo>
                     <div className="illustration">
                         <Illustration size = "28rem"></Illustration>
                     </div>
                     </Col>
-                    <Col style={{height:"76vh", marginTop: "10rem"}}> 
+                    <Col style={{height:"76vh", marginTop: "10rem"}}>
                         <Col >
-                        <Formik 
+                        <Formik
                             initialValues={{
                                 email: '',
                                 password: ''
@@ -63,7 +86,7 @@ export default class Login extends React.Component{
                                 <h1 style={{color:"#6153ae",fontSize: "3.5em"}}>Login</h1>
                                 <Form.Group controlId="email">
                                     <Form.Label>Email address</Form.Label>
-                                        <Form.Control 
+                                        <Form.Control
                                         className="form-input"
                                         type="email"
                                         name="email"
@@ -77,7 +100,7 @@ export default class Login extends React.Component{
                                     </Form.Group>
                                     <Form.Group controlId="password">
                                         <Form.Label >Password</Form.Label>
-                                        <Form.Control 
+                                        <Form.Control
                                         className="form-input"
                                         type="password"
                                         name="password"
@@ -97,9 +120,9 @@ export default class Login extends React.Component{
                                 </Form>
                             )}
                         </Formik>
-                            
-                        </Col>  
-                        
+
+                        </Col>
+
                     </Col>
                 </Row>
 
