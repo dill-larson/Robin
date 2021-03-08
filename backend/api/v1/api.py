@@ -82,26 +82,47 @@ def crawl(url, keywords, job_list):
 
 		return crawl(job_list[len(job_list) - random_offset]["Link"], keywords, job_list)
 
-
+3
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
-def home():
-    print("reached")
-    return '''<html>
-    <head> </head>
-    <body> home </body>
-     </html>'''
-
 @app.route('/scrape')
 def scrape():
-    print("URL -->>>" + request.args["url"])
-    print(type(request.args["url"]))
     job_list = []
     keywords = ['Software', 'data science', 'Data Science', 'Data science', 'software', 'machine learing', 'intern', 'backend', 'frontend', 'ios', 'android', 'flutter']
     crawl(request.args["url"], keywords, job_list)
     return json.dumps(job_list)
+
+@app.route('/onboard/contact', methods=['POST'])
+def onboardContact():
+	print(request.args)
+	# TODO: commit to db when cloud team creates DB schema
+	return 'contact successfully added'
+
+@app.route('/onboard/education', methods=['POST'])
+def onboardEducation():
+	print(request.args)
+	# TODO: commit to db when cloud team creates DB schema
+	return 'education successfully added'
+
+@app.route('/onboard/experience', methods=['POST'])
+def onboardExperience():
+	print(request.args)
+	# TODO: commit to db when cloud team creates DB schema
+	return 'experience successfully added'
+
+@app.route('/onboard/skills', methods=['POST'])
+def onboardSkills():
+	print(request.args)
+	# TODO: commit to db when cloud team creates DB schema
+	return 'skills added successfully'
+
+@app.route('/onboard/project', methods=['POST'])
+def onboardProject():
+	print(request.args)
+	# TODO: commit to db when cloud team creates DB schema
+	return 'projects added successfully'
+
 
 if __name__ == "__main__":
     app.run()
