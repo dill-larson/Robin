@@ -43,18 +43,5 @@ context('JobScraping', () =>{
         cy.contains('ago').should('not.exist')
     })
 
-    
-//     it('Retrive Jobs based on Attributes',() => {
-//         cy.request({
-//             url: 'http://127.0.0.1:5000/scrape?url=https://www.linkedin.com/jobs/view/2346070467/?alternateChannel=search&refId=7GYFSHaW65JkJD4QvM059w%3D%3D&trackingId=vqQohV0mcM6%2BGeGhQwDKfg%3D%3D'
-
-//         })
-//        // .then ((resp)=> {expect(resp.status). to.eq(200)})
-//         .then ((resp)=> {expect(resp.body).have.property('Position')
-
-//     })
-
-// })
-
 
 })
