@@ -60,3 +60,22 @@
     }
 }
 
+// We should use uniform styling throughout all onboarding pages, so we don't need it nested in a class
+.onboarding-form-label{
+    color: $dark-shade;
+}
+.onboarding-form-input {
+    border-color: transparent; //valid & invalid form-input use border color
+    border-radius: 0.75rem;
+    background-color: $light-shade; //not sure how I feel about the grey backgroun and white text; kinda hard to read
+    color: $white;
+}
+.onboarding-form-btn {
+    font-weight: bolder;
+    border: 0;
+    border-radius: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: 130px;
+}
+
