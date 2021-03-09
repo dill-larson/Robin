@@ -11,6 +11,7 @@ import EducationHome from '../SignUp/EducationOnboarding';
 import EducationInput from '../SignUp/EducationInputOnboarding';
 import EducationExtras from '../SignUp/EducationExtrasOnboarding';
 import ExperienceHome from '../SignUp/ExperienceOnboarding';
+import ExperienceInput from '../SignUp/ExperienceInputOnboarding';
 import Skills from '../SignUp/SkillsOnboarding';
 import ProjectsHome from '../SignUp/ProjectsOnboarding';
 
@@ -27,7 +28,7 @@ function App() {
             <Route exact path="/onboarding-education-2" component={EducationInput}/>
             <Route exact path="/onboarding-education-3" component={EducationExtras}/>
             <Route exact path="/onboarding-experience-1" component={ExperienceHome}/>
-            <Route exact path="/onboarding-experience-2" component={GeneralOnboarding}/>
+            <Route exact path="/onboarding-experience-2" component={ExperienceInput}/>
             <Route exact path="/onboarding-skills" component={Skills}/>
             <Route exact path="/onboarding-projects-1" component={ProjectsHome}/>
             <Route exact path="/onboarding-projects-2" component={GeneralOnboarding}/>
