@@ -1,17 +1,160 @@
 import React from 'react';
-
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import './Onboarding.scss';
 
 import OnboardingMenu from '../Components/OnboardingMenu';
-
 import Page from '../Page/Page';
 import Logo from "../illustrations/Logo";
 
-export default class EducationOnboarding extends React.Component {
-    
+export default class EducationInputOnboarding extends React.Component {
+    validationSchema = yup.object({
+        school: yup.string()
+            .required("Required"),
+        degree: yup.string()
+            .required("Required"),
+        field_of_study: yup.string()
+            .required("Required"),
+        start_date: yup.string()
+            .required("Required"),
+        graduation_date: yup.date()
+            .required("Required"),
+        gpa: yup.number()
+            .moreThan(0.9 ,"GPA must be higher to equal to 1.0")
+            .lessThan(5.1, "GPA must be lower or equal to 5.0")
+            .required("Required")
+    });
+
+    handleSubmit(values) {
+        console.log(values);
+    }
 
     render() {
-        return(null);
+        return(
+            <Page>
+                <Row>
+                    <Col md={4}>
+                        <OnboardingMenu current="education"/>
+                    </Col>
+                    <Col>
+                        <Row style={{justifyContent:"space-between"}}>
+                            <h1 className="onboarding-title">Education</h1>
+                            <Logo size="12rem" ></Logo>
+                        </Row>
+                        <Formik
+                            initialValues={{
+                                school: '',
+                                degree: '',
+                                field_of_study: '',
+                                start_date: '',
+                                graduation_date: '',
+                                gpa: ''
+                            }}
+                            validationSchema={this.validationSchema}
+                            onSubmit={(values) => (this.handleSubmit(values))}
+                        >
+                            {({
+                                handleSubmit,
+                                handleChange,
+                                handleBlur,
+                                values,
+                                touched,
+                                errors,
+                            }) => (
+                                <Form className="education-form" onSubmit={handleSubmit}>
+                                    <Form.Group controlId="school">
+                                        <Form.Label className="onboarding-form-label">School</Form.Label>
+                                        <Form.Control
+                                            className="onboarding-form-input"
+                                            type="text"
+                                            value={values.school}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            isValid={touched.school && !errors.school}
+                                            isInvalid={touched.school && errors.school}
+                                        />
+                                        <Form.Text className="form-error">{touched.school && errors.school}</Form.Text>
+                                    </Form.Group>
+                                    <Form.Row>
+                                        <Form.Group controlId="degree">
+                                            <Form.Label className="onboarding-form-label">Degree</Form.Label>
+                                            <Form.Control
+                                                className="onboarding-form-input"
+                                                type="text"
+                                                value={values.degree}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                isValid={touched.degree && !errors.degree}
+                                                isInvalid={touched.degree && errors.degree}
+                                            />
+                                            <Form.Text className="form-error">{touched.degree && errors.degree}</Form.Text>
+                                        </Form.Group>
+                                        <Form.Group controlId="field_of_study">
+                                            <Form.Label className="onboarding-form-label">Field of Study</Form.Label>
+                                            <Form.Control
+                                                className="onboarding-form-input"
+                                                type="text"
+                                                value={values.field_of_study}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                isValid={touched.field_of_study && !errors.field_of_study}
+                                                isInvalid={touched.field_of_study && errors.field_of_study}
+                                            />
+                                            <Form.Text className="form-error">{touched.field_of_study && errors.field_of_study}</Form.Text>
+                                        </Form.Group>
+                                    </Form.Row>
+                                    <Form.Row>
+                                        <Form.Group controlId="start_date">
+                                            <Form.Label className="onboarding-form-label">Start Datae</Form.Label>
+                                            <Form.Control
+                                                className="onboarding-form-input"
+                                                type="date"
+                                                value={values.start_date}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                isValid={touched.start_date && !errors.start_date}
+                                                isInvalid={touched.start_date && errors.start_date}
+                                            />
+                                            <Form.Text className="form-error">{touched.start_date && errors.start_date}</Form.Text>
+                                        </Form.Group>
+                                        <Form.Group controlId="graduation_date">
+                                            <Form.Label className="onboarding-form-label">Graduation Date</Form.Label>
+                                            <Form.Control
+                                                className="onboarding-form-input"
+                                                type="date"
+                                                value={values.graduation_date}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                isValid={touched.graduation_date && !errors.graduation_date}
+                                                isInvalid={touched.graduation_date && errors.graduation_date}
+                                            />
+                                            <Form.Text className="form-error">{touched.graduation_date && errors.graduation_date}</Form.Text>
+                                        </Form.Group>
+                                        <Form.Group controlId="gpa">
+                                            <Form.Label className="onboarding-form-label">GPA</Form.Label>
+                                            <Form.Control
+                                                className="onboarding-form-input"
+                                                type="numbers"
+                                                value={values.gpa}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                isValid={touched.gpa && !errors.gpa}
+                                                isInvalid={touched.gpa && errors.gpa}
+                                            />
+                                            <Form.Text className="form-error">{touched.gpa && errors.gpa}</Form.Text>
+                                        </Form.Group>
+                                    </Form.Row>
+                                    <Row>
+                                        <Button variant="brand-danger" className="onboarding-form-submit">Delete</Button>
+                                        <Button variant="light-accent text-white" className="onboarding-form-submit" type="submit">Save</Button>
+                                    </Row>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Col>
+                </Row>
+            </Page>
+        );
     }
 }
