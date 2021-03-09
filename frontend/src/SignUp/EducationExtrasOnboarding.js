@@ -90,7 +90,7 @@ export default class EducationExtrasOnboarding extends React.Component {
                                         <Form.Text className="form-error">{touched.activities && errors.activities}</Form.Text>
                                     </Form.Group>
                                     <Row>
-                                        <Button variant="light-accent text-white" className="onboarding-form-btn ml-2" type="submit">Save</Button>
+                                        <Button variant="light-accent text-white" className="onboarding-form-btn ml-auto" type="submit">Save</Button>
                                     </Row>
                                 </Form>
                             )}
