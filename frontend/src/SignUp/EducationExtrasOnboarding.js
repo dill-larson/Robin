@@ -9,7 +9,7 @@ import OnboardingMenu from '../Components/OnboardingMenu';
 import Page from '../Page/Page';
 import Logo from "../illustrations/Logo";
 
-export default class EducationInputOnboarding extends React.Component {
+export default class EducationExtrasOnboarding extends React.Component {
     validationSchema = yup.object({
         honors: yup.string(),
         rel_course_work: yup.string(),
