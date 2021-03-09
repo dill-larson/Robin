@@ -112,7 +112,7 @@ export default class EducationInputOnboarding extends React.Component {
                                     <Form.Row>
                                         <Col>
                                             <Form.Group controlId="start_date">
-                                                <Form.Label className="onboarding-form-label">Start Datae</Form.Label>
+                                                <Form.Label className="onboarding-form-label">Start Date</Form.Label>
                                                 <Form.Control
                                                     className="onboarding-form-input"
                                                     type="date"
