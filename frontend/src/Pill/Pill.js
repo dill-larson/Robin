@@ -3,7 +3,7 @@ import { Badge } from 'react-bootstrap';
 
 import './Pill.scss';
 
-export function Pill(props) {
+export default function Pill(props) {
     const [visible, setVisible] = useState(true);
 
     function handleClick(e) {
