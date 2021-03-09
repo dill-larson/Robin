@@ -40,7 +40,7 @@ export default class EducationInputOnboarding extends React.Component {
                     </Col>
                     <Col>
                         <Row style={{justifyContent:"space-between"}}>
-                            <h1 className="onboarding-title">Education</h1>
+                            <h1 className="onboarding-title">Degree</h1>
                             <Logo size="12rem" ></Logo>
                         </Row>
                         <Formik
