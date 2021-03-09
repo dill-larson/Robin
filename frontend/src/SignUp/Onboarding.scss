@@ -1,0 +1,62 @@
+@import '../App/App.scss';//for custom colors
+
+.onboarding-title{
+    padding-top: 6rem;
+    padding-left: 1rem;
+    color: $dark-shade;
+}
+.onboarding-menu{
+    display: grid;
+    background-color: $light-shade;
+    border-radius: 1rem;
+    margin-top: 4rem;
+    padding: 3rem;
+    height: 95%;
+    grid-row-gap: 5px;
+    .onboarding-form-input {
+        border-radius: 1rem;
+    }
+    .onboarding-menu-current {
+        color: $main-brand;
+        font-size:2em;  
+    }
+    .onboarding-menu-current:hover, .onboarding-menu-current:active {
+        text-decoration: none;
+        color: darken($main-brand, 15%);
+    }
+    .onboarding-menu-element{
+        color: white;
+        font-size: 1.7em;
+    }
+    .onboarding-menu-filled {
+        color: $light-accent;
+        font-size:1.7em;  
+    }
+    .onboarding-menu-filled:hover, .onboarding-menu-current:active {
+        text-decoration: none;
+        color: darken($light-accent, 15%);
+    }
+
+}
+.onboarding-general-form{
+    
+    .onboarding-form-label{
+        color: $dark-shade;
+    }
+    .onboarding-submit{
+        font-weight: bolder;
+        color: $white;
+        background-color: $light-accent;
+        border: 0;
+        border-radius: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-left: 130px;
+    }
+    
+    .onboarding-submit:hover {
+        color: $light-accent;
+        background-color: $white;
+    }
+}
+
