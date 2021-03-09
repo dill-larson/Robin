@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import './Onboarding.scss';
@@ -156,7 +157,7 @@ export default class EducationInputOnboarding extends React.Component {
                                         </Col>
                                     </Form.Row>
                                     <Row className="mb-2">
-                                        <Button variant="dark-shade" className="onboarding-form-btn ml-auto">Extras</Button>
+                                        <Button as={Link} to="/onboarding-education-3"variant="dark-shade" className="onboarding-form-btn ml-auto">Extras</Button>
                                     </Row>
                                     <Row>
                                         <Button variant="brand-danger" className="onboarding-form-btn ml-auto">Delete</Button>
