@@ -12,6 +12,7 @@ import Page from '../Page/Page';
 import Logo from "../illustrations/Logo"
 import Checklist from '../illustrations/Checklist';
 import UserPool from '../UserPool';
+import InformationFields from '../Components/InformationFields';
 
 export default class EducationOnboarding extends React.Component {
 
@@ -49,7 +50,13 @@ export default class EducationOnboarding extends React.Component {
                         <h1 className="onboarding-title">Professional History</h1>
                         <Logo size="12rem" ></Logo>
                     </Row>
+                    <Row>
+                        <InformationFields name= "Google" description= "Software Engineer"></InformationFields>
+                    </Row>
                     
+                    <Row style={{justifyContent:"flex-end"}}>
+                        <Button className="onboarding-submit" type="submit">Next</Button>
+                    </Row>
                 </Col>
 
             </Row>

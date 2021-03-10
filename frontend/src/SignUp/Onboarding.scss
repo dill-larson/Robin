@@ -2,7 +2,7 @@
 
 .onboarding-title{
     padding-top: 6rem;
-    padding-left: 1rem;
+    padding-left: 0.5rem;
     color: $dark-shade;
 }
 .onboarding-menu{
@@ -43,16 +43,7 @@
     .onboarding-form-label{
         color: $dark-shade;
     }
-    .onboarding-submit{
-        font-weight: bolder;
-        color: $white;
-        background-color: $light-accent;
-        border: 0;
-        border-radius: 2rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        margin-left: 130px;
-    }
+    
     
     .onboarding-submit:hover {
         color: $light-accent;
@@ -78,4 +69,17 @@
     padding-right: 2rem;
     margin-left: 130px;
 }
-
+.information-field-back{
+    background-color: $light-shade;
+    border-radius: 1rem;
+    height: 13rem;
+    width: 45rem;
+    margin-bottom: 3rem;
+}
+.information-field{
+    background-color: white;
+    border-radius: 1rem;
+    height: 8rem;
+    width: 43rem;
+    margin: 1rem;
+}
