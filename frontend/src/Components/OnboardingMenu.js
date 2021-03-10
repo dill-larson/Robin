@@ -1,65 +1,65 @@
-import React from 'react';
-import { Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Nav } from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
+import './Onboarding.scss';
 
-function General(){
-    return(<div className="onboarding-menu">
-        <Link to="/onboarding-general" className="onboarding-menu-current "> Contact Information</Link>
-        <p  className="onboarding-menu-element"> Education</p>
-        <p  className="onboarding-menu-element"> Experience</p>
-        <p  className="onboarding-menu-element"> Skills</p>
-        <p  className="onboarding-menu-element"> Projects</p>
-    </div >);
-}
-function Education(){
-    return(<div className="onboarding-menu">
-        <Link to="/onboarding-general" className="onboarding-menu-filled"> Contact Information</Link>
-        <Link to="/onboarding-education-1" className="onboarding-menu-current"> Education</Link>
-        <p  className="onboarding-menu-element"> Experience</p>
-        <p className="onboarding-menu-element"> Skills</p>
-        <p className="onboarding-menu-element"> Projects</p>
-    </div >);
-}
-function Experience(){
-    return(<div className="onboarding-menu">
-        <Link to="/onboarding-general" className="onboarding-menu-filled"> Contact Information</Link>
-        <Link to="/onboarding-education-1" className="onboarding-menu-filled">Education</Link>
-        <Link to="/onboarding-experience-1" className="onboarding-menu-current"> Experience</Link>
-        <p className="onboarding-menu-element"> Skills</p>
-        <p className="onboarding-menu-element"> Projects</p>
-    </div >);
-}
-function Skills(){
-    return(<div className="onboarding-menu">
-        <Link to="/onboarding-general" className="onboarding-menu-filled"> Contact Information</Link>
-        <Link to="/onboarding-education-1" className="onboarding-menu-filled"> Education</Link>
-        <Link to="/onboarding-experience-1" className="onboarding-menu-filled">Experience</Link>
-        <Link to="/onboarding-skills" className="onboarding-menu-current"> Skills</Link>
-        <p className="onboarding-menu-element"> Projects</p>
-    </div >);
-}
-function Projects(){
-    return(<div className="onboarding-menu">
-        <Link to="/onboarding-general" className="onboarding-menu-filled"> Contact Information</Link>
-        <Link to="/onboarding-education-1" className="onboarding-menu-filled">Education</Link>
-        <Link to="/onboarding-experience-1" className="onboarding-menu-filled">Experience</Link>
-        <Link to="/onboarding-skills" className="onboarding-menu-filled"> Skills</Link>
-        <Link to="/onboarding-projects-1" className="onboarding-menu-current">Projects</Link>
-    </div >);
+export default function OnboardingMenu() {
+    const location = useLocation();
+    const [progress] = useState([0,1]);
+    const links = [
+        {
+            label: "Contact Information",
+            link: "/onboarding-general"
+        },
+        {
+            label: "Education",
+            link: "/onboarding-education-1"
+        },
+        {
+            label: "Experience",
+            link: "/onboarding-experience-1"
+        },
+        {
+            label: "Skills",
+            link: "/onboarding-skills"
+        },
+        {
+            label: "Projects",
+            link: "/onboarding-projects-1"
+        }
+    ];
+
+    return (
+        <Nav activeKey={location.pathname} className="onboarding-nav flex-column">
+            {links.map((link, index) => {
+                return (
+                    <Nav.Link 
+                        as={Link} 
+                        to={link.link}
+                        eventKey={link.link}
+                        key={`onboarding-link-${index}`}
+                        className={OnboardingPageFilled(index, progress)}
+                        disabled={!progress.includes(index)}
+                    >
+                        <OnboardingNumber number={index+1}/>
+                        {link.label}
+                    </Nav.Link>
+                )
+            })}
+        </Nav>
+    );
 }
 
+function OnboardingPageFilled(index, progress) {
+    if (progress.includes(index))
+        return "onboarding-nav-link filled";
+    return "onboarding-nav-link";
+}
 
-export default function Menu(props) {
-    if(props.current == "general"){
-        return(<General></General>);
-    }else if(props.current == "education"){
-        return(<Education></Education>);
-    }else if(props.current == "experience"){
-        return(<Experience></Experience>);
-    }else if(props.current == "skills"){
-        return(<Skills></Skills>);
-    }else if(props.current == "projects"){
-        return(<Projects></Projects>);
-    }
-    
+function OnboardingNumber(props) {
+    return (
+        <div className="onboarding-nav-number mr-2">
+            {props.number}
+        </div>
+    );
 }
