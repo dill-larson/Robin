@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import Nav from "../Components/Nav"
 import './Onboarding.scss';
 
-import OnboardingMenu from '../Components/OnboardingMenu'
+import OnboardingMenu from './OnboardingMenu'
 
 import Page from '../Page/Page';
 import Logo from "../illustrations/Logo"

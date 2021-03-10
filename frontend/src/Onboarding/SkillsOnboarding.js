@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import './Onboarding.scss';
 
-import OnboardingMenu from '../Components/OnboardingMenu';
+import OnboardingMenu from './OnboardingMenu';
 import Page from '../Page/Page';
 import Logo from "../illustrations/Logo"
 
