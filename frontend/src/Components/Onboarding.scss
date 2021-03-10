@@ -17,6 +17,40 @@
 
 .onboarding-nav-link {
     font-size: 1.5rem;
+    color: $white;
+    margin: 0.5rem 0rem;
+    .onboarding-nav-number {
+        background-color: $white;
+        color: $light-shade;
+    }   
+}
+
+.onboarding-nav-link.disabled {
+    color: $white;
+    .onboarding-nav-number {
+        background-color: $white;
+        color: $light-shade;
+    }   
+}
+
+.onboarding-nav-link.active {
+    color: $main-brand !important;
+    .onboarding-nav-number {
+        background-color: $main-brand !important;
+        color: $white !important;
+    }
+}
+
+.onboarding-nav-link.active:hover, .onboarding-nav-link.active:active {
+    color: darken($main-brand, 15%) !important;
+    .onboarding-nav-number {
+        background-color: darken($main-brand, 15%) !important;
+        color: $white !important;
+    }
+}
+
+.onboarding-nav-link.filled {
+    font-size: 1.5rem;
     color: $light-accent;
     margin: 0.5rem 0rem;
     .onboarding-nav-number {
@@ -25,26 +59,10 @@
     }   
 }
 
-.onboarding-nav-link:hover, .onboarding-nav-link:active {
+.onboarding-nav-link.filled:hover, .onboarding-nav-link.filled:active {
     color: darken($light-accent, 15%);
     .onboarding-nav-number {
         background-color: darken($light-accent, 15%);
         color: $white;
     }   
-}
-
-.onboarding-nav-link.active {
-    color: $main-brand;
-    .onboarding-nav-number {
-        background-color: $main-brand;
-        color: $white;
-    }
-}
-
-.onboarding-nav-link.active:hover, .onboarding-nav-link.active:active {
-    color: darken($main-brand, 15%);
-    .onboarding-nav-number {
-        background-color: darken($main-brand, 15%);
-        color: $white;
-    }
 }
