@@ -12,7 +12,7 @@ export default function Pill(props) {
     }
 
     return visible && (
-        <Badge pill variant="dark-accent" className="text-white pill">
+        <Badge pill variant={props.variant} className="text-white pill">
             {props.name.toLowerCase()}
             <button type="button" className="close" aria-label="Close" onClick={handleClick}>
                 <span aria-hidden="true">&times;</span>
