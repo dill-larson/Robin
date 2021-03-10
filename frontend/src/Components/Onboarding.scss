@@ -1,0 +1,50 @@
+@import '../App/App.scss';
+
+.onboarding-nav {
+    background-color: $light-shade;
+    border-radius: 1rem;
+    padding: 3rem 1rem;
+}
+
+.onboarding-nav-number {
+    width: 1.75rem;
+    height: 1.75rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    display: inline-flex;
+}
+
+.onboarding-nav-link {
+    font-size: 1.5rem;
+    color: $light-accent;
+    margin: 0.5rem 0rem;
+    .onboarding-nav-number {
+        background-color: $light-accent;
+        color: $white;
+    }   
+}
+
+.onboarding-nav-link:hover, .onboarding-nav-link:active {
+    color: darken($light-accent, 15%);
+    .onboarding-nav-number {
+        background-color: darken($light-accent, 15%);
+        color: $white;
+    }   
+}
+
+.onboarding-nav-link.active {
+    color: $main-brand;
+    .onboarding-nav-number {
+        background-color: $main-brand;
+        color: $white;
+    }
+}
+
+.onboarding-nav-link.active:hover, .onboarding-nav-link.active:active {
+    color: darken($main-brand, 15%);
+    .onboarding-nav-number {
+        background-color: darken($main-brand, 15%);
+        color: $white;
+    }
+}
