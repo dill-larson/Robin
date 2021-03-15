@@ -3,43 +3,43 @@ import { Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import './Onboarding.scss';
 
-export default function OnboardingMenu() {
-    const location = useLocation();
-    const [progress] = useState([0,1]);
+
+export default function OnboardingMenu(props) {
     const links = [
         {
             label: "Contact Information",
-            link: "/onboarding-general"
+            link: "/general"
         },
         {
             label: "Education",
-            link: "/onboarding-education-1"
+            link: "/education"
         },
         {
             label: "Experience",
-            link: "/onboarding-experience-1"
+            link: "/experience"
         },
         {
             label: "Skills",
-            link: "/onboarding-skills"
+            link: "/skills"
         },
         {
             label: "Projects",
-            link: "/onboarding-projects-1"
+            link: "/projects"
         }
     ];
-
+    const location = useLocation();
+    
     return (
         <Nav activeKey={location.pathname} className="onboarding-nav flex-column">
             {links.map((link, index) => {
                 return (
                     <Nav.Link 
                         as={Link} 
-                        to={link.link}
+                        to={props.url + "" + link.link}
                         eventKey={link.link}
                         key={`onboarding-link-${index}`}
-                        className={OnboardingPageFilled(index, progress)}
-                        disabled={!progress.includes(index)}
+                        className={OnboardingPageFilled(index, props.progress)}
+                        disabled={!props.progress.includes(index)}
                     >
                         <OnboardingNumber number={index+1}/>
                         {link.label}
@@ -50,16 +50,16 @@ export default function OnboardingMenu() {
     );
 }
 
-function OnboardingPageFilled(index, progress) {
-    if (progress.includes(index))
-        return "onboarding-nav-link filled";
-    return "onboarding-nav-link";
-}
-
 function OnboardingNumber(props) {
     return (
         <div className="onboarding-nav-number mr-2">
             {props.number}
         </div>
     );
+}
+
+function OnboardingPageFilled(index, progress) {
+    if (progress.includes(index))
+        return "onboarding-nav-link filled";
+    return "onboarding-nav-link";
 }
