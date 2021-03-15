@@ -36,7 +36,7 @@ export default function OnboardingMenu(props) {
                     <Nav.Link 
                         as={Link} 
                         to={props.url + "" + link.link}
-                        eventKey={link.link}
+                        eventKey={props.url + "" + link.link}
                         key={`onboarding-link-${index}`}
                         className={OnboardingPageFilled(index, props.progress)}
                         disabled={!props.progress.includes(index)}
