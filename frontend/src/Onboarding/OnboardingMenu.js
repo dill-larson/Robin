@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import './Onboarding.scss';
-
 
 export default function OnboardingMenu(props) {
     const links = [
