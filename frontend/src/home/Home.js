@@ -90,7 +90,7 @@ export default class Home extends React.Component {
                                 <td>{index+1}</td>
                                 <td>{requisition.Company}</td>
                                 <td className="text-wrap">{requisition.Position}</td>
-                                <td><a href={requisition.Link}>Apply at {requisition.Company}</a></td>
+                                <td><a href={requisition.Link} target="_blank">Apply at {requisition.Company}</a></td>
                                 <td>{requisition.Time}</td>
                             </tr>)
                         })}
