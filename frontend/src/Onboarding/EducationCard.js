@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 export default function EducationCard(props) {
     return ( 
-        <Card style={{width: "100%"}}>
+        <Card className="onboarding-card">
             <Row>
-                <Col md={10}>
+                <Col md={7}>
                     <Card.Body>
                         <Card.Title>{props.degree} in <span className="text-main-brand">{props.field_of_study}</span></Card.Title>
                         <Card.Subtitle>{props.school} - {props.start_date} to {props.graduation_date}</Card.Subtitle>
@@ -16,9 +16,15 @@ export default function EducationCard(props) {
                 <Col className="mt-3">
                     <Button 
                         variant="light-shade" 
-                        className="onboarding-form-btn ml-auto"
+                        className="onboarding-form-btn"
                     >
                         Edit
+                    </Button>
+                    <Button 
+                        variant="brand-danger" 
+                        className="onboarding-form-btn mt-2"
+                    >
+                        Delete
                     </Button>
                 </Col>
             </Row>
