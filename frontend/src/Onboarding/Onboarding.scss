@@ -1,10 +1,12 @@
 @import '../App/App.scss';//for custom colors
 
 .onboarding-title{
-    padding-top: 6rem;
+    padding-top: 4rem;
     padding-left: 0.5rem;
     color: $dark-shade;
 }
+
+//Onboarding Nav:
 .onboarding-nav {
     background-color: $light-shade;
     border-radius: 1rem;
@@ -71,28 +73,14 @@
         color: $white;
     }   
 }
-.onboarding-general-form{
-    
-    .onboarding-form-label{
-        color: $dark-shade;
-    }
-    
-    
-    .onboarding-submit:hover {
-        color: $light-accent;
-        background-color: $white;
-    }
-}
 
-// We should use uniform styling throughout all onboarding pages, so we don't need it nested in a class
+//Onboarding Form:
 .onboarding-form-label{
     color: $dark-shade;
 }
 .onboarding-form-input {
     border-color: transparent; //valid & invalid form-input use border color
     border-radius: 0.75rem;
-    //background-color: $light-shade; //not sure how I feel about the grey backgroun and white text; kinda hard to read
-    //color: $white;
 }
 .onboarding-form-btn {
     font-weight: bolder;
@@ -102,17 +90,17 @@
     padding-right: 2rem;
     margin-left: 130px;
 }
-.information-field-back{
+
+//Onboarding Card
+.onboarding-card {
+    width: 100%;
+    border: transparent;
+    margin: 0.5rem 0rem;
+}
+
+.onboarding-card-display {
     background-color: $light-shade;
     border-radius: 1rem;
-    height: 13rem;
-    width: 45rem;
-    margin-bottom: 3rem;
-}
-.information-field{
-    background-color: white;
-    border-radius: 1rem;
-    height: 8rem;
-    width: 43rem;
-    margin: 1rem;
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
 }
