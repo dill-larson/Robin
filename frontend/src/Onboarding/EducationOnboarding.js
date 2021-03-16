@@ -1,67 +1,75 @@
 import React from 'react';
-import { Button, Col, Form, Row, InputGroup,FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import Nav from "../Components/Nav"
+import { Button, Card, Row } from 'react-bootstrap';
+import { Link, Switch, Route } from 'react-router-dom';
 import './Onboarding.scss';
 
-import OnboardingMenu from '../Components/OnboardingMenu'
-
-import Page from '../Page/Page';
-import Logo from "../illustrations/Logo"
-import Checklist from '../illustrations/Checklist';
-import UserPool from '../UserPool';
-import InformationFields from '../Components/InformationFields';
+import Logo from "../illustrations/Logo";
+import EducationCard from './EducationCard';
 
 export default class EducationOnboarding extends React.Component {
-
-    validationSchema = yup.object({
-        name: yup.string()
-            .required("Required"),
-        email: yup.string()
-            .email("Invalid email")
-            .required("Required"),
-        phone: yup.number("No special characters")
-            .min(1000000000, "Please input a valid phone number, no special characters")
-            .required("Required"),
-        website: yup.string().url("Please input a valid url"),
-        // tos: yup.bool()
-        //     .required("Required")
-    });
-
     constructor(props) {
         super(props);
+        this.state = {
+            educations: [
+                {
+                    degree: 'Bachelors of Science',
+                    field_of_study: 'Computer Science',
+                    school: 'San Jose State University',
+                    gpa: '4.0',
+                    start_date: 'August 2018',
+                    graduation_date: 'May 2021'
+                },
+            ],
+        };
     }
 
-    handleSubmit(value) {
-
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onUserDataUpdate(null, "education");
     }
 
     render() {
         return (
-        <Page>
-            <Row>
-                <Col md={4}> 
-                <OnboardingMenu current="education"></OnboardingMenu>
-                </Col>
-                <Col>
-                    <Row style={{justifyContent:"space-between"}}>
-                        <h1 className="onboarding-title">Degrees</h1>
-                        <Logo size="12rem" ></Logo>
-                    </Row>
-                    <Row>
-                        <InformationFields name= "Computer Science Bs." description= "San Jose State University"></InformationFields>
-                    </Row>
-                    
-                    <Row style={{justifyContent:"flex-end"}}>
-                        <Button className="onboarding-submit" type="submit">Next</Button>
-                    </Row>
-                </Col>
-
-            </Row>
-           
-        </Page>
-        )
+            <div>
+                <Row style={{justifyContent:"space-between"}}>
+                    <h1 className="onboarding-title">Degrees</h1>
+                    <Logo size="12rem" ></Logo>
+                </Row>
+                <Row className="onboarding-card-display">
+                    {this.state.educations.map(edu => {
+                        return (
+                        <EducationCard 
+                            degree={edu.degree}
+                            field_of_study={edu.field_of_study}
+                            school={edu.school}
+                            gpa={edu.gpa}
+                            start_date={edu.start_date}
+                            graduation_date={edu.graduation_date}
+                        />
+                        );
+                    })}
+                    {/* Add icon*/}
+                    <Card className="onboarding-card">
+                        <Row className="py-2 px-5">
+                            <Button 
+                                variant="light-shade" 
+                                className="onboarding-form-btn ml-auto"
+                            >
+                                Add
+                            </Button>
+                        </Row>
+                    </Card>
+                </Row>
+                <Row>
+                    <Button 
+                        className="onboarding-form-btn text-white ml-auto" 
+                        variant="light-accent"
+                        onClick={(e) => this.handleSubmit(e)}
+                    >
+                        Next
+                    </Button>
+                </Row>
+            </div>
+        );
     }
 }
