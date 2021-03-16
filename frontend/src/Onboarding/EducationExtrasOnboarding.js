@@ -53,8 +53,8 @@ export default class EducationExtrasOnboarding extends React.Component {
                                     <Form.Group controlId="honors">
                                         <Form.Label className="onboarding-form-label">Honors</Form.Label>
                                         <Form.Control
+                                            as="textarea"
                                             className="onboarding-form-input"
-                                            type="text"
                                             value={values.honors}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -66,8 +66,8 @@ export default class EducationExtrasOnboarding extends React.Component {
                                     <Form.Group controlId="rel_course_work">
                                         <Form.Label className="onboarding-form-label">Relevant Course Work</Form.Label>
                                         <Form.Control
+                                            as="textarea"
                                             className="onboarding-form-input"
-                                            type="text"
                                             value={values.rel_course_work}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -79,8 +79,8 @@ export default class EducationExtrasOnboarding extends React.Component {
                                     <Form.Group controlId="activities">
                                         <Form.Label className="onboarding-form-label">Activities</Form.Label>
                                         <Form.Control
+                                            as="textarea"
                                             className="onboarding-form-input"
-                                            type="text"
                                             value={values.activities}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
