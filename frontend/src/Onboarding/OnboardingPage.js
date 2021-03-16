@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
+import ProjectsOnboarding from './ProjectsOnboarding';
+import SkillsOnboarding from './SkillsOnboarding';
+import ExperienceOnboarding from './ExperienceOnboarding';
 import EducationOnboarding from './EducationOnboarding';
 import GeneralOnboarding from './GeneralOnboarding';
 import OnboardingMenu from './OnboardingMenu';
@@ -35,9 +38,15 @@ export default function OnboardingPage(props) {
                         <Route path={`${path}/education`}>
                             <EducationOnboarding onUserDataUpdate={handleUserDataUpdate}/>
                         </Route>
-                        <Route path={`${path}/experience`} component={GeneralOnboarding} />
-                        <Route path={`${path}/skills`} component={GeneralOnboarding} />
-                        <Route path={`${path}/projects`} component={GeneralOnboarding} />
+                        <Route path={`${path}/experience`}>
+                            <ExperienceOnboarding onUserDataUpdate={handleUserDataUpdate}/>
+                        </Route>
+                        <Route path={`${path}/skills`}>
+                            <SkillsOnboarding onUserDataUpdate={handleUserDataUpdate}/>
+                        </Route>
+                        <Route path={`${path}/projects`}>
+                            <ProjectsOnboarding onUserDataUpdate={handleUserDataUpdate}/>
+                        </Route>
                     </Switch>
                 </Col>
             </Row>
