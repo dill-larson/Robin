@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Onboarding.scss';
 
 import Logo from "../illustrations/Logo";
@@ -50,7 +51,9 @@ export default class EducationOnboarding extends React.Component {
                     {/* Add icon*/}
                     <Card className="onboarding-card">
                         <Row className="py-2 px-5">
-                            <Button 
+                            <Button
+                                as={Link}
+                                to="/onboarding/experience/create"
                                 variant="light-shade" 
                                 className="onboarding-form-btn ml-auto"
                             >

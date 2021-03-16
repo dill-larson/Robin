@@ -46,7 +46,9 @@ export default class ProjectsOnboarding extends React.Component {
                     {/* Add icon*/}
                     <Card className="onboarding-card">
                         <Row className="py-2 px-5">
-                            <Button 
+                            <Button
+                                as={Link}
+                                to="/onboarding/projects/create"
                                 variant="light-shade" 
                                 className="onboarding-form-btn ml-auto"
                             >
