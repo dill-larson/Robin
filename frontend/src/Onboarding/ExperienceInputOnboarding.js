@@ -14,7 +14,7 @@ export default class EducationInputOnboarding extends React.Component {
             .required("Required"),
         city: yup.string()
             .required("Required"),
-        start_date: yup.string()
+        start_date: yup.date()
             .required("Required"),
         end_date: yup.date(),
         rel_achievements: yup.string()
@@ -51,7 +51,7 @@ export default class EducationInputOnboarding extends React.Component {
                         touched,
                         errors,
                     }) => (
-                        <Form className="experience-form" onSubmit={handleSubmit}>
+                        <Form className="onboarding-form" onSubmit={handleSubmit}>
                             <Form.Group controlId="company">
                                 <Form.Label className="onboarding-form-label">Company</Form.Label>
                                 <Form.Control
