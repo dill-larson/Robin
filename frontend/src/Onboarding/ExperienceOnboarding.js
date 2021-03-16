@@ -1,67 +1,74 @@
 import React from 'react';
-import { Button, Col, Form, Row, InputGroup,FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import Nav from "../Components/Nav"
+import { Button, Card, Row } from 'react-bootstrap';
 import './Onboarding.scss';
 
-import OnboardingMenu from '../Components/OnboardingMenu'
-
-import Page from '../Page/Page';
-import Logo from "../illustrations/Logo"
-import Checklist from '../illustrations/Checklist';
-import UserPool from '../UserPool';
-import InformationFields from '../Components/InformationFields';
+import Logo from "../illustrations/Logo";
+import JobCard from './JobCard';
 
 export default class EducationOnboarding extends React.Component {
-
-    validationSchema = yup.object({
-        name: yup.string()
-            .required("Required"),
-        email: yup.string()
-            .email("Invalid email")
-            .required("Required"),
-        phone: yup.number("No special characters")
-            .min(1000000000, "Please input a valid phone number, no special characters")
-            .required("Required"),
-        website: yup.string().url("Please input a valid url"),
-        // tos: yup.bool()
-        //     .required("Required")
-    });
-
     constructor(props) {
         super(props);
+        this.state = {
+            jobs: [
+                {
+                    company: 'Google',
+                    position: 'Software Engineer',
+                    city: 'San Francisco',
+                    start_date: 'Jan 2020',
+                    end_date: 'Present',
+                    rel_achievements: ''
+                },
+            ]
+        };
     }
 
-    handleSubmit(value) {
-
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onUserDataUpdate(null, "experience");
     }
 
     render() {
         return (
-        <Page>
-            <Row>
-                <Col md={4}> 
-                <OnboardingMenu current="experience"></OnboardingMenu>
-                </Col>
-                <Col>
-                    <Row style={{justifyContent:"space-between"}}>
-                        <h1 className="onboarding-title">Professional History</h1>
-                        <Logo size="12rem" ></Logo>
-                    </Row>
-                    <Row>
-                        <InformationFields name= "Google" description= "Software Engineer"></InformationFields>
-                    </Row>
-                    
-                    <Row style={{justifyContent:"flex-end"}}>
-                        <Button className="onboarding-submit" type="submit">Next</Button>
-                    </Row>
-                </Col>
-
-            </Row>
-           
-        </Page>
-        )
+            <div>
+                <Row style={{justifyContent:"space-between"}}>
+                    <h1 className="onboarding-title">Professional History</h1>
+                    <Logo size="12rem" ></Logo>
+                </Row>
+                <Row className="onboarding-card-display">
+                    {this.state.jobs.map(job => {
+                        return (
+                        <JobCard 
+                            company={job.company}
+                            position={job.position}
+                            city={job.city}
+                            start_date={job.start_date}
+                            end_date={job.end_date}
+                            rel_achievements={job.rel_achievements}
+                        />
+                        );
+                    })}
+                    {/* Add icon*/}
+                    <Card className="onboarding-card">
+                        <Row className="py-2 px-5">
+                            <Button 
+                                variant="light-shade" 
+                                className="onboarding-form-btn ml-auto"
+                            >
+                                Add
+                            </Button>
+                        </Row>
+                    </Card>
+                </Row>
+                <Row>
+                    <Button 
+                        className="onboarding-form-btn text-white ml-auto" 
+                        variant="light-accent"
+                        onClick={(e) => this.handleSubmit(e)}
+                    >
+                        Next
+                    </Button>
+                </Row>
+            </div>
+        );
     }
 }
