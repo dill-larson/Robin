@@ -1,23 +1,25 @@
 import React from 'react';
 import { Button, Form, Row } from 'react-bootstrap';
-import { Formik } from 'formik';
-import * as yup from 'yup';
 import './Onboarding.scss';
 
-import Logo from "../illustrations/Logo"
+import Logo from "../illustrations/Logo";
 
-export default class SkillsOnboarding extends React.Component {
-    validationSchema = yup.object({
-        skills: yup.string()
-            .required("Required"),
-    });
-    
+export default class SkillsOnboarding extends React.Component {   
     constructor(props) {
         super(props);
+        this.state = {
+            skills_input: ''
+        };
     }
 
-    handleSubmit(value) {
-        this.props.onUserDataUpdate(value, "skills");
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onUserDataUpdate(e, "skills");
+    }
+
+    handleChange(e) {
+        e.preventDefault();
+        this.setState({skills_input: e.target.value});
     }
 
     render() {
@@ -27,48 +29,27 @@ export default class SkillsOnboarding extends React.Component {
                     <h1 className="onboarding-title">Skills</h1>
                     <Logo size="12rem" ></Logo>
                 </Row>
-                <Formik
-                    initialValues={{
-                        skills: ''
-                        
-                    }}
-                    validationSchema={this.validationSchema}
-                    onSubmit={(values) => (this.handleSubmit(values))}
-                >
-                    {({
-                        handleSubmit,
-                        handleChange,
-                        handleBlur,
-                        values,
-                        touched,
-                        errors,
-                    }) => (
-                        <Form className="onboarding-form" onSubmit={handleSubmit}>
-                            <Form.Group controlId="skills">
-                                <Form.Label className="onboarding-form-label">Skills</Form.Label>
-                                <Form.Control
-                                    className="onboarding-form-input"
-                                    type="text"
-                                    value={values.skills}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isValid={touched.skills && !errors.skills}
-                                    isInvalid={touched.skills && errors.skills}
-                                />
-                                <Form.Text className="form-error">{touched.skills && errors.skills}</Form.Text>
-                            </Form.Group>
-                            <Row>
-                                <Button 
-                                    type="submit"
-                                    variant="light-accent" 
-                                    className="onboarding-form-btn text-white ml-auto"
-                                >
-                                    Next
-                                </Button>
-                            </Row>
-                        </Form>
-                    )}
-                </Formik>
+                <Form className="onboarding-form" onSubmit={(e) => this.handleSubmit(e)}>
+                    <Form.Group controlId="skills_input">
+                        <Form.Label className="onboarding-form-label">Skills</Form.Label>
+                        <Form.Text className="text-muted">Separated by commas (",")</Form.Text>
+                        <Form.Control
+                            as="textarea"
+                            className="onboarding-form-input"
+                            value={this.state.skills_input}
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                    </Form.Group>
+                    <Row>
+                        <Button 
+                            type="submit"
+                            variant="light-accent" 
+                            className="onboarding-form-btn text-white ml-auto"
+                        >
+                            Next
+                        </Button>
+                    </Row>
+                </Form>
             </div>
         );
     }
