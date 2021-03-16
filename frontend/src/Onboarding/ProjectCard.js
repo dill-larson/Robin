@@ -9,7 +9,7 @@ export default function ProjectCard(props) {
                 <Col md={7}>
                     <Card.Body>
                         <Card.Title><span className="text-main-brand">{props.name}</span></Card.Title>
-                        <Card.Subtitle>{props.start_date} to {props.graduation_date}</Card.Subtitle>
+                        <Card.Subtitle>{props.start_date} to {props.end_date}</Card.Subtitle>
                         <Card.Body>{props.about}</Card.Body>
                     </Card.Body>
                 </Col>
