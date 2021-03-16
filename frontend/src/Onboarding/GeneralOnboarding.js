@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Col, Form, Row, InputGroup,FormControl } from 'react-bootstrap';
+import axios from 'axios';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import './Onboarding.scss';
@@ -26,6 +27,14 @@ export default class GeneralOnboarding extends React.Component {
 
     handleSubmit(value) {
         this.props.onUserDataUpdate(value, "general");
+        var uri = `http://127.0.0.1:5000/onboard/contact?name=${value.name}&email=${value.email}&phone=${value.phone}&website=${value.website}`;
+        axios.post(uri, {})
+            .then(res => { //successful PUT
+                console.log(res.data);
+            })
+            .catch(error => { //error occurred
+                console.error(error);
+            });
     }
 
     render() {
