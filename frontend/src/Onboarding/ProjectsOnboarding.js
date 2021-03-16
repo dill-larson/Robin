@@ -1,69 +1,70 @@
 import React from 'react';
-import { Button, Col, Form, Row, InputGroup,FormControl } from 'react-bootstrap';
+import { Button, Card, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import Nav from "../Components/Nav"
 import './Onboarding.scss';
 
-import OnboardingMenu from '../Components/OnboardingMenu'
-
-import Page from '../Page/Page';
-import Logo from "../illustrations/Logo"
-import Checklist from '../illustrations/Checklist';
-import UserPool from '../UserPool';
-import InformationFields from '../Components/InformationFields';
-
-
-export default class EducationOnboarding extends React.Component {
-
-    validationSchema = yup.object({
-        name: yup.string()
-            .required("Required"),
-        email: yup.string()
-            .email("Invalid email")
-            .required("Required"),
-        phone: yup.number("No special characters")
-            .min(1000000000, "Please input a valid phone number, no special characters")
-            .required("Required"),
-        website: yup.string().url("Please input a valid url"),
-        // tos: yup.bool()
-        //     .required("Required")
-    });
-
+import Logo from "../illustrations/Logo";
+import ProjectCard from './ProjectCard';
+export default class ProjectsOnboarding extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            projects: [
+                {
+                    name: 'Robin',
+                    start_date: 'January 2021',
+                    end_date: 'May 2021',
+                    about: 'AI resume builder'
+                }
+            ],
+        };
     }
 
-    handleSubmit(value) {
-
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onUserDateUpdate(null, "projects");
     }
 
     render() {
         return (
-        <Page>
-            <Row>
-                <Col md={4}> 
-                <OnboardingMenu current="projects"></OnboardingMenu>
-                </Col>
-                <Col>
-                    <Row style={{justifyContent:"space-between"}}>
-                        <h1 className="onboarding-title">Projects</h1>
-                        <Logo size="12rem" ></Logo>
-                    </Row>
-                    <Row>
-                        <InformationFields name= "Robin" description= "Worked on the security testing of the application"></InformationFields>
-                    </Row>
-                    
-                    <Row style={{justifyContent:"flex-end"}}>
-                        <Button className="onboarding-submit" type="submit">Next</Button>
-                    </Row>
-                    
-                </Col>
-
-            </Row>
-           
-        </Page>
-        )
+            <div>
+                <Row style={{justifyContent:"space-between"}}>
+                    <h1 className="onboarding-title">Projects</h1>
+                    <Logo size="12rem" ></Logo>
+                </Row>
+                <Row className="onboarding-card-display">
+                    {this.state.projects.map(project => {
+                        return (
+                        <ProjectCard 
+                            name={project.name}
+                            start_date={project.start_date}
+                            end_date={project.end_date}
+                            about={project.about}
+                        />
+                        );
+                    })}
+                    {/* Add icon*/}
+                    <Card className="onboarding-card">
+                        <Row className="py-2 px-5">
+                            <Button 
+                                variant="light-shade" 
+                                className="onboarding-form-btn ml-auto"
+                            >
+                                Add
+                            </Button>
+                        </Row>
+                    </Card>
+                </Row>
+                <Row>
+                    <Button 
+                        className="onboarding-form-btn text-white ml-auto" 
+                        variant="light-accent"
+                        onClick={(e) => this.handleSubmit(e)}
+                    >
+                        Next
+                    </Button>
+                </Row>      
+            </div>
+        );
     }
 }
