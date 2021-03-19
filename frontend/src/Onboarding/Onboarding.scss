@@ -79,7 +79,8 @@
     color: $dark-shade;
 }
 .onboarding-form-input {
-    border-color: transparent; //valid & invalid form-input use border color
+    //border color adds readability 
+    //border-color: transparent; //valid & invalid form-input use border color
     border-radius: 0.75rem;
 }
 .onboarding-form-btn {

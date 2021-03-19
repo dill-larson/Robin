@@ -3,7 +3,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import './Onboarding.scss';
-
+import axios from 'axios';
 import Logo from "../illustrations/Logo";
 
 export default class EducationInputOnboarding extends React.Component {
@@ -21,7 +21,16 @@ export default class EducationInputOnboarding extends React.Component {
     });
 
     handleSubmit(values) {
-        console.log(values);
+        const position ={
+            company: values.company,
+            position: values.position,
+            start_date: values.start_date,
+            end_date: values.end_date,
+            relevant_achievements: values.rel_achievements     
+        }
+        axios.post('http://127.0.0.1:5000/onboard/experience',{
+            position}).then(res=>{console.log(res)
+            console.log(res.data);})
     }
 
     render() {

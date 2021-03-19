@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import './Onboarding.scss';
 
 import Logo from "../illustrations/Logo";
+import axios from 'axios';
 
 export default class EducationInputOnboarding extends React.Component {
     validationSchema = yup.object({
@@ -26,7 +27,17 @@ export default class EducationInputOnboarding extends React.Component {
     });
 
     handleSubmit(values) {
-        console.log(values);
+        const degree = {
+            school: values.school,
+            degree: values.degree, 
+            field_of_study: values.field_of_study,
+            start_date: values.start_date,
+            graduation_date: values.graduation_date,
+            gpa:values.gpa
+        }
+        axios.post('http://127.0.0.1:5000/onboard/education',{
+            degree}).then(res=>{console.log(res)
+            console.log(res.data);})
     }
 
     render() {

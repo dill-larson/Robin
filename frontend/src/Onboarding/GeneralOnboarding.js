@@ -4,10 +4,13 @@ import axios from 'axios';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import './Onboarding.scss';
+import { Redirect, Route } from 'react-router-dom'
 
 import Logo from "../illustrations/Logo";
 
+
 export default class GeneralOnboarding extends React.Component {
+
     validationSchema = yup.object({
         name: yup.string()
             .required("Required"),
@@ -23,18 +26,42 @@ export default class GeneralOnboarding extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            informationPosted: false
+        }
     }
-
-    handleSubmit(value) {
+    postValues(value){
         this.props.onUserDataUpdate(value, "general");
-        var uri = `http://127.0.0.1:5000/onboard/contact?name=${value.name}&email=${value.email}&phone=${value.phone}&website=${value.website}`;
-        axios.post(uri, {})
+        
+        axios.post("http://127.0.0.1:5000/onboard/contact", {
+            name: value.name,
+            email: value.email,
+            webstie: value.website,
+            linkedin: value.linkedin,
+            github: value.github
+        })
             .then(res => { //successful PUT
-                console.log(res.data);
+                console.log(res)
+                this.setState({informationPosted:true})
+                
             })
             .catch(error => { //error occurred
                 console.error(error);
             });
+        
+    }
+
+
+    handleSubmit(value) {
+        this.postValues(value)
+        if(this.state.informationPosted){
+ 
+                return <Redirect to='/onboarding/education'/>
+   
+            
+        }
+       
+        
     }
 
     render() {
@@ -124,27 +151,32 @@ export default class GeneralOnboarding extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                            <Form.Group as={Col} controlId="linkedin">
                                     <Form.Label className="onboarding-form-label">LinkedIn</Form.Label>
                                     <InputGroup className="onboarding-form-input">
-                                        <InputGroup.Prepend>
+                                        <InputGroup.Prepend className="onboarding-form-label">
                                         <InputGroup.Text>@</InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <FormControl 
-                                            value={values.linkedin}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur} 
-                                            placeholder="Username"
-                                        />
+                                    <Form.Control
+                                        className="onboarding-form-input"
+                                        type="text"
+                                        placeholder="Username"
+                                        value={values.linkedin}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    
+                                    />
                                     </InputGroup>
+                                    <Form.Text className="form-error">{touched.linkedin && errors.linkedin}</Form.Text>
                                 </Form.Group>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="github">
                                     <Form.Label className="onboarding-form-label">Github</Form.Label>
-                                    <InputGroup className="onboarding-form-input">
+                                    <InputGroup >
                                         <InputGroup.Prepend>
                                         <InputGroup.Text>@</InputGroup.Text>
                                         </InputGroup.Prepend>
                                         <FormControl 
+                                            className="onboarding-form-input"
                                             value={values.github}
                                             onChange={handleChange}
                                             onBlur={handleBlur} 
@@ -166,6 +198,7 @@ export default class GeneralOnboarding extends React.Component {
                     )}
                 </Formik>
         </div>
+        
         )
     }
 }
