@@ -1,3 +1,4 @@
+from typing import Tuple
 from flask import *
 from flask_cors import CORS
 import requests
@@ -96,30 +97,40 @@ def scrape():
 @app.route('/onboard/contact', methods=['POST'])
 def onboardContact():
 	print(request.args)
+	user = request.get_json(silent=True)
+	print(user)
 	# TODO: commit to db when cloud team creates DB schema
 	return 'contact successfully added'
 
 @app.route('/onboard/education', methods=['POST'])
 def onboardEducation():
-	print(request.args)
+	#gets single degree object as it is created, needs to be added to a list
+	degree = request.get_json(silent=True)
+	print(degree)
 	# TODO: commit to db when cloud team creates DB schema
 	return 'education successfully added'
 
 @app.route('/onboard/experience', methods=['POST'])
 def onboardExperience():
-	print(request.args)
+	#gets experience object as its created, needs to be added to a list
+	experience = request.get_json(silent=True)
+	print(experience)
 	# TODO: commit to db when cloud team creates DB schema
 	return 'experience successfully added'
 
 @app.route('/onboard/skills', methods=['POST'])
 def onboardSkills():
-	print(request.args)
+	#gets skills divided by commas
+	skills = request.get_json(silent=True)
+	print(skills)
 	# TODO: commit to db when cloud team creates DB schema
 	return 'skills added successfully'
 
 @app.route('/onboard/project', methods=['POST'])
 def onboardProject():
-	print(request.args)
+	#gets project object as its created, needs to be added to a list
+	project = request.get_json(silent=True)
+	print(project)
 	# TODO: commit to db when cloud team creates DB schema
 	return 'projects added successfully'
 
