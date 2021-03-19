@@ -7,7 +7,7 @@ import Search from '../Search/Search';
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import OnboardingPage from '../Onboarding/OnboardingPage';
-
+import Verify from '../SignUp/Verify';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/login" component={Login}/>
             <Route path="/onboarding" component={OnboardingPage}/>
+            <Route path="/verify-email" component={Verify}/>
         </Switch>
     </Router>
   );
