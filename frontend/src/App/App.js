@@ -8,6 +8,7 @@ import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import OnboardingPage from '../Onboarding/OnboardingPage';
 import Verify from '../SignUp/Verify';
+import WrongLogin from '../Login/WrongLogin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/login" component={Login}/>
             <Route path="/onboarding" component={OnboardingPage}/>
             <Route path="/verify-email" component={Verify}/>
+            <Route path="/login-retry" component={WrongLogin}/>
         </Switch>
     </Router>
   );

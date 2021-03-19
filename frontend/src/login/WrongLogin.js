@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import Logo from "../illustrations/Logo"
 import Nav from "../Components/Nav"
-import Illustration from "../illustrations/Login_illustration"
+import Illustration from "../illustrations/Error_illustration"
 import UserPool from '../UserPool';
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
@@ -15,6 +15,7 @@ const pageStyle = {
     color:"white",
     backgroundColor:"#d8d8e0"
 }
+
 export default class Login extends React.Component{
     validationSchema = yup.object({
         email: yup.string()
@@ -62,22 +63,22 @@ export default class Login extends React.Component{
         if(this.state.logedIn === true){
             return <Redirect to='/search'></Redirect>
         }
-        if(this.state.wrongPassword === true){
-            return <Redirect to='/login-retry'></Redirect>
-        }
         return (
             <div style={pageStyle}>
-                <Container >
+                <Container>
+                <Row>
+                    <Logo size="12rem"></Logo>
+                </Row>
                 <Row >
                     <Col>
-                     <Logo size="12rem"></Logo>
-                    <div className="illustration">
-                        <Illustration size = "28rem"></Illustration>
-                    </div>
+                    <Illustration size="30rem"></Illustration>
                     </Col>
-                    <Col style={{height:"76vh", marginTop: "10rem"}}>
+                    <Col style={{height:"76vh"}}>
                         <Col >
-                        
+                        <h1 style={{color:"#6153ae",fontSize: "3.5em"}}>Login</h1>
+                        <div style={{backgroundColor:"#ff6666", borderRadius:"1rem", padding:"0.7rem"}}>
+                            <p >The username and password you entered did not match our records. Double-check and try again.</p>
+                        </div>
                         <Formik
                             initialValues={{
                                 email: '',
@@ -95,7 +96,8 @@ export default class Login extends React.Component{
                                 handleSubmit
                             }) => (
                             <Form onSubmit={handleSubmit} >
-                                <h1 style={{color:"#6153ae",fontSize: "3.5em"}}>Login</h1>
+                                
+                                
                                 <Form.Group controlId="email">
                                     <Form.Label>Email address</Form.Label>
                                         <Form.Control
@@ -121,10 +123,7 @@ export default class Login extends React.Component{
                                         value={values.password}
                                         isInvalid={touched.password && errors.password}
                                          />
-                                        <Form.Text className="form-error">{touched.password && errors.password}</Form.Text>
-
-                                       
-                                        
+                                        <Form.Text className="form-error">{touched.password && errors.password}</Form.Text> 
                                     </Form.Group>
                                     <Row style={{justifyContent:"space-between"}}>
                                         <p>I don't have an account yet - <Link to="/signup" className="form-link"> Sign Up</Link></p>
@@ -139,6 +138,7 @@ export default class Login extends React.Component{
                         </Col>
 
                     </Col>
+            
                 </Row>
 
             </Container>
