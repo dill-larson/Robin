@@ -4,12 +4,15 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
 import Nav from "../Components/Nav"
+import '../Home/Home.scss'
 
 export default class Search extends React.Component {
     validationSchema = yup.object({
         url: yup.string()
             .url("Invalid URL")
-            .required("Required"),
+            ,
+        skills: yup.string()
+            
     });
 
     constructor(props) {
@@ -21,9 +24,12 @@ export default class Search extends React.Component {
 
     handleSubmit(value) {
         console.log(value.url);
+        console.log(value.skills);
         axios.get('http://127.0.0.1:5000/scrape', {
             params: {
-                url: value.url
+                url: value.url,
+                skills: value.skills
+            
             }
         })
             .then(res => {
@@ -55,8 +61,23 @@ export default class Search extends React.Component {
                         errors,
                     }) => (
                         <Form onSubmit={handleSubmit}>
+                            <h1 className="search-label">Search for a job</h1>
+                            <Form.Group controlId="skills">
+                                <Form.Label style= {{color: "#6153ae"}}>Search job by specific skills</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="skill1, skill2, skill3"
+                                    value={values.skills}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    isValid={touched.skills && !errors.skills}
+                                    isInvalid={touched.skills && errors.skills}
+                                />
+                                <Form.Text className="text-danger">{touched.url && errors.url}</Form.Text>
+                            </Form.Group>
+                            <h3 className="search-label"> -or- </h3>
                             <Form.Group controlId="url">
-                                <Form.Label>URL</Form.Label>
+                                <Form.Label style= {{color: "#6153ae"}}>Search job by specific URL</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="URL"
