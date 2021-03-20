@@ -1,0 +1,28 @@
+@import '../App/App.scss';//for custom colors
+.signup-nav{
+    font-size: 2.5rem;
+    padding-top: 3rem;
+    color: $light-accent;
+    .signup-nav-link{
+        color:$main-brand;
+    }
+}
+.footer{
+    padding-left: 14rem;
+    color:$main-brand;
+    .footer-link{
+        color: $light-accent;
+    }
+    ul {
+        padding: 0;
+        list-style-type: none;
+    }
+}
+.home-information{
+    justify-content: center;
+    padding-top: 2rem;
+    p{
+        font-size: 1.5em;
+        color: $main-brand;
+    }
+}

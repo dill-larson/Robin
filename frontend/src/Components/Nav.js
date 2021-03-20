@@ -6,9 +6,10 @@ export default function Page(props) {
     return (
         <>
             <ul>
-                <Link to="/" className="form-link"> Home |</Link>
+                <Link to="/search" className="form-link"> Seach |</Link>
                 <Link to="/login" className="form-link"> Login |</Link>
-                <Link to="/signup" className="form-link"> Sign Up </Link>
+                <Link to="/signup" className="form-link"> Sign Up |</Link>
+                <Link to="/onboarding/general" className="form-link"> Onboarding </Link>
             </ul>
         </>
     );

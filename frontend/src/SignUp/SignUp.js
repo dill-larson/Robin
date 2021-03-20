@@ -1,9 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import Nav from "../Components/Nav"
 import './SignUp.scss';
 
 import Page from '../Page/Page';
@@ -19,31 +18,44 @@ export default class SignUp extends React.Component {
             .email("Invalid email")
             .required("Required"),
         password: yup.string()
-            .min(6, "Password must be 6 or more characters")
-            .required("Required"),
+            .required("Required")
+            .matches(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                "Your password must contain 8 characters, at least one:\n uppercase,\n lowercase, \n  number and \n special case character"
+              ),
         confirm_password: yup.string()
-            .min(6, "Password must be 6 or more characters")
             .required("Required")
             .oneOf(
                 [yup.ref('password'), null],
                 "Passwords must match"
-            ),
+            ).matches(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                "Your password must contain 8 characters, at least one:\n uppercase,\n lowercase, \n  number and \n special case character"
+              ),
         // tos: yup.bool()
         //     .required("Required")
     });
 
     constructor(props) {
         super(props);
-    }
+        this.state = {
+            signedUp: false
+        }
 
+    }
     handleSubmit(value) {
       UserPool.signUp(value.email, value.password, [], null, (err, data) => {
-  if (err) console.error(err);
-  console.log(data);
-});
-    }
-
+            if (err) console.error(err);
+            console.log(data);
+            this.setState({signedUp:true})
+            });
+    }  
+    
     render() {
+        if(this.state.signedUp === true){
+            return <Redirect to='/verify-email'></Redirect>
+        }
+
         return (
         <Page>
             <Row>
@@ -115,7 +127,7 @@ export default class SignUp extends React.Component {
                                     <Form.Text className="form-error">{touched.password && errors.password}</Form.Text>
                                 </Form.Group>
                                 <Form.Group controlId="confirm_password">
-                                    <Form.Label className="form-label">Cofirm Password</Form.Label>
+                                    <Form.Label className="form-label">Confirm Password</Form.Label>
                                     <Form.Control
                                         className="form-input"
                                         type="password"
