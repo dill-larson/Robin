@@ -11,7 +11,7 @@ export default class Home extends React.Component {
                 <Header></Header>
                 <Row className="home-information">
                     <p>Find a job <br></br> tailored to your skills <br></br>and the perfect resume <br></br> for that job</p>
-                    <Illustration size="27rem"></Illustration>
+                    <Illustration size="33rem"></Illustration>
                 </Row>
                 <Footer></Footer>
             </Page>
