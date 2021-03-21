@@ -35,8 +35,9 @@ export default class GeneralOnboarding extends React.Component {
         
         axios.post("http://127.0.0.1:5000/onboard/contact", {
             name: value.name,
+            phone: value.phone,
             email: value.email,
-            webstie: value.website,
+            website: value.website,
             linkedin: value.linkedin,
             github: value.github
         })
