@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Row } from 'react-bootstrap';
 import './Onboarding.scss';
+import axios from 'axios';
 
 import Logo from "../illustrations/Logo";
 
@@ -14,7 +15,12 @@ export default class SkillsOnboarding extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.onUserDataUpdate(e, "skills");
+        const skills = this.state.skills_input;
+        //this.props.onUserDataUpdate(e, "skills");
+         axios.post('http://127.0.0.1:5000/onboard/education',{
+             skills}).then(res=>{console.log(res)
+             console.log(res.data);})
+        //console.log(skills)
     }
 
     handleChange(e) {
