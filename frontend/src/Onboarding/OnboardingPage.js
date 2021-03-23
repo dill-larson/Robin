@@ -55,7 +55,7 @@ export default function OnboardingPage(props) {
                             <SkillsOnboarding onUserDataUpdate={handleUserDataUpdate}/>
                         </Route>
                         <Route path={`${path}/projects/create`} component={ProjectsInputOnboarding}/>
-                        <Route path={`${path}/experience/:projectId`} component={ProjectsInputOnboarding}/>
+                        <Route path={`${path}/projects/:projectId`} component={ProjectsInputOnboarding}/>
                         <Route path={`${path}/projects`}>
                             <ProjectsOnboarding onUserDataUpdate={handleUserDataUpdate}/>
                         </Route>
