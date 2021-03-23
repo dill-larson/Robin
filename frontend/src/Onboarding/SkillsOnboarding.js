@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import './Onboarding.scss';
 import axios from 'axios';
 
@@ -16,11 +17,18 @@ export default class SkillsOnboarding extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const skills = this.state.skills_input;
-        //this.props.onUserDataUpdate(e, "skills");
-         axios.post('http://127.0.0.1:5000/onboard/education',{
-             skills}).then(res=>{console.log(res)
-             console.log(res.data);})
-        //console.log(skills)
+        
+         axios.post('http://127.0.0.1:5000/onboard/education',{skills})
+         .then(res => {
+            console.log(res.data);
+            // this.props.onUserDataUpdate(null, "skills");
+            // this.setState({informationPosted:true});
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        this.props.onUserDataUpdate(null, "skills");
+        this.setState({informationPosted:true});
     }
 
     handleChange(e) {
@@ -29,6 +37,9 @@ export default class SkillsOnboarding extends React.Component {
     }
 
     render() {
+        if(this.state.informationPosted){
+            return <Redirect to='/onboarding/projects'/>
+        }
         return (
             <div>
                 <Row style={{justifyContent:"space-between"}}>
