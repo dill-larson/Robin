@@ -30,6 +30,7 @@ export default class GeneralOnboarding extends React.Component {
         }
     }
     postValues(value){
+        this.setState({informationPosted:true});
         this.props.onUserDataUpdate(value, "general");
         
         axios.post("http://127.0.0.1:5000/onboard/contact", {
@@ -42,7 +43,8 @@ export default class GeneralOnboarding extends React.Component {
         })
             .then(res => { //successful PUT
                 console.log(res)
-                this.setState({informationPosted:true});
+                // this.setState({informationPosted:true});
+                // this.props.onUserDataUpdate(value, "general");
             })
             .catch(error => { //error occurred
                 console.error(error);
