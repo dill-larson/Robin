@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import './Onboarding.scss';
@@ -18,6 +19,13 @@ export default class ProjectInputOnboarding extends React.Component {
             .required("Required")
     });
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            informationPosted: false
+        };
+    }
+
     handleSubmit(values) {
         const position ={
             name: values.name,
@@ -26,12 +34,21 @@ export default class ProjectInputOnboarding extends React.Component {
             end_date: values.end_date,
             about: values.about     
         }
-        axios.post('http://127.0.0.1:5000/onboard/experience',{
-            position}).then(res=>{console.log(res)
-            console.log(res.data);})
+        axios.post('http://127.0.0.1:5000/onboard/experience',{position})
+            .then(res => {
+                console.log(res.data);
+                // this.setState({informationPosted: true});
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        this.setState({informationPosted: true});
     }
 
     render() {
+        if(this.state.informationPosted){
+            return <Redirect to='/onboarding/projects'/>
+        }
         return(
             <div>
                 <Row style={{justifyContent:"space-between"}}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Onboarding.scss';
 
 import Logo from "../illustrations/Logo";
@@ -22,10 +22,14 @@ export default class ProjectsOnboarding extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.onUserDateUpdate(null, "projects");
+        this.props.onUserDataUpdate(null, "projects");
+        this.setState({informationPosted: true});
     }
 
     render() {
+        if(this.state.informationPosted){
+            return <Redirect to='/search'/>
+        }
         return (
             <div>
                 <Row style={{justifyContent:"space-between"}}>
