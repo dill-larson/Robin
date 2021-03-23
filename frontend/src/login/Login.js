@@ -21,7 +21,6 @@ export default class Login extends React.Component{
             .email("Invalid email")
             .required("Required"),
         password: yup.string()
-            .min(6, "Password must be 6 or more characters")
             .required("Required"),
     });
     constructor(props) {
@@ -73,7 +72,7 @@ export default class Login extends React.Component{
             return <Redirect to='/login-retry'></Redirect>
         }
         if(this.state.logedIn === true){
-            return <Redirect to='/search'></Redirect>
+            return <Redirect to='/onboarding/general'></Redirect>
         }
         return (
             <div style={pageStyle}>
