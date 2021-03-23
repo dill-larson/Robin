@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import './Onboarding.scss';
@@ -20,6 +21,13 @@ export default class EducationInputOnboarding extends React.Component {
         rel_achievements: yup.string()
     });
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            informationPosted: false
+        }
+    }
+
     handleSubmit(values) {
         const position ={
             company: values.company,
@@ -28,12 +36,21 @@ export default class EducationInputOnboarding extends React.Component {
             end_date: values.end_date,
             relevant_achievements: values.rel_achievements     
         }
-        axios.post('http://127.0.0.1:5000/onboard/experience',{
-            position}).then(res=>{console.log(res)
-            console.log(res.data);})
+        axios.post('http://127.0.0.1:5000/onboard/experience',{position})
+            .then(res => {
+                console.log(res.data);
+                //this.setState({informationPosted: true});
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        this.setState({informationPosted: true});
     }
 
     render() {
+        if(this.state.informationPosted){
+            return <Redirect to='/onboarding/experience'/>
+        }
         return(
             <div>
                 <Row style={{justifyContent:"space-between"}}>
