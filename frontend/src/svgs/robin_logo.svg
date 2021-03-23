@@ -2,6 +2,6 @@
   <text id="robin" transform="translate(0 179)" fill="#6153ae" font-size="182" font-family="FuturaPT-Medium, Futura PT" font-weight="500"><tspan x="0" y="0">robin</tspan></text>
   <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(257 58)" fill="#73c1ce" stroke="#73c1ce" stroke-width="1" style="mix-blend-mode: lighten;isolation: isolate">
     <circle cx="13" cy="13" r="13" stroke="none"/>
-    <circle cx="13" cy="13" r="12.5" fill="none"/>
+    <circle cx="13" cy="13" r="13" fill="none"/>
   </g>
 </svg>

@@ -28,7 +28,8 @@ export default class Login extends React.Component{
         super(props);
         this.state = {
             logedIn: false,
-            wrongPassword:false
+            wrongPassword:false,
+            notConfirmed:false
         }
     }
 
@@ -50,7 +51,13 @@ export default class Login extends React.Component{
 
         onFailure: err => {
         console.error("onFailure:", err);
-        this.setState({wrongPassword:true});
+        if(err.name == "UserNotConfirmedException"){
+            console.error(err)
+            this.setState({notConfirmed:true})
+        }else{
+            this.setState({wrongPassword:true});
+        }
+        
         },
 
         newPasswordRequired: data => {
@@ -59,11 +66,14 @@ export default class Login extends React.Component{
     });
     }
     render(){
-        if(this.state.logedIn === true){
-            return <Redirect to='/search'></Redirect>
+        if(this.state.notConfirmed === true){
+            return <Redirect to='/verify-email'></Redirect>
         }
         if(this.state.wrongPassword === true){
             return <Redirect to='/login-retry'></Redirect>
+        }
+        if(this.state.logedIn === true){
+            return <Redirect to='/search'></Redirect>
         }
         return (
             <div style={pageStyle}>
