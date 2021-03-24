@@ -22,14 +22,14 @@ export default class Login extends React.Component{
             .email("Invalid email")
             .required("Required"),
         password: yup.string()
-            .min(6, "Password must be 6 or more characters")
             .required("Required"),
     });
     constructor(props) {
         super(props);
         this.state = {
             logedIn: false,
-            wrongPassword:false
+            wrongPassword:false,
+            notConfirmed:false
         }
     }
 
@@ -51,7 +51,12 @@ export default class Login extends React.Component{
 
         onFailure: err => {
         console.error("onFailure:", err);
-        this.setState({wrongPassword:true});
+        if(err.name == "UserNotConfirmedException"){
+            console.error(err)
+            this.setState({notConfirmed:true})
+        }else{
+            this.setState({wrongPassword:true});
+        }
         },
 
         newPasswordRequired: data => {
@@ -60,8 +65,11 @@ export default class Login extends React.Component{
     });
     }
     render(){
+        if(this.state.notConfirmed === true){
+            return <Redirect to='/verify-email'></Redirect>
+        }
         if(this.state.logedIn === true){
-            return <Redirect to='/search'></Redirect>
+            return <Redirect to='/onboarding/general'></Redirect>
         }
         return (
             <div style={pageStyle}>

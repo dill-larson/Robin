@@ -15,6 +15,7 @@ import Page from '../Page/Page';
 
 export default function OnboardingPage(props) {
     const [progress, setProgress] = useState([0]);
+    const [from, setFrom] = useState([]);
     let { path, url } = useRouteMatch();
     
 
@@ -23,8 +24,10 @@ export default function OnboardingPage(props) {
     }
 
     function handleUserDataUpdate(obj, origin) {
-        updateProgress();
-        console.log(progress);
+        if(!from.includes(origin)) {
+            updateProgress();
+            setFrom(from => [...from, origin]);
+        }
     }
 
     return(
@@ -52,7 +55,7 @@ export default function OnboardingPage(props) {
                             <SkillsOnboarding onUserDataUpdate={handleUserDataUpdate}/>
                         </Route>
                         <Route path={`${path}/projects/create`} component={ProjectsInputOnboarding}/>
-                        <Route path={`${path}/experience/:projectId`} component={ProjectsInputOnboarding}/>
+                        <Route path={`${path}/projects/:projectId`} component={ProjectsInputOnboarding}/>
                         <Route path={`${path}/projects`}>
                             <ProjectsOnboarding onUserDataUpdate={handleUserDataUpdate}/>
                         </Route>

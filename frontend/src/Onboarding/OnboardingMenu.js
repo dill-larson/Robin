@@ -38,7 +38,8 @@ export default function OnboardingMenu(props) {
                         eventKey={props.url + "" + link.link}
                         key={`onboarding-link-${index}`}
                         className={OnboardingPageFilled(index, props.progress)}
-                        disabled={!props.progress.includes(index)}
+                        disabled={true}
+                        // !props.progress.includes(index)
                     >
                         <OnboardingNumber number={index+1}/>
                         {link.label}

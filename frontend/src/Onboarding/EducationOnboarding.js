@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, Row } from 'react-bootstrap';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Onboarding.scss';
 
 import Logo from "../illustrations/Logo";
@@ -20,15 +20,20 @@ export default class EducationOnboarding extends React.Component {
                     graduation_date: 'May 2021'
                 },
             ],
+            informationPosted: false
         };
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.props.onUserDataUpdate(null, "education");
+        this.setState({informationPosted: true});
     }
 
     render() {
+        if(this.state.informationPosted){
+            return <Redirect to='/onboarding/experience'/>
+        }
         return (
             <div>
                 <Row style={{justifyContent:"space-between"}}>
