@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import Logo from "../illustrations/Logo"
 import '../Search/Search.scss'
+import { Redirect } from 'react-router';
 
 export default class Search extends React.Component {
     validationSchema = yup.object({
@@ -16,13 +17,14 @@ export default class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            response: []
+            response: [],
+            search: false,
         }
     }
 
     handleSubmit(value) {
-        console.log(value.url);
         console.log(value.skills);
+        console.log(value.position);
         axios.get('http://127.0.0.1:5000/scrape', {
             params: {
                 position: value.position,
@@ -33,14 +35,24 @@ export default class Search extends React.Component {
         })
             .then(res => {
                 const response = res.data;
-                this.setState({ response });
+                this.setState({ 
+                    response,
+                    search:true 
+                });
             })
             .catch(error => {
                 console.error(error);
             });
+        //Needs to be removed when connected to backend
+        this.setState({ 
+                search:true 
+            });
     }
 
     render() {
+        if(this.state.search === true){
+            return <Redirect to='/results'></Redirect>
+        }
         return(
             <Container>
                 <Row>
