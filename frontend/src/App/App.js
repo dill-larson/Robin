@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import {Row} from 'react-bootstrap';
 import './App.scss';
 import Home from '../Home/Home';
 import Search from '../Search/Search';
