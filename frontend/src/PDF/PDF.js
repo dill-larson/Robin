@@ -54,7 +54,7 @@ export default function createResume(data, order = ["education", "experience", "
                 doc.text("Education:", margin, current_y);
                 current_y = update_y(current_y); 
                 // print all educations
-                current_y = educations.map((edu, index) => {
+                current_y = educations.map(edu => {
                     return current_y = printEducation(doc, current_y, edu);
                 });
                 current_y = current_y[current_y.length-1]; // get most recent current_y
@@ -63,7 +63,7 @@ export default function createResume(data, order = ["education", "experience", "
                 doc.text("Projects:", margin, current_y);
                 current_y = update_y(current_y);
                 // print all projects
-                current_y = projects.map((prj, index) => {
+                current_y = projects.map(prj => {
                     return current_y = printProject(doc, current_y, prj);
                 });
                 current_y = current_y[current_y.length-1]; // get most recent current_y
@@ -72,7 +72,7 @@ export default function createResume(data, order = ["education", "experience", "
                 doc.text("Experience:", margin, current_y);
                 current_y = update_y(current_y);
                 // print all work experiences
-                current_y = jobs.map((job, index) => {
+                current_y = jobs.map(job => {
                     return current_y = printExperiece(doc, current_y, job);
                 });
                 current_y = current_y[current_y.length-1]; // get most recent current_y
