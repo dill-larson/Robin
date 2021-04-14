@@ -16,7 +16,7 @@ const doc_width = 210,
     line_height = 1.15,
     one_line_height = (font_size * line_height) / pts_per_mm;
 
-export default function createResume(data, order = ["education", "projects", "experience"]) {
+export default function createResume(data, order = ["education", "experience", "projects"]) {
     // a4 paper, portrait, using millimeters for units
     const doc = new jsPDF();
     
