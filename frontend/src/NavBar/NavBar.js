@@ -50,9 +50,9 @@ export default class NavBar extends React.Component {
                         <span aria-hidden="true">&times;</span>
                     </Nav.Link>
                     <Nav.Link as={Link} eventKey="profile" to="/">profile</Nav.Link>
-                    <Nav.Link as={Link} eventKey="find_jobs" to="/">find jobs</Nav.Link>
+                    <Nav.Link as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
                     <Nav.Link as={Link} eventKey="portfolio" to="/">jobs, skills, projects</Nav.Link>
-                    <Nav.Link as={Link} eventKey="sign_up" to="/signup">sign out</Nav.Link>
+                    <Nav.Link as={Link} eventKey="sign_out" to="/">sign out</Nav.Link>
                 </Nav>
             </div>
         );
