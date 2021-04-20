@@ -10,7 +10,7 @@ import Logo from "../illustrations/Logo"
 import Checklist from '../illustrations/Checklist';
 import UserPool from '../UserPool';
 
-export default class WrongSignUp extends React.Component {
+export default class SignUp extends React.Component {
     validationSchema = yup.object({
         name: yup.string()
             .required("Required"),
@@ -59,7 +59,7 @@ export default class WrongSignUp extends React.Component {
     
     render() {
         if(this.state.alreadyExists === true){
-            return <Redirect to='/signup-retry'></Redirect> 
+            return <Redirect to='/wrong-login'></Redirect> 
         }
         if(this.state.signedUp === true){
             return <Redirect to='/verify-email'></Redirect>
@@ -96,7 +96,9 @@ export default class WrongSignUp extends React.Component {
                         }) => (
                             <Form className="form-signup" onSubmit={handleSubmit}>
                                 <h1 className="form-header text-center">Sign Up</h1>
-                            
+                                <div style={{backgroundColor:"#ff6666", borderRadius:"1rem", padding:"0.7rem"}}>
+                                    <p >The username you entered is already being used, Please <Link to="/login" className="form-link">Login</Link></p>
+                                </div>
                                 <Form.Group controlId="name">
                                     <Form.Label className="form-label">Name</Form.Label>
                                     <Form.Control
