@@ -15,7 +15,6 @@ import WrongSignup from '../SignUp/WrongSignup';
 function App() {
   return (
     <Router>
-        <NavBar/>
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/search" component={Search}/>
