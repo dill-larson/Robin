@@ -3,7 +3,7 @@ import { Button, Container, Form, Table } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
-import Nav from "../Components/Nav"
+import NavBar from '../NavBar/NavBar';
 import '../Home/Home.scss'
 
 export default class Search extends React.Component {
@@ -44,7 +44,7 @@ export default class Search extends React.Component {
     render() {
         return(
             <Container>
-                <Nav></Nav>
+                <NavBar/>
                 <Formik
                     initialValues={{
                         url: ''
