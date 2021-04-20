@@ -1,31 +1,42 @@
-@import '../App/App.scss';
+.y-scrollable {
+    overflow-y: auto;
+}
+
+/* styling chrome and safari navbar */
+.y-scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+   
+.y-scrollable::-webkit-scrollbar-thumb {
+    background: var(--light-accent);
+    border-radius: 20px;
+}
+  
+.y-scrollable::-webkit-scrollbar-track {
+    background: var(--light-shade);
+}
 
 .nav {
-    height: auto;
-    width: 0;
+    height: 100vh;
+    width: 0; //hide navbar initially
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: $dark-shade;
+    background-color: var(--dark-shade);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
 
-.nav-logo {
-    margin-top: -5rem;
-    margin-bottom: -5rem;
-}
-
 .nav-link {
-    color: $white;
+    color: white;
     font-size: 4rem;
     transition: 0.3s;
 }
 
 .nav-link:hover, .nav-link:focus {
-    color: darken($white, 15%)
+    color: darken(white, 15%)
 }
 
 .nav-close {
@@ -33,4 +44,8 @@
     top: 0;
     right: 25px;
     margin-left: 50px;
+}
+
+.hamburger {
+    cursor: pointer;
 }
