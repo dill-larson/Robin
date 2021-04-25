@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Container, Form, Row, Table,Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -116,10 +117,6 @@ export default class Search extends React.Component {
                         </Form>
                     )}
                 </Formik>
-
-                </div>
-                         
-                
             </Container>
         );
     }
