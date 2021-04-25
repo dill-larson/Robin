@@ -8,6 +8,7 @@ import Logo from "../illustrations/Logo"
 import Nav from "../Components/Nav"
 import Illustration from "../illustrations/Login_illustration"
 import UserPool from '../UserPool';
+import Page from '../Page/Page'
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
 const pageStyle = {
@@ -76,7 +77,7 @@ export default class Login extends React.Component{
         }
         return (
             <div style={pageStyle}>
-                <Container >
+                <Page >
                 <Row >
                     <Col>
                      <Logo size="12rem"></Logo>
@@ -150,7 +151,7 @@ export default class Login extends React.Component{
                     </Col>
                 </Row>
 
-            </Container>
+            </Page>
             </div>
         )
     }

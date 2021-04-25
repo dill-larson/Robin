@@ -18,8 +18,9 @@ export default class SkillsOnboarding extends React.Component {
         e.preventDefault();
         const skills = this.state.skills_input;
         
-         axios.post('http://127.0.0.1:5000/onboard/education',{skills})
+         axios.post('http://127.0.0.1:5000/onboard/skills',{skills})
          .then(res => {
+            console.log('Printing skills request data')
             console.log(res.data);
             // this.props.onUserDataUpdate(null, "skills");
             // this.setState({informationPosted:true});

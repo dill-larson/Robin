@@ -1,0 +1,39 @@
+@import '../App/App.scss';//for custom colors
+
+
+.results-container{
+    background-color:$light-shade;
+    border-radius: 3rem; 
+    padding: 2rem;
+}
+
+.results-card{
+     background-color: $light-shade;
+     border: none;
+     .results-title-company{
+        color: $main-brand;
+        font-size: 2rem;
+       
+
+    }
+     .results-title{
+         color: $dark-accent;
+
+     }
+     .result-job-description{
+         margin-top:1rem;
+         color:white;
+         font-size: 1.2rem;
+         font-weight: lighter;
+         
+     }
+     .results-resume-button{
+        margin-top:2.5rem;
+         border-radius: 2rem  !important;
+         margin-bottom: 1rem;
+     }
+     .results-apply-button{
+        border-radius: 2rem  !important;
+    }
+
+}
