@@ -329,8 +329,8 @@ function printExperience(job) {
     if(lines_printed + lines_to_print <= max_printed_lines) {
         // job title, start & end date -- on the same line
         doc.setFont(font, "bold"); // bold font
-        doc.text(`${job.title} @ ${job.company}`, margin, current_y);
-        doc.text(`${dateToText(job.start_date, "MM-DD-YYYY")} to ${dateToText(job.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
+        doc.text(`${job.title} @ ${job.company}, San Francisco, CA`, margin, current_y);
+        doc.text(`${dateToText(job.start_date, "MM-DD-YYYY")} - ${dateToText(job.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
         doc.setFont(font, "normal"); // unbold font
         update_y();
 
@@ -351,7 +351,7 @@ function printProject(prj) {
         // project name, begin & end date -- on the same line
         doc.setFont(font, "bold"); // bold font
         doc.text(prj.title, margin, current_y);
-        doc.text(`${dateToText(prj.start_date, "MM-DD-YYYY")} to ${dateToText(prj.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
+        doc.text(`${dateToText(prj.start_date, "MM-DD-YYYY")} - ${dateToText(prj.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
         doc.setFont(font, "normal"); // unbold font
         update_y();
 
@@ -379,7 +379,7 @@ function dateToText(date, format) {
                 if(parseInt(date.substring(0,2)) - 1 >= 0 && parseInt(date.substring(0,2)) - 1 < 12) {
                     month = months[parseInt(date.substring(0,2)) - 1];
                 }
-                formatted_date = `${month} ${date.substring(3,5)}, ${date.substring(6)}`;
+                formatted_date = `${month} ${date.substring(6)}`;
             } else {
                 formatted_date = 'Error: date did not match specified format';
             }
