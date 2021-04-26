@@ -52,6 +52,8 @@ export default function createResume(data, order = ["education", "experience", "
                                         // 1 line = blank line
     lines_printed += 3;
 
+    console.log(dateToText("11-2019", "MM-YYYY"))
+
     order.map(content => {
         switch (content){
             case "education":
@@ -137,6 +139,11 @@ function printEducation(doc, current_y, lines_printed, edu) {
     return current_y;
 }
 
+/*
+ * Helper function to print a "titled" list
+ * prints title and
+ * prints indented list (separated by commas)
+ */
 function printTitledList(doc, current_y, hanging_indent, title, list) {
     if (list.length > 0) {
         // title
@@ -192,4 +199,27 @@ function printProject(doc, current_y, prj) {
     current_y = update_y(current_y, long_description.length);
 
     return current_y;
+}
+
+function dateToText(date, format) {
+    const months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var formatted_date = '';
+    var month = null;
+    switch(format) {
+        case "MM-DD-YYYY":
+            if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                month = months[parseInt(date.substring(0,2)) - 1];
+            }
+            formatted_date = `${month} ${date.substring(3,5)}, ${date.substring(6)}`;
+            break;
+        case "MM-YYYY":
+            if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                month = months[parseInt(date.substring(0,2)) - 1];
+            }
+            formatted_date = `${month} ${date.substring(3)}`;
+            break;
+        default:
+    }
+
+    return formatted_date;
 }
