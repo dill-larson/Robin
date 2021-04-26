@@ -56,6 +56,8 @@ export default function createResume(order = ["education", "skills", "experience
                                         // 1 line = blank line
     lines_printed += 3;
 
+    console.log(dateToText("01-30-2020", "MM-DD-YYYY"));
+
     order.map(content => {
         switch (content){
             case "education":
@@ -331,7 +333,7 @@ function dateToText(date, format) {
             // check if date matches format
             if(date.match(/^(\d){1,2}-(\d){1,2}-(\d){4}$/)) {
                 // check if month value is valid
-                if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                if(parseInt(date.substring(0,2)) - 1 >= 0 && parseInt(date.substring(0,2)) - 1 < 12) {
                     month = months[parseInt(date.substring(0,2)) - 1];
                 }
                 formatted_date = `${month} ${date.substring(3,5)}, ${date.substring(6)}`;
