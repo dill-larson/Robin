@@ -17,10 +17,14 @@ const doc_width = 210,
     one_line_height = (font_size * line_height) / pts_per_mm,
     max_printed_lines = (doc_height - 2 * margin) / one_line_height + 1; // +1 because name doesn't print exactly under the margin; makes the margins more equal
 
-export default function createResume(order = ["education", "skills", "experience", "projects"]) {
-    // a4 paper, portrait, using millimeters for units
-    const doc = new jsPDF();
+// shared variables
+var lines_printed = 0,
+    lines_to_print,
+    current_y = margin + one_line_height;
+const doc = new jsPDF(); // a4 paper, portrait, using millimeters for units
 
+export default function createResume(order = ["education", "skills", "experience", "projects"]) {
+    
     let data = getUserData();
 
     // user data
@@ -35,9 +39,6 @@ export default function createResume(order = ["education", "skills", "experience
         projects = data.projects,
         skills = data.skills.skills;
 
-    let current_y = margin + one_line_height, // name in twice the font
-        lines_printed = 0;
-
     // formatting of US phone numbers -- (000) 000-0000
     let formatted_phone = phone.length == 10 ? `(${phone.slice(0,3)}) ${phone.slice(3,6)}-${phone.slice(6,10)}` : phone;
 
@@ -45,51 +46,68 @@ export default function createResume(order = ["education", "skills", "experience
     doc.setFont(font, "bold"); // bold font
     doc.setFontSize(heading_font_size);
     doc.text(`${name}`, center, current_y, {align: "center"});
-    current_y = update_y(current_y);
-    lines_printed += 2; // 2 = name is twice the font size
+    update_y();
+    lines_printed += 1; // update_y incremenets lines printed by 1; 1 more is needed b/c name is twice the font size
     
     // contact information
     doc.setFont(font, "normal"); // unbold font
     doc.setFontSize(font_size);
     doc.text([`${email} | ${formatted_phone} | Website: ${website}`, `Github: github.com/${githubUsername} | LinkedIn: linkedin.com/in/${linkedInUsername}`], center, current_y, {align: "center"});
-    current_y = update_y(current_y, 3); // 2 lines for email/phone/website and github/linkedin
-                                        // 1 line = blank line
-    lines_printed += 3;
+    update_y(3); // 2 lines for email/phone/website and github/linkedin
+                 // 1 line = blank line
 
     order.map(content => {
         switch (content){
             case "education":
-                doc.text("Education:", margin, current_y);
-                current_y = update_y(current_y); 
-                // print all educations
-                current_y = educations.map(edu => {
-                    return current_y = printEducation(doc, current_y, edu);
-                });
-                current_y = current_y[current_y.length-1]; // get most recent current_y
+                if(educations.length > 0) {
+                    lines_to_print = 1;
+                    if(lines_printed + lines_to_print <= max_printed_lines) {
+                        doc.text("Education:", margin, current_y);
+                        update_y();
+                    }
+                    // print all educations
+                    educations.map(edu => {
+                        printEducation(edu);
+                    });
+                }
+                console.log("Edu", lines_printed);
                 break;
             case "skills":
-                current_y = printSkills(doc, current_y, skills);
+                if(skills.length > 0) {
+                    printSkills(skills);
+                }
+                console.log("Skills", lines_printed);
                 break;
             case "experience":
-                doc.text("Experience:", margin, current_y);
-                current_y = update_y(current_y);
-                // print all work experiences
-                current_y = jobs.map(job => {
-                    return current_y = printExperiece(doc, current_y, job);
-                });
-                current_y = current_y[current_y.length-1]; // get most recent current_y
+                if(jobs.length > 0) {
+                    lines_to_print = 1;
+                    if(lines_printed + lines_to_print <= max_printed_lines) {
+                        doc.text("Experience:", margin, current_y);
+                        update_y();
+                    }
+                    // print all work experiences
+                    jobs.map(job => {
+                        printExperience(job);
+                    });
+                }
+                console.log("Exp", lines_printed);
                 break;
             case "projects":
-                doc.text("Projects:", margin, current_y);
-                current_y = update_y(current_y);
-                // print all projects
-                current_y = projects.map(prj => {
-                    return current_y = printProject(doc, current_y, prj);
-                });
-                current_y = current_y[current_y.length-1]; // get most recent current_y
+                if(projects.length > 0) {
+                    lines_to_print = 1;
+                    if(lines_printed + lines_to_print <= max_printed_lines) {
+                        doc.text("Projects:", margin, current_y);
+                        update_y();
+                    }
+                    // print all projects
+                    projects.map(prj => {
+                        printProject(prj);
+                    });
+                }
+                console.log("Prj", lines_printed);
                 break;
             default:
-                console.error(`Invalid resume order: ${content}`);
+                console.error(`Invalid resume order param: ${content}`);
         }
     });
 
@@ -198,36 +216,43 @@ function getUserData() {
  * adds the correct spacing acccording to
  * num_lines
  */
-function update_y(current_y, num_lines = 1) {
-    return current_y += one_line_height * num_lines;
+function update_y(num_lines = 1) {
+    current_y += one_line_height * num_lines;
+    lines_printed += num_lines;
 }
 
-function printSkills(doc, current_y,  skills) {
-    if(skills.length > 0) {
+function printSkills(skills) {
+    // calculate num of lines for skills -- multilined list separated by commas
+    let comma_sep_list = doc.splitTextToSize(skills.join(", "), max_line_width - indent);
+
+    lines_to_print = 1 + comma_sep_list.length; // 1 = "skills" title
+                                                // length is number of lines to needed to fit skills 
+
+    // print title and skills
+    if(lines_printed + lines_to_print <= max_printed_lines) {
         doc.text("Skills:", margin, current_y);
-
-        // print skills -- multilined list separated by commas
-        let comma_sep_list = doc.splitTextToSize(skills.join(", "), max_line_width - indent);
-        doc.text(comma_sep_list, margin + calcTitleLength(doc, "Skills:", false) + 1, current_y); // 1mm for padding
-        current_y = update_y(current_y, comma_sep_list.length);
-    }
-    return current_y;
+        doc.text(comma_sep_list, margin + calcTitleLength("Skills:", false) + 1, current_y); // 1mm for padding
+        update_y(comma_sep_list.length);
+    }   
 }
 
-function printEducation(doc, current_y, edu) {
-    // school, city, state -- on the same line
-    doc.setFont(font, "bold"); // bold font
-    doc.text(edu.school, margin + indent, current_y);
-    doc.text(edu.location, doc_width - margin, current_y, {align: "right"});
-    doc.setFont(font, "normal"); // unbold font
-    current_y = update_y(current_y);
+function printEducation(edu) {
+    lines_to_print = 2; // 2 lines for school/city/state and degree/gpa/grad_date
+    if(lines_printed + lines_to_print <= max_printed_lines) {
+        // school, city, state -- on the same line
+        doc.setFont(font, "bold"); // bold font
+        doc.text(edu.school, margin + indent, current_y);
+        doc.text(edu.location, doc_width - margin, current_y, {align: "right"});
+        doc.setFont(font, "normal"); // unbold font
+        update_y();
 
-    // degree, gpa, graduation date -- on the same line
-    doc.setFont(font, "italic"); // italics font
-    doc.text(`${edu.degree} in ${edu.major}, GPA: ${edu.gpa}`, margin + indent, current_y);
-    doc.text(`${dateToText(edu.start_date, "MM-YYYY")} to ${dateToText(edu.end_date, "MM-YYYY")}`, doc_width - margin, current_y, {align: "right"});        
-    doc.setFont(font, "normal"); // unitalics font
-    current_y = update_y(current_y);
+        // degree, gpa, graduation date -- on the same line
+        doc.setFont(font, "italic"); // italics font
+        doc.text(`${edu.degree} in ${edu.major}, GPA: ${edu.gpa}`, margin + indent, current_y);
+        doc.text(`${dateToText(edu.start_date, "MM-YYYY")} to ${dateToText(edu.end_date, "MM-YYYY")}`, doc_width - margin, current_y, {align: "right"});        
+        doc.setFont(font, "normal"); // unitalics font
+        update_y();
+    }
 
     var titles = {
         "Achievements:": edu.achievements,
@@ -236,14 +261,12 @@ function printEducation(doc, current_y, edu) {
     };
 
     // calculate the longest printed word -- uses current doc settings -- used in calculating hanging indent
-    let longest_printed_word = calcTitleLength(doc, Object.keys(titles).sort((a, b) => calcTitleLength(doc, b) - calcTitleLength(doc, a))[0]);
+    let longest_printed_word = calcTitleLength(Object.keys(titles).sort((a, b) => calcTitleLength(b) - calcTitleLength(a))[0]);
     
     // print achievements, coursework, activities
     for(const [key, value] of Object.entries(titles)) {
-        current_y = printTitledList(doc, current_y, key, value, indent * 2, longest_printed_word);
+        printTitledList(key, value, indent * 2, longest_printed_word);
     }
-
-    return current_y;
 }
 
 /*
@@ -251,25 +274,31 @@ function printEducation(doc, current_y, edu) {
  * prints title and
  * prints indented list (separated by commas)
  */
-function printTitledList(doc, current_y, title, list, indent_size = 0, hanging_indent = calcTitleLength(doc, title)) {
+function printTitledList(title, list, indent_size = 0, hanging_indent = calcTitleLength(title)) {
     if (list.length > 0) {
-        // title
-        doc.setFont(font, "bold"); // bold font
-        doc.text(title, margin + indent_size, current_y);
-        doc.setFont(font, "normal"); // unbold font
-
+        // calculate number of lines to print
         let title_length = hanging_indent + 1;  // length of title in mm when printed
                                                 // 1 mm for padding
         // multilined list separated by commas
         let comma_sep_list = doc.splitTextToSize(list.join(", "), max_line_width - indent_size - title_length);
-        doc.text(comma_sep_list, margin + indent_size + title_length, current_y);
-        current_y = update_y(current_y, comma_sep_list.length);
-    }
+        
+        lines_to_print = 1 + comma_sep_list.length; // 1 = title
+                                                    // length is number of lines to needed to fit list
+        // print title and list
+        if(lines_printed + lines_to_print <= max_printed_lines) {
+            // title
+            doc.setFont(font, "bold"); // bold font
+            doc.text(title, margin + indent_size, current_y);
+            doc.setFont(font, "normal"); // unbold font
 
-    return current_y;
+            // list
+            doc.text(comma_sep_list, margin + indent_size + title_length, current_y);
+            update_y(comma_sep_list.length);
+        }
+    }
 }
 
-function calcTitleLength(doc, title, bolded = true) {
+function calcTitleLength(title, bolded = true) {
     if(bolded) { doc.setFont(font, "bold"); } // bold font
     let length = doc.getTextWidth(title);
     if(bolded) { doc.setFont(font, "normal"); } // unbold font 
@@ -277,43 +306,52 @@ function calcTitleLength(doc, title, bolded = true) {
     return length;
 }
 
-function printExperiece(doc, current_y, job) {
-    // job title, start & end date -- on the same line
-    doc.setFont(font, "bold"); // bold font
-    doc.text(job.title, margin + indent, current_y);
-    doc.text(`${dateToText(job.start_date, "MM-DD-YYYY")} to ${dateToText(job.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
-    doc.setFont(font, "normal"); // unbold font
-    current_y = update_y(current_y);
-
-    // company name -- on the same line
-    doc.setFont(font, "italic"); // italic font
-    doc.text(job.company, margin + indent, current_y);
-    doc.text(job.location, doc_width - margin, current_y, {align: "right"});
-    doc.setFont(font, "normal"); // unitalic font
-    current_y = update_y(current_y);
-
-    // achievements -- supports multiple lines for long descriptions
+function printExperience(job) {
+    // calc number of lines for achievements
     let long_description = doc.splitTextToSize(job.achievements, max_line_width - indent);
-    doc.text(long_description, margin + indent, current_y);
-    current_y = update_y(current_y, long_description.length);
 
-    return current_y;
+    lines_to_print = 2 + long_description.length;   // 2 lines for title/start/end_date and company/location
+                                                    // length is number of lines to needed to fit achievements
+    if(lines_printed + lines_to_print <= max_printed_lines) {
+        // job title, start & end date -- on the same line
+        doc.setFont(font, "bold"); // bold font
+        doc.text(job.title, margin + indent, current_y);
+        doc.text(`${dateToText(job.start_date, "MM-DD-YYYY")} to ${dateToText(job.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
+        doc.setFont(font, "normal"); // unbold font
+        update_y();
+
+        // company name, location -- on the same line
+        doc.setFont(font, "italic"); // italic font
+        doc.text(job.company, margin + indent, current_y);
+        doc.text(job.location, doc_width - margin, current_y, {align: "right"});
+        doc.setFont(font, "normal"); // unitalic font
+        update_y();
+
+        // achievements
+        doc.text(long_description, margin + indent, current_y);
+        update_y(long_description.length);
+    }
 }
 
-function printProject(doc, current_y, prj) {
-    // project name, begin & end date -- on the same line
-    doc.setFont(font, "bold"); // bold font
-    doc.text(prj.title, margin + indent, current_y);
-    doc.text(`${dateToText(prj.start_date, "MM-DD-YYYY")} to ${dateToText(prj.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
-    doc.setFont(font, "normal"); // unbold font
-    current_y = update_y(current_y);
-
-    // project description -- supports multiple lines for long descriptions
+function printProject(prj) {
+    // calc number of lines for description
     let long_description = doc.splitTextToSize(prj.description, max_line_width - indent);
-    doc.text(long_description, margin + indent, current_y);
-    current_y = update_y(current_y, long_description.length);
 
-    return current_y;
+    lines_to_print = 1 + long_description.length;   // 1 line for name/start/end_date
+                                                    // length is number of lines to needed to fit achievements
+    
+    if(lines_printed + lines_to_print <= max_printed_lines) {
+        // project name, begin & end date -- on the same line
+        doc.setFont(font, "bold"); // bold font
+        doc.text(prj.title, margin + indent, current_y);
+        doc.text(`${dateToText(prj.start_date, "MM-DD-YYYY")} to ${dateToText(prj.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
+        doc.setFont(font, "normal"); // unbold font
+        update_y();
+
+        // project description
+        doc.text(long_description, margin + indent, current_y);
+        update_y(long_description.length);
+    }
 }
 
 /* Helper function
