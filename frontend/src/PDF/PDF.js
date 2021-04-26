@@ -205,11 +205,10 @@ function update_y(current_y, num_lines = 1) {
 function printSkills(doc, current_y,  skills) {
     if(skills.length > 0) {
         doc.text("Skills:", margin, current_y);
-        current_y = update_y(current_y);
 
         // print skills -- multilined list separated by commas
         let comma_sep_list = doc.splitTextToSize(skills.join(", "), max_line_width - indent);
-        doc.text(comma_sep_list, margin + indent, current_y);
+        doc.text(comma_sep_list, margin + calcTitleLength(doc, "Skills:", false) + 1, current_y); // 1mm for padding
         current_y = update_y(current_y, comma_sep_list.length);
     }
     return current_y;
@@ -270,10 +269,10 @@ function printTitledList(doc, current_y, title, list, indent_size = 0, hanging_i
     return current_y;
 }
 
-function calcTitleLength(doc, title) {
-    doc.setFont(font, "bold"); // bold font
+function calcTitleLength(doc, title, bolded = true) {
+    if(bolded) { doc.setFont(font, "bold"); } // bold font
     let length = doc.getTextWidth(title);
-    doc.setFont(font, "normal"); // unbold font
+    if(bolded) { doc.setFont(font, "normal"); } // unbold font 
     
     return length;
 }
