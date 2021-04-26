@@ -40,8 +40,8 @@ def scrape():
 	return json.dumps(job_list)
 
 @app.route('/resume/build')
-def build_resume(job_desc):
-	#job_desc = request.get_json()['description']
+def build_resume():
+	job_desc = request.args['description']
 	user_data = {}
 
 	contact_data = get_contact()
@@ -53,7 +53,7 @@ def build_resume(job_desc):
 	experience_data = sort_experiences(experience_data, job_desc)
 	projects_data = sort_projects(projects_data, job_desc)
 
-	user_data['skills'] = skills_data['data']
+	user_data['skills'] = skills_data['data']['skills'].split(', ')
 	user_data['experience'] = experience_data
 	user_data['projects'] = projects_data
 	user_data['education'] = education_data['data']
@@ -415,4 +415,5 @@ if __name__ == "__main__":
 			print(str(key) + ':' + str(resume_data[key]))
 		print('*******************\n')
 	'''
+	
 	
