@@ -46,7 +46,7 @@ export default function createResume(order = ["education", "skills", "experience
     doc.setFontSize(heading_font_size);
     doc.text(`${name}`, center, current_y, {align: "center"});
     current_y = update_y(current_y);
-    lines_printed += 2; // name is twice the font size
+    lines_printed += 2; // 2 = name is twice the font size
     
     // contact information
     doc.setFont(font, "normal"); // unbold font
@@ -55,8 +55,6 @@ export default function createResume(order = ["education", "skills", "experience
     current_y = update_y(current_y, 3); // 2 lines for email/phone/website and github/linkedin
                                         // 1 line = blank line
     lines_printed += 3;
-
-    console.log(dateToText("01-30-2020", "MM-DD-YYYY"));
 
     order.map(content => {
         switch (content){
