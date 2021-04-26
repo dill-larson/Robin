@@ -324,7 +324,7 @@ function printProject(doc, current_y, prj) {
  * to their text equivalents (ie. it spells out the month)
  */
 function dateToText(date, format) {
-    const months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var formatted_date = '';
     var month = null;
 
