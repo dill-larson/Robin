@@ -12,29 +12,34 @@ app = Flask(__name__)
 user_email = 'clouduser@gmail.com'
 CORS(app)
 
-
 @app.route('/scrape')
 def scrape():
+	'''
     job_list = [{'Title': 'Software Engineer 1', 'Company': 'Adobe', 'Description': 'Strong hands-on experience with Java Experience with MongoDB, Kafka Problem solving skills & technical troubleshooting Experience with testing frameworks, continuous integration and build tools'}, 
                 {'Title': 'Software Developer', 'Company': 'Sleep Number Labs', 'Description': 'Learn how to work with Python and FLASK, Willing to work in a team atmosphere, C++, Node'},
                 {'Title': 'Product Marketing Intern', 'Company': 'Ring Central', 'Description': 'Digital Marketing, Instagram Facebook, Mailchimp'},
-                {'Title': 'Senior Software Engineer', 'Company': 'IBM', 'Description': 'React JS, Node JS, Frontend development experience, Database Mangement, SQL, MySQL'}]
-    keywords = ['Software', 'data science', 'Data Science', 'Data science', 'software', 'machine learing', 'intern', 'backend', 'frontend', 'ios', 'android', 'flutter']
-    #crawl(request.args["url"], keywords, job_list)
+                {'Title': 'Senior Software Engineer', 'Company': 'IBM', 'Description': 'React JS, Node JS, Frontend development experience, Database Mangement, SQL, MySQL'}]'''
+	job_list = []
+	keywords = ['Software', 'data science', 'Data Science', 'Data science', 'software', 'machine learing', 'intern', 'backend', 'frontend', 'ios', 'android', 'flutter']
+	crawl(request.args["url"], keywords, job_list)
 
-    user_data = {}
-    skills_data = get_skills()
-    experience_data = get_experience()
-    projects_data = get_projects()
+	user_data = {}
+	skills_data = get_skills()
+	experience_data = get_experience()
+	projects_data = get_projects()
 
-    user_data['skills'] = skills_data['data'][0]
-    user_data['experience'] = experience_data['data']
-    user_data['projects'] = projects_data['data']
+	user_data['skills'] = skills_data['data']['skills']
+	user_data['experience'] = experience_data['data']
+	user_data['projects'] = projects_data['data']
 
-    sort_job_list(user_data, job_list)
-    return str(job_list)
+	job_list = sort_job_list(user_data, job_list)
 
-@app.route('/resume/build', methods=['POST'])
+	for job in job_list:
+		del job['links']
+
+	return json.dumps(job_list)
+
+@app.route('/resume/build')
 def build_resume(job_desc):
 	#job_desc = request.get_json()['description']
 	user_data = {}
@@ -410,3 +415,4 @@ if __name__ == "__main__":
 			print(str(key) + ':' + str(resume_data[key]))
 		print('*******************\n')
 	'''
+	

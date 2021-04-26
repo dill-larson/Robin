@@ -49,16 +49,15 @@ def sort_job_list(user_data, job_list):
     # get all user keywords
     user_keywords = []
     for project in user_data['projects']:
-        user_keywords += nlp_pipeline(project[1])
+        user_keywords += nlp_pipeline(project['description'])
     for exp in user_data['experience']:
-        user_keywords += nlp_pipeline(exp[2])
-    user_keywords += user_data['skills'][0].split(', ')
+        user_keywords += nlp_pipeline(exp['achievements'])
+    user_keywords += user_data['skills'].split(', ')
     # get all job keywords
     for job in job_list:
         job['score'] = score(user_keywords, nlp_pipeline(job['Description'] + job['Title']))
     job_list = sorted(job_list, key = lambda i: i['score'],reverse=True)
 
-    print(job_list)
     return job_list
 
 
