@@ -52,7 +52,7 @@ export default function createResume(data, order = ["education", "experience", "
                                         // 1 line = blank line
     lines_printed += 3;
 
-    console.log(dateToText("11-2019", "MM-YYYY"))
+    console.log(dateToText("11-12-2019", "MM-YYYY"))
 
     order.map(content => {
         switch (content){
@@ -205,20 +205,34 @@ function dateToText(date, format) {
     const months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var formatted_date = '';
     var month = null;
+
     switch(format) {
         case "MM-DD-YYYY":
-            if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
-                month = months[parseInt(date.substring(0,2)) - 1];
+            // check if date matches format
+            if(date.match(/^(\d){1,2}-(\d){1,2}-(\d){4}$/)) {
+                // check if month value is valid
+                if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                    month = months[parseInt(date.substring(0,2)) - 1];
+                }
+                formatted_date = `${month} ${date.substring(3,5)}, ${date.substring(6)}`;
+            } else {
+                formatted_date = 'Error: date did not match specified format';
             }
-            formatted_date = `${month} ${date.substring(3,5)}, ${date.substring(6)}`;
             break;
         case "MM-YYYY":
-            if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
-                month = months[parseInt(date.substring(0,2)) - 1];
+            // check if date matches format
+            if (date.match(/^(\d){1,2}-(\d){4}$/)) {
+                // check if month value is valid
+                if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                    month = months[parseInt(date.substring(0,2)) - 1];
+                }
+                formatted_date = `${month} ${date.substring(3)}`;
+            } else {
+                formatted_date = 'Error: date did not match specified format';
             }
-            formatted_date = `${month} ${date.substring(3)}`;
             break;
         default:
+            formatted_date = "Error: unsupported format";
     }
 
     return formatted_date;
