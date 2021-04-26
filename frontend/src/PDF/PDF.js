@@ -1,4 +1,5 @@
 import { jsPDF } from 'jspdf';
+import axios from 'axios';
 
 // constants for font
 const font = "Helvetica",
@@ -23,9 +24,9 @@ var lines_printed = 0,
     current_y = margin + one_line_height;
 const doc = new jsPDF(); // a4 paper, portrait, using millimeters for units
 
-export default function createResume(order = ["education", "skills", "experience", "projects"]) {
+export default function createResume(user_email, order = ["education", "skills", "experience", "projects"]) {
     
-    let data = getUserData();
+    let data = getUserData(user_email);
 
     // user data
     let name = data.contact.name,
@@ -115,7 +116,19 @@ export default function createResume(order = ["education", "skills", "experience
     doc.save("resume.pdf"); 
 }
 
-function getUserData() {
+function getUserData(user_email) {
+    // let data = await axios.get('http://127.0.0.1:5000/resume/build', {
+    //         params: {
+    //             email: user_email
+    //         }
+    //     })
+    //         .then(res => {
+    //             return res.data;
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+
     let generic_data = {
         contact: {
             name: "CloudUser",
