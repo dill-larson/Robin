@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ResultPill from './ResultPill'
+import Scroll from './Scroll';
 
 export default function JobCard(props) {
     return ( 
@@ -12,26 +13,29 @@ export default function JobCard(props) {
                         <Card.Title>
                             <span className="results-title-company">{props.company}</span> 
                             <br></br>
-                            <br></br>
-                            <span className="results-title">{props.position}</span> 
-                            <br></br>
-                            <span className="results-title">{props.city}</span>
+                            
                             
                         </Card.Title>
                     
                     </Card.Body>
                 </Col>
                 <Col md={7}>
-                    <Row>
-                        <Card.Body className="result-job-description">{props.description}</Card.Body>
-                    </Row>
+                    <Col>
+                        {/* <Scroll>
+                            <Card.Body className="result-job-description">{props.description}</Card.Body>
+                        </Scroll> */}
+                        
+                        <h5 className="results-position"> Position: <span className="results-info">{ props.position}</span>  </h5>
+                        <h5 className="results-location"> Location: <span className="results-info">{props.city}</span> </h5>
+                        <h5 className="results-score">Score: <span className="results-info">{props.score}</span> </h5>
+                    </Col>
                     <Row>
                         
-                    {props.skills.map((skill,i) => {
+                    {/* {props.skills.map((skill,i) => {
                         return (
                         <ResultPill name= {skill} variant="dark-accent"></ResultPill>
                         );
-                    })}
+                    })} */}
                     </Row>
                 </Col>
                 <Col >

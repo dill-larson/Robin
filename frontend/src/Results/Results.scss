@@ -6,6 +6,16 @@
     border-radius: 3rem; 
     padding: 2rem;
 }
+.loading-box{
+
+    background-color:$light-shade;
+    border-radius: 3rem; 
+    padding: 2rem;
+    margin-top: 10%;
+    margin: 20%;
+    color: $main-brand;
+    
+}
 
 .results-card{
      background-color: $light-shade;
@@ -27,13 +37,28 @@
          font-weight: lighter;
          
      }
+     .results-position{
+        margin-top: 1.3rem;
+         color: $main-brand;
+     }
+     .results-location{
+         color: $dark-accent;
+
+     }
+     .results-score{
+         color: $light-accent;
+     }
+     .results-info{
+         color:white
+     }
      .results-resume-button{
-        margin-top:2.5rem;
+        //margin-top:2.5rem;
          border-radius: 2rem  !important;
          margin-bottom: 1rem;
      }
      .results-apply-button{
         border-radius: 2rem  !important;
     }
+    
 
 }
