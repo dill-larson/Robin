@@ -318,21 +318,7 @@ function calcTitleLength(title, bolded = true) {
 }
 
 function printExperience(job) {
-    // split achievements into sentences
-    let achievements = job.achievements.split(". ");
-    let num_of_lines = 0;
-
-    // resize sentences to fit length of page
-    let long_achievements = [];
-    achievements.map((line, index) => {
-        achievements[index] = '\u2022 ' + line;
-        let temp_arr = doc.splitTextToSize(achievements[index], max_line_width - indent);
-        long_achievements.push(temp_arr);
-        num_of_lines += temp_arr.length;
-    });
-
-    lines_to_print = 2 + num_of_lines;  // 2 lines for title/start/end_date and company/location
-                                        // length is number of lines to needed to fit achievements
+    lines_to_print = 1;  // 1 lines for title/start/end_date and company/location
     if(lines_printed + lines_to_print <= max_printed_lines) {
         // job title, start & end date -- on the same line
         doc.setFont(font, "bold"); // bold font
@@ -342,19 +328,12 @@ function printExperience(job) {
         update_y();
 
         // achievements
-        long_achievements.map(achieve => {
-            doc.text(achieve, margin, current_y);
-            update_y(achieve.length);
-        });
+        printBulletedList(job.achievements, indent/2);
     }
 }
 
 function printProject(prj) {
-    // calc number of lines for description
-    let long_description = doc.splitTextToSize(prj.description, max_line_width - indent);
-
-    lines_to_print = 1 + long_description.length;   // 1 line for name/start/end_date
-                                                    // length is number of lines to needed to fit achievements
+    lines_to_print = 1; // 1 line for name/start/end_date
     
     if(lines_printed + lines_to_print <= max_printed_lines) {
         // project name, begin & end date -- on the same line
@@ -365,8 +344,33 @@ function printProject(prj) {
         update_y();
 
         // project description
-        doc.text(long_description, margin, current_y);
-        update_y(long_description.length);
+        printBulletedList(prj.description, indent/2);
+    }
+}
+
+function printBulletedList(list, indent_size, delimiter = ". ") {
+    // split list by sentences
+    let sentences = list.split(delimiter);
+    let num_of_lines = 0;
+
+    // resize sentences to fit length of page
+    let long_sentences = [];
+    sentences.map(sent => {
+        let temp_arr = doc.splitTextToSize(sent, max_line_width - indent_size - calcTitleLength('\u2022 ', false));
+        long_sentences.push(temp_arr);
+        num_of_lines += temp_arr.length;
+    });
+
+    lines_to_print = num_of_lines;
+    if(lines_printed + lines_to_print <= max_printed_lines) {
+        // achievements
+        long_sentences.map(sent => {
+            // print bullet
+            doc.text('\u2022 ', margin + indent_size, current_y);
+            // print sentences with hanging indent
+            doc.text(sent, margin + indent_size + calcTitleLength('\u2022 ', false), current_y);
+            update_y(sent.length);
+        });
     }
 }
 
