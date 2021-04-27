@@ -6,6 +6,9 @@ import axios from 'axios';
 import Logo from "../illustrations/Logo"
 import '../Search/Search.scss'
 import Results from '../Results/Results';
+import NavBar from '../NavBar/NavBar';
+import '../Home/Home.scss'
+
 
 export default class Search extends React.Component {
     validationSchema = yup.object({
@@ -47,8 +50,10 @@ export default class Search extends React.Component {
                     <Logo size="12rem"></Logo>
                     <h1 className="search-title">Search for a job</h1>
                 </Row>
+                 <NavBar/>
                 <div className="search-card">
                     <Formik
+
                     initialValues={{
                         skills: '',
                         position: '',

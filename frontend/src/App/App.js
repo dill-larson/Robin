@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.scss';
+
+/* components */
 import Home from '../Home/Home';
 import Search from '../Search/Search';
 import SignUp from '../SignUp/SignUp';
@@ -9,6 +11,7 @@ import OnboardingPage from '../Onboarding/OnboardingPage';
 import Verify from '../SignUp/Verify';
 import WrongLogin from '../Login/WrongLogin';
 import WrongSignup from '../SignUp/WrongSignup';
+import Test from '../PDF/Test'; //to be removed
 
 function App() {
   return (
@@ -22,7 +25,8 @@ function App() {
             <Route path="/verify-email" component={Verify}/>
             <Route path="/login-retry" component={WrongLogin}/>
             <Route path="/signup-retry" component={WrongSignup}/>
-            
+            <Route path="/pdf" component={Test}/>
+
         </Switch>
     </Router>
   );
