@@ -126,100 +126,6 @@ async function getUserData(user_email, desc) {
             .catch(error => {
                 console.error(error);
             });
-
-    // let generic_data = {
-    //     contact: {
-    //         name: "CloudUser",
-    //         phone: "1256893939",
-    //         website: "clouduser.com",
-    //         github: "CloudUser",
-    //         linkedIn: "CloudUser",
-    //         email: "clouduser@gmail.com",
-    //     },
-    //     educations: [
-    //         {
-    //             school: "San Jose State University",
-    //             location: "San Jose, CA",
-    //             degree: "B.S.",
-    //             major: "Computer Science",
-    //             gpa: "3.70/4.00",
-    //             achievements: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "nunc", "in", "dapibus", "ante"],
-    //             coursework: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "nunc", "in", "dapibus", "ante"],
-    //             activities: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "nunc", "in", "dapibus", "ante"],
-    //             start_date: "08-2017",
-    //             end_date: "05-2021"
-    //         },
-    //         // {
-    //         //     school: "San Jose State University",
-    //         //     location: "San Jose, CA",
-    //         //     degree: "B.S.",
-    //         //     major: "Computer Science",
-    //         //     gpa: "3.70/4.00",
-    //         //     achievements: [],
-    //         //     coursework: [],
-    //         //     activities: [],
-    //         //     start_date: "08-2017",
-    //         //     end_date: "05-2021"
-    //         // }
-    //     ],
-    //     experience: [
-    //         {
-    //             company:"Confidential",
-    //             location: "San Francisco, CA",
-    //             title:"AWS Cloud Engineer",
-    //             start_date:"12-12-2008",
-    //             end_date:"12-12-2015",
-    //             achievements:"Built S3 buckets and managed policies for S3 buckets and used S3 bucket and Glacier for storage and backup on  AWS . Work with other teams to help develop the Puppet infrastructure to conform to various requirements including security and compliance of managed servers. Built a VPC , established the site-to- site VPN connection between Data Center and AWS .  Develop push-button  automation for app teams for deployments in multiple environments like Dev, QA, and Production. Help with the creation of dev standards for Puppet module development including best practices for version control ( git ). Perform troubleshooting and monitoring of the Linux server on AWS using Zabbix , Nagios and Splunk .  Management and Administration of AWS Services CLI , EC2 , VPC , S3 , ELB Glacier, Route 53 , Cloudtrail , IAM , and Trusted Advisor services. Created automated pipelines in AWS  CodePipeline  to deploy Docker containers in AWS ECS using services like CloudFormation , CodeBuild , CodeDeploy , S3 and puppet . Worked on JIRA for defect/issues logging & tracking and documented all my work using CONFLUENCE . Integrated services like GitHub , AWS  CodePipeline , Jenkins and AWS Elastic Beanstalk to create a deployment pipeline.",
-    //         },
-    //         // {
-    //         //     company:"Cloudbeds",
-    //         //     location: "San Francisco",
-    //         //     title:"Lead DevOps Engineer",
-    //         //     start_date:"11-07-2017",
-    //         //     end_date:"24-04-2021",
-    //         //     achievements:"Leading development and operations processes inside team Developing CI/CD roadmap and implementing to the project Play a significant role in establishing operational processes for a fast-growing distributed cloud platform. Help scale our platform to 10x customers. Improve deployment process within AWS (ex. cross-region automated deployment). AWS services administration: IAM, VPC, Route 53, EC2, S3, CodeBuild, CodeDeploy, Redshift, RDS, CloudWatch, CloudFormation Develop and automate standard operating procedures around common failure scenarios. Monitor, analyze, and report performance statistics for cloud hosted environments. Develop application performance management to measure and act upon performance data.",
-    //         // }
-    //     ],
-    //     projects: [
-    //         {
-    //             title: "Star Social",
-    //             description: "Social media app for people interested in space and are looking to express thoughts Supports sign-up/sign-in, user post history, joining/creating groups, and posting features Deployed on cloud using AWS EC2 service Backend development with Python, Django, and SQLite Designed frontend with CSS, JavaScript, jQuery, and Bootstrap",
-    //             start_date: "12-17-2019",
-    //             end_date: "01-30-2020",
-    //         },
-    //         {
-    //             title: "Video Summarization web application",
-    //             description: "Web application for summarizing a video/document into a smaller video or document of 20% of its original length with additional notes on important keywords. Implemented microservices architecture for sign-in/sign-up, transcript/video processing, and video editing services Built each service as a RESTful API using React, Python, and Flask Utilized API Gateway for user authentication, authorization, and request routing Encapsulated microservices using Docker for deploying in AWS EC2 Worked with other technologies such as AWS Lambda, S3, Springboot, and Jenkins",
-    //             start_date: "11-17-2019",
-    //             end_date: "12-20-2020",
-    //         }
-    //     ],
-    //     skills: {
-    //         skills: [
-    //             "Puppet", 
-    //             "Chef", 
-    //             "Ansible", 
-    //             "Vagrant", 
-    //             "Docker", 
-    //             "Splunk", 
-    //             "Amazon Web Services (AWS)", 
-    //             "Azure", 
-    //             "OpenStack", 
-    //             "Oracle", 
-    //             "SQL", 
-    //             "Enterprise NoSQL", 
-    //             "Cassandra", 
-    //             "PERL", 
-    //             "Ruby", 
-    //             "Python", 
-    //             "Java", 
-    //             "J2EE", 
-    //             "C++", 
-    //             "Virtualization/ContainerVagrant", 
-    //             "VMware"
-    //         ]
-    //     }
-    // };
     return data;
 }
 
@@ -260,7 +166,7 @@ function printEducation(edu) {
         // degree, gpa, graduation date -- on the same line
         doc.setFont(font, "italic"); // italics font
         doc.text(`${edu.degree} in ${edu.major}, GPA: ${edu.gpa}`, margin, current_y);
-        doc.text(`${dateToText(edu.start_date, "MM-YYYY")} to ${dateToText(edu.end_date, "MM-YYYY")}`, doc_width - margin, current_y, {align: "right"});        
+        doc.text(`${dateToText(edu.end_date, "MM-YYYY")}`, doc_width - margin, current_y, {align: "right"});        
         doc.setFont(font, "normal"); // unitalics font
         update_y();
     }
