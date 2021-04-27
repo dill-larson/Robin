@@ -50,7 +50,7 @@ export default class EducationInputOnboarding extends React.Component {
             .catch(err => {
                 console.log(err);
             })
-        //this.setState({informationPosted: true});
+        this.setState({informationPosted: true});
     }
 
     render() {
