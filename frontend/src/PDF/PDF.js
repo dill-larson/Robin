@@ -40,8 +40,6 @@ export default async function createResume(user_email, desc, order = ["education
         projects = data.projects,
         skills = data.skills;
 
-    console.log(data);
-
     // formatting of US phone numbers -- (000) 000-0000
     let formatted_phone = phone.length == 10 ? `(${phone.slice(0,3)}) ${phone.slice(3,6)}-${phone.slice(6,10)}` : phone;
 
