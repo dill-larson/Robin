@@ -5,12 +5,15 @@ import * as yup from 'yup';
 import axios from 'axios';
 import Logo from "../illustrations/Logo"
 import '../Search/Search.scss'
-import { Redirect } from 'react-router';
+import Results from '../Results/Results';
 
 export default class Search extends React.Component {
     validationSchema = yup.object({
         position: yup.string(),
-        skills: yup.string()
+        skills: yup.string(),
+        url: yup.string()
+            .url("Invalid URL").required()
+            ,
             
     });
 
@@ -19,39 +22,24 @@ export default class Search extends React.Component {
         this.state = {
             response: [],
             search: false,
+            url:"",
         }
     }
 
     handleSubmit(value) {
         console.log(value.skills);
         console.log(value.position);
-        axios.get('http://127.0.0.1:5000/scrape', {
-            params: {
-                position: value.position,
-                skills: value.skills,
-                recommended: value.recommended
-            
-            }
-        })
-            .then(res => {
-                const response = res.data;
-                this.setState({ 
-                    response,
-                    search:true 
-                });
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        //Needs to be removed when connected to backend
+        
+       
         this.setState({ 
-                search:true 
+                search:true,
+                url:value.url
             });
     }
 
     render() {
         if(this.state.search === true){
-            return <Redirect to='/results'></Redirect>
+           return(<Results searchUrl={this.state.url}></Results>)
         }
         return(
             <Container>
@@ -79,7 +67,21 @@ export default class Search extends React.Component {
                         errors,
                     }) => (
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="skills">
+                            <Form.Group controlId="url">
+                                <Form.Label className="search-heddings" style={{color:'#6153ae'}}>Search job by position</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="URL"
+                                    value={values.url}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    isValid={touched.url && !errors.url}
+                                    isInvalid={touched.url && errors.url}
+                                />
+                                <Form.Text className="text-danger">{touched.url && errors.url}</Form.Text>
+                            </Form.Group>
+                            <Button variant="light-accent text-white" className="search-button" type="submit">Search</Button>
+                            {/* <Form.Group controlId="skills">
                                 <Form.Label className="search-heddings" style={{color:'#6153ae'}}>Search job by specific skills</Form.Label>
                                 <Form.Control
                                     className="onboarding-form-input"
@@ -108,8 +110,8 @@ export default class Search extends React.Component {
                                     
                                 />
                                 <Form.Text className="text-danger">{touched.position && errors.position}</Form.Text>
-                            </Form.Group>
-                            <Row style={{justifyContent:"center", marginBottom:"2rem", marginTop:"2rem"}}>
+                            </Form.Group> */}
+                            {/* <Row style={{justifyContent:"center", marginBottom:"2rem", marginTop:"2rem"}}>
                                 <Button variant="light-accent text-white" className="search-button" type="submit">Search</Button>
                             </Row>
                             <Row style={{justifyContent:"center",marginBottom:"2rem", marginTop:"2rem"}}>
@@ -117,7 +119,7 @@ export default class Search extends React.Component {
                             </Row>
                             <Row style={{justifyContent:"center",marginBottom:"2rem", marginTop:"2rem"}}>
                                 <Button  className="search-button" variant="light-accent text-white" type="submit"> Search recommended positions</Button>
-                            </Row>
+                            </Row> */}
                         </Form>
                     )}
                 </Formik>
