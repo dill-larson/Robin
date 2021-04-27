@@ -10,9 +10,11 @@
     background-color:$light-shade !important;
     border-radius: 3rem; 
     padding: 2rem;
-    margin-top: 10%;
-    margin: 20%;
+    display: "flex";
+    align-items: "center" ;
+    justify-content: "center";
     color: $main-brand;
+    width: 25%;
 }
 
 .results-card{
