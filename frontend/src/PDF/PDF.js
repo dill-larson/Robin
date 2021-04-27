@@ -318,14 +318,21 @@ function calcTitleLength(title, bolded = true) {
 }
 
 function printExperience(job) {
-    // calc number of lines for achievements
-    let long_description = doc.splitTextToSize(job.achievements, max_line_width - indent);
-    long_description.map((line, index) => {
-        long_description[index] = '\u2022 ' + line;
+    // split achievements into sentences
+    let achievements = job.achievements.split(". ");
+    let num_of_lines = 0;
+
+    // resize sentences to fit length of page
+    let long_achievements = [];
+    achievements.map((line, index) => {
+        achievements[index] = '\u2022 ' + line;
+        let temp_arr = doc.splitTextToSize(achievements[index], max_line_width - indent);
+        long_achievements.push(temp_arr);
+        num_of_lines += temp_arr.length;
     });
 
-    lines_to_print = 2 + long_description.length;   // 2 lines for title/start/end_date and company/location
-                                                    // length is number of lines to needed to fit achievements
+    lines_to_print = 2 + num_of_lines;  // 2 lines for title/start/end_date and company/location
+                                        // length is number of lines to needed to fit achievements
     if(lines_printed + lines_to_print <= max_printed_lines) {
         // job title, start & end date -- on the same line
         doc.setFont(font, "bold"); // bold font
@@ -335,8 +342,10 @@ function printExperience(job) {
         update_y();
 
         // achievements
-        doc.text(long_description, margin, current_y);
-        update_y(long_description.length);
+        long_achievements.map(achieve => {
+            doc.text(achieve, margin, current_y);
+            update_y(achieve.length);
+        });
     }
 }
 
