@@ -45,14 +45,14 @@ export default class NavBar extends React.Component {
                     </g>
                 </svg>
 
-                <Nav id="nav" className="nav y-scrollable">
-                    <Nav.Link className="nav-close" onClick={(e) => this.handleClose(e)} aria-label="Close">
+                <Nav id="nav" className="robin-nav y-scrollable">
+                    <Nav.Link className="robin-nav-close robin-nav-link" onClick={(e) => this.handleClose(e)} aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </Nav.Link>
-                    <Nav.Link as={Link} eventKey="profile" to="/">profile</Nav.Link>
-                    <Nav.Link as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
-                    <Nav.Link as={Link} eventKey="portfolio" to="/">jobs, skills, projects</Nav.Link>
-                    <Nav.Link as={Link} eventKey="sign_out" to="/">sign out</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="profile" to="/">profile</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="portfolio" to="/">jobs, skills, projects</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="sign_out" to="/">sign out</Nav.Link>
                 </Nav>
             </div>
         );

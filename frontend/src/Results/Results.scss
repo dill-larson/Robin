@@ -6,9 +6,22 @@
     border-radius: 3rem; 
     padding: 2rem;
 }
+.loading-box{
+    background-color:$light-shade !important;
+    border-radius: 3rem; 
+    padding: 2rem;
+    display: "flex";
+    align-items: "center" ;
+    justify-content: "center";
+    color: $main-brand;
+    width: 25%;
+}
 
 .results-card{
      background-color: $light-shade;
+     border-radius: 3rem; 
+     padding: 1rem;
+     margin:1rem;
      border: none;
      .results-title-company{
         color: $main-brand;
@@ -23,17 +36,32 @@
      .result-job-description{
          margin-top:1rem;
          color:white;
-         font-size: 1.2rem;
-         font-weight: lighter;
+         font-size: 1.1rem;
+         font-weight: normal;
          
      }
+     .results-position{
+        margin-top: 1.3rem;
+         color: $main-brand;
+     }
+     .results-location{
+         color: $dark-accent;
+
+     }
+     .results-score{
+         color: $light-accent;
+     }
+     .results-info{
+         color:white
+     }
      .results-resume-button{
-        margin-top:2.5rem;
+        //margin-top:2.5rem;
          border-radius: 2rem  !important;
          margin-bottom: 1rem;
      }
      .results-apply-button{
         border-radius: 2rem  !important;
     }
+
 
 }
