@@ -26,6 +26,7 @@ function App() {
             <Route path="/login-retry" component={WrongLogin}/>
             <Route path="/signup-retry" component={WrongSignup}/>
             <Route path="/pdf" component={Test}/>
+
         </Switch>
     </Router>
   );

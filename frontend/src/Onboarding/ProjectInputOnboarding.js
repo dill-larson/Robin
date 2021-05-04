@@ -34,8 +34,9 @@ export default class ProjectInputOnboarding extends React.Component {
             end_date: values.end_date,
             about: values.about     
         }
-        axios.post('http://127.0.0.1:5000/onboard/experience',{position})
+        axios.post('http://127.0.0.1:5000/onboard/project',{position})
             .then(res => {
+                console.log('in project input onboarding');
                 console.log(res.data);
                 // this.setState({informationPosted: true});
             })

@@ -1,57 +1,68 @@
 import React from 'react';
-import { Button, Container, Form, Table } from 'react-bootstrap';
+import { Button, Container, Form, Row, Table,Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import Logo from "../illustrations/Logo"
+import '../Search/Search.scss'
+import Results from '../Results/Results';
 import NavBar from '../NavBar/NavBar';
 import '../Home/Home.scss'
 
+
 export default class Search extends React.Component {
     validationSchema = yup.object({
+        position: yup.string(),
+        skills: yup.string(),
         url: yup.string()
-            .url("Invalid URL")
+            .url("Invalid URL").required()
             ,
-        skills: yup.string()
             
     });
 
     constructor(props) {
         super(props);
         this.state = {
-            response: []
+            response: [],
+            search: false,
+            url:"",
         }
     }
 
     handleSubmit(value) {
-        console.log(value.url);
         console.log(value.skills);
-        axios.get('http://127.0.0.1:5000/scrape', {
-            params: {
-                url: value.url,
-                skills: value.skills
-            
-            }
-        })
-            .then(res => {
-                const response = res.data;
-                this.setState({ response });
-            })
-            .catch(error => {
-                console.error(error);
+        console.log(value.position);
+        
+       
+        this.setState({ 
+                search:true,
+                url:value.url
             });
     }
 
     render() {
+        if(this.state.search === true){
+           return(<Results searchUrl={this.state.url}></Results>)
+        }
         return(
             <Container>
-                <NavBar/>
-                <Formik
+                <Row>
+                    <Logo size="12rem"></Logo>
+                    <h1 className="search-title">Search for a job</h1>
+                </Row>
+                 <NavBar/>
+                <div className="search-card">
+                    <Formik
+
                     initialValues={{
-                        url: ''
+                        skills: '',
+                        position: '',
+                        recommended: false
+    
                     }}
                     validationSchema={this.validationSchema}
                     onSubmit={(values) => (this.handleSubmit(values))}
-                >
+                    >
                     {({
                         handleSubmit,
                         handleChange,
@@ -61,23 +72,8 @@ export default class Search extends React.Component {
                         errors,
                     }) => (
                         <Form onSubmit={handleSubmit}>
-                            <h1 className="search-label">Search for a job</h1>
-                            <Form.Group controlId="skills">
-                                <Form.Label style= {{color: "#6153ae"}}>Search job by specific skills</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="skill1, skill2, skill3"
-                                    value={values.skills}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isValid={touched.skills && !errors.skills}
-                                    isInvalid={touched.skills && errors.skills}
-                                />
-                                <Form.Text className="text-danger">{touched.url && errors.url}</Form.Text>
-                            </Form.Group>
-                            <h3 className="search-label"> -or- </h3>
                             <Form.Group controlId="url">
-                                <Form.Label style= {{color: "#6153ae"}}>Search job by specific URL</Form.Label>
+                                <Form.Label className="search-heddings" style={{color:'#6153ae'}}>Search job by position</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="URL"
@@ -89,34 +85,53 @@ export default class Search extends React.Component {
                                 />
                                 <Form.Text className="text-danger">{touched.url && errors.url}</Form.Text>
                             </Form.Group>
-                            <Button variant="main-brand" type="submit">Retrieve Data</Button>
+                            <Button variant="light-accent text-white" className="search-button" type="submit">Search</Button>
+                            {/* <Form.Group controlId="skills">
+                                <Form.Label className="search-heddings" style={{color:'#6153ae'}}>Search job by specific skills</Form.Label>
+                                <Form.Control
+                                    className="onboarding-form-input"
+                                    type="text"
+                                    placeholder="skill1, skill2, skill3"
+                                    value={values.skills}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    isValid={touched.skills && !errors.skills}
+                                    isInvalid={touched.skills && errors.skills}
+                                    
+                                />
+                                <Form.Text className="text-danger">{touched.skills && errors.skills}</Form.Text>
+                            </Form.Group>
+                            <Form.Group controlId="position">
+                                <Form.Label className="search-heddings" style={{color:'#6153ae'}}>Search job by position</Form.Label>
+                                <Form.Control
+                                    className="onboarding-form-input"
+                                    type="text"
+                                    placeholder="position"
+                                    value={values.position}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    isValid={touched.position && !errors.position}
+                                    isInvalid={touched.position && errors.position}
+                                    
+                                />
+                                <Form.Text className="text-danger">{touched.position && errors.position}</Form.Text>
+                            </Form.Group> */}
+                            {/* <Row style={{justifyContent:"center", marginBottom:"2rem", marginTop:"2rem"}}>
+                                <Button variant="light-accent text-white" className="search-button" type="submit">Search</Button>
+                            </Row>
+                            <Row style={{justifyContent:"center",marginBottom:"2rem", marginTop:"2rem"}}>
+                                <h3 className="search-heddings"> -or- </h3><br></br>
+                            </Row>
+                            <Row style={{justifyContent:"center",marginBottom:"2rem", marginTop:"2rem"}}>
+                                <Button  className="search-button" variant="light-accent text-white" type="submit"> Search recommended positions</Button>
+                            </Row> */}
                         </Form>
                     )}
                 </Formik>
-                <h6>Response:</h6>
-                {/* <p>{JSON.stringify(this.state.response)}</p> */}
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Company</th>
-                            <th>Position</th>
-                            <th>Link</th>
-                            <th>Date Posted</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.response.map((requisition, index) => {
-                            return (<tr>
-                                <td>{index+1}</td>
-                                <td>{requisition.Company}</td>
-                                <td className="text-wrap">{requisition.Position}</td>
-                                <td><a href={requisition.Link} target="_blank">Apply at {requisition.Company}</a></td>
-                                <td>{requisition.Time}</td>
-                            </tr>)
-                        })}
-                    </tbody>
-                </Table>
+
+                </div>
+                         
+                
             </Container>
         );
     }

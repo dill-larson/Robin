@@ -45,7 +45,7 @@ export default class EducationInputOnboarding extends React.Component {
         axios.post('http://127.0.0.1:5000/onboard/education',{degree})
             .then(res => {
                 console.log(res.data);
-                //this.setState({informationPosted: true});
+                this.setState({informationPosted: true});
             })
             .catch(err => {
                 console.log(err);
