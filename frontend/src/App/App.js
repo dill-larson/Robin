@@ -12,6 +12,8 @@ import Verify from '../SignUp/Verify';
 import WrongLogin from '../Login/WrongLogin';
 import WrongSignup from '../SignUp/WrongSignup';
 import Test from '../PDF/Test'; //to be removed
+import Results from '../Results/Results';
+
 
 function App() {
   return (
@@ -26,7 +28,7 @@ function App() {
             <Route path="/login-retry" component={WrongLogin}/>
             <Route path="/signup-retry" component={WrongSignup}/>
             <Route path="/pdf" component={Test}/>
-
+            <Route path="/results" component={Results}/>
         </Switch>
     </Router>
   );

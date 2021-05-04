@@ -1,14 +1,11 @@
 import React from 'react';
 import { Button, Container, Form, Row, Table,Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
-import Logo from "../illustrations/Logo"
-import '../Search/Search.scss'
-import Results from '../Results/Results';
 import NavBar from '../NavBar/NavBar';
 import '../Home/Home.scss'
-
 
 export default class Search extends React.Component {
     validationSchema = yup.object({
@@ -46,14 +43,8 @@ export default class Search extends React.Component {
         }
         return(
             <Container>
-                <Row>
-                    <Logo size="12rem"></Logo>
-                    <h1 className="search-title">Search for a job</h1>
-                </Row>
-                 <NavBar/>
-                <div className="search-card">
-                    <Formik
-
+                <NavBar/>
+                <Formik
                     initialValues={{
                         skills: '',
                         position: '',
@@ -128,10 +119,6 @@ export default class Search extends React.Component {
                         </Form>
                     )}
                 </Formik>
-
-                </div>
-                         
-                
             </Container>
         );
     }
