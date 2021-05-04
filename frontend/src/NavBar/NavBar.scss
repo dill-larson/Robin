@@ -16,7 +16,7 @@
     background: transparent;
 }
 
-.nav {
+.robin-nav {
     height: 100vh;
     width: 0; //hide navbar initially
     position: fixed;
@@ -29,17 +29,17 @@
     padding-top: 60px;
 }
 
-.nav-link {
+.robin-nav-link {
     color: white;
     font-size: 4rem;
     transition: 0.3s;
 }
 
-.nav-link:hover, .nav-link:focus {
+.robin-nav-link:hover, .robin-nav-link:focus {
     color: darken(white, 15%)
 }
 
-.nav-close {
+.robin-nav-close {
     position: absolute;
     top: 0;
     right: 25px;
