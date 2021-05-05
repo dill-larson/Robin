@@ -5,6 +5,10 @@ import ResultPill from './ResultPill'
 import Scroll from './Scroll';
 
 export default function JobCard(props) {
+    function handleClick(e){
+        e.preventDefault();
+        console.log(props.description);
+    }
     return ( 
         <Card className="results-card" style={{ backgroundColor:"#d8d8e0",border:"none"}}>
             <Row>
@@ -54,6 +58,7 @@ export default function JobCard(props) {
                 <Col >
                     <Row>
                         <Button 
+                            onClick={handleClick}
                             variant="dark-shade" 
                             className="results-resume-button"
                         >
@@ -61,7 +66,8 @@ export default function JobCard(props) {
                         </Button>
                     </Row>
                     <Row>
-                        <Button 
+                        <Button
+                            
                             variant="light-accent text-white" 
                             className="results-apply-button"
                         >

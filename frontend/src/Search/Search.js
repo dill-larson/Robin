@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import axios from 'axios';
 import NavBar from '../NavBar/NavBar';
 import '../Home/Home.scss'
+import Results from '../Results/Results'
+import './Search.scss'
 
 export default class Search extends React.Component {
     validationSchema = yup.object({
@@ -44,6 +46,7 @@ export default class Search extends React.Component {
         return(
             <Container>
                 <NavBar/>
+                <div className="search-card">
                 <Formik
                     initialValues={{
                         skills: '',
@@ -119,6 +122,8 @@ export default class Search extends React.Component {
                         </Form>
                     )}
                 </Formik>
+                </div>
+                
             </Container>
         );
     }

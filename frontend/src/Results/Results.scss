@@ -10,9 +10,9 @@
     background-color:$light-shade !important;
     border-radius: 3rem; 
     padding: 2rem;
-    display: "flex";
-    align-items: "center" ;
-    justify-content: "center";
+    margin-left: 37%;
+    margin-right: 10rem;
+    margin-top: 10%;
     color: $main-brand;
     width: 25%;
 }
@@ -26,8 +26,6 @@
      .results-title-company{
         color: $main-brand;
         font-size: 2rem;
-       
-
     }
      .results-title{
          color: $dark-accent;

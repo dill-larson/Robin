@@ -47,6 +47,7 @@ export default class Login extends React.Component{
         onSuccess: data => {
         console.log("onSuccess:", data);
         this.setState({logedIn:true});
+        
         },
 
         onFailure: err => {
@@ -55,6 +56,7 @@ export default class Login extends React.Component{
             console.error(err)
             this.setState({notConfirmed:true})
         }else{
+            
             this.setState({wrongPassword:true});
         }
         
