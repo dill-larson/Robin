@@ -46,6 +46,8 @@ export default class Login extends React.Component{
     user.authenticateUser(authDetails, {
         onSuccess: data => {
         console.log("onSuccess:", data);
+        sessionStorage.setItem('email', value.email);
+        sessionStorage.setItem('loggedIn', "true");
         this.setState({logedIn:true});
         },
 

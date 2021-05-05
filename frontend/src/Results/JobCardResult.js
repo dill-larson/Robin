@@ -3,11 +3,14 @@ import { Button, Card, Col, Row, Accordion } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ResultPill from './ResultPill'
 import Scroll from './Scroll';
+import createResume from '../PDF/PDF';
 
 export default function JobCard(props) {
+    let email = sessionStorage.getItem('email');
     function handleClick(e){
         e.preventDefault();
         console.log(props.description);
+        createResume(email, props.description);
     }
     return ( 
         <Card className="results-card" style={{ backgroundColor:"#d8d8e0",border:"none"}}>

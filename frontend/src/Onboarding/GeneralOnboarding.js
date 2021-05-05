@@ -9,22 +9,24 @@ import './Onboarding.scss';
 import Logo from "../illustrations/Logo";
 
 export default class GeneralOnboarding extends React.Component {
-
     validationSchema = yup.object({
         name: yup.string()
             .required("Required"),
         email: yup.string()
             .email("Invalid email")
             .required("Required"),
-        phone: yup.number("No special characters")
-            .positive("Invalid US phone number")
-            .required("Required"),
+        phone: yup.string().matches(/^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/, 'Phone number is not valid')
+            .required("Required")
+            .min(10),
         website: yup.string()
-            .url("Invalid url")
+            .url("Invalid url"),
+        linkedin: yup.string().required("Required"),
+        github: yup.string().required("Required"),
     });
 
     constructor(props) {
         super(props);
+
         this.state = {
             informationPosted: false
         }
@@ -159,7 +161,8 @@ export default class GeneralOnboarding extends React.Component {
                                             value={values.linkedin}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                        
+                                            isValid={touched.linkedin && !errors.linkedin}
+                                            isInvalid={touched.linkedin && errors.linkedin}
                                         />
                                         </InputGroup>
                                         <Form.Text className="form-error">{touched.linkedin && errors.linkedin}</Form.Text>
@@ -176,6 +179,8 @@ export default class GeneralOnboarding extends React.Component {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur} 
                                                 placeholder="Username"
+                                                isValid={touched.github && !errors.github}
+                                                isInvalid={touched.github && errors.github}
                                             />
                                         </InputGroup>
                                     </Form.Group>
