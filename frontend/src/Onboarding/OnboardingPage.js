@@ -13,6 +13,7 @@ import GeneralOnboarding from './GeneralOnboarding';
 import OnboardingMenu from './OnboardingMenu';
 import Page from '../Page/Page';
 import Home from '../Home/Home';
+import Login from '../Login/Login';
 
 export default function OnboardingPage(props) {
     const [progress, setProgress] = useState([0]);
@@ -66,6 +67,6 @@ export default function OnboardingPage(props) {
             </Page>
         );
     }else{
-        return(<Home></Home>)
+        return(<Login></Login>)
     }
 }

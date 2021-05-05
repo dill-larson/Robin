@@ -9,6 +9,7 @@ import '../Home/Home.scss'
 import Results from '../Results/Results'
 import './Search.scss'
 import Home from '../Home/Home';
+import Login from '../Login/Login';
 
 export default class Search extends React.Component {
     
@@ -132,7 +133,7 @@ export default class Search extends React.Component {
                 </Container>
             );
         } else {
-            return(<Home></Home>)
+            return(<Login></Login>)
         }
     }
 }
