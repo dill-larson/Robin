@@ -22,7 +22,7 @@ const doc_width = 210,
 var lines_printed = 0,
     lines_to_print,
     current_y = margin + one_line_height;
-const doc = new jsPDF(); // a4 paper, portrait, using millimeters for units
+var doc = new jsPDF(); // a4 paper, portrait, using millimeters for units
 
 export default async function createResume(user_email, desc, order = ["education", "skills", "experience", "projects"]) {
     
@@ -110,6 +110,12 @@ export default async function createResume(user_email, desc, order = ["education
 
     // prompt user to save pdf
     doc.save("resume.pdf"); 
+
+    //clear and create new PDF for next file
+    lines_printed = 0;
+    lines_to_print = 0;
+    current_y = margin + one_line_height;
+    doc = new jsPDF();
 }
 
 async function getUserData(user_email, desc) {
