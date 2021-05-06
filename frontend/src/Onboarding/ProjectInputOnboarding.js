@@ -7,6 +7,8 @@ import './Onboarding.scss';
 import axios from 'axios';
 import Logo from "../illustrations/Logo";
 
+import DateToDBDate from './Util';
+
 export default class ProjectInputOnboarding extends React.Component {
     validationSchema = yup.object({
         name: yup.string()
@@ -30,8 +32,8 @@ export default class ProjectInputOnboarding extends React.Component {
         const position ={
             name: values.name,
             position: values.position,
-            start_date: values.start_date,
-            end_date: values.end_date,
+            start_date: DateToDBDate(values.start_date),
+            end_date: DateToDBDate(values.end_date),
             about: values.about     
         }
         axios.post('http://127.0.0.1:5000/onboard/project',{position})
