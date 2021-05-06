@@ -9,7 +9,6 @@ import Login from '../Login/Login';
 import OnboardingPage from '../Onboarding/OnboardingPage';
 import Verify from '../SignUp/Verify';
 import WrongLogin from '../Login/WrongLogin';
-import WrongSignup from '../SignUp/WrongSignup';
 import Test from '../PDF/Test'; //to be removed
 import Results from '../Results/Results';
 
@@ -25,7 +24,6 @@ function App() {
             <Route path="/onboarding" component={OnboardingPage}/>
             <Route path="/verify-email" component={Verify}/>
             <Route path="/login-retry" component={WrongLogin}/>
-            <Route path="/signup-retry" component={WrongSignup}/>
             <Route path="/pdf" component={Test}/>
             <Route path="/results" component={Results}/>
         </Switch>
