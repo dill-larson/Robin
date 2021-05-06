@@ -51,15 +51,13 @@ export default class SignUp extends React.Component {
                 if(err.name == "UsernameExistsException"){
                     this.setState({alreadyExists:true})
                 }
-            };
-            this.setState({signedUp:true})
+            } else {
+                this.setState({signedUp:true});
+            }
         });
     }  
     
     render() {
-        if(this.state.alreadyExists === true){
-            return <Redirect to='/signup-retry'></Redirect> 
-        }
         if(this.state.signedUp === true){
             return <Redirect to='/verify-email'></Redirect>
         }
@@ -95,7 +93,11 @@ export default class SignUp extends React.Component {
                             }) => (
                                 <Form className="form-signup" onSubmit={handleSubmit}>
                                     <h1 className="form-header text-center">Sign Up</h1>
-                                
+                                    { this.state.alreadyExists &&
+                                    <div className="form-error">
+                                        <p>The username you entered is already being used. <br/> Please <Link to="/login" className="form-link text-white">Login</Link></p>
+                                    </div>
+                                    }
                                     <Form.Group controlId="name">
                                         <Form.Label className="form-label">Name</Form.Label>
                                         <Form.Control
@@ -107,7 +109,7 @@ export default class SignUp extends React.Component {
                                             isValid={touched.name && !errors.name}
                                             isInvalid={touched.name && errors.name}
                                         />
-                                        <Form.Text className="form-error">{touched.name && errors.name}</Form.Text>
+                                        <Form.Text className="form-error-text">{touched.name && errors.name}</Form.Text>
                                     </Form.Group>
                                     <Form.Group controlId="email">
                                         <Form.Label className="form-label">Email</Form.Label>
@@ -120,7 +122,7 @@ export default class SignUp extends React.Component {
                                             isValid={touched.email && !errors.email}
                                             isInvalid={touched.email && errors.email}
                                         />
-                                        <Form.Text className="form-error">{touched.email && errors.email}</Form.Text>
+                                        <Form.Text className="form-error-text">{touched.email && errors.email}</Form.Text>
                                     </Form.Group>
                                     <Form.Group controlId="password">
                                         <Form.Label className="form-label">Password</Form.Label>
@@ -133,7 +135,7 @@ export default class SignUp extends React.Component {
                                             isValid={touched.password && !errors.password}
                                             isInvalid={touched.password && errors.password}
                                         />
-                                        <Form.Text className="form-error">{touched.password && errors.password}</Form.Text>
+                                        <Form.Text className="form-error-text">{touched.password && errors.password}</Form.Text>
                                     </Form.Group>
                                     <Form.Group controlId="confirm_password">
                                         <Form.Label className="form-label">Confirm Password</Form.Label>
@@ -146,11 +148,11 @@ export default class SignUp extends React.Component {
                                             isValid={touched.confirm_password && !errors.confirm_password}
                                             isInvalid={touched.confirm_password && errors.confirm_password}
                                         />
-                                        <Form.Text className="form-error">{touched.confirm_password && errors.confirm_password}</Form.Text>
+                                        <Form.Text className="form-error-text">{touched.confirm_password && errors.confirm_password}</Form.Text>
                                     </Form.Group>
                                     <Row>
                                         <p className="text-white">I already have an account - <Link to="/login" className="text-main-brand">Login</Link></p>
-                                        <Button variant="dark-shade" className="form-submit ml-auto" type="submit">Next</Button>
+                                        <Button variant="dark-shade" className="form-submit ml-auto" type="submit" id="submit">Next</Button>
                                     </Row>
                                 </Form>
                             )}
