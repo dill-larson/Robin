@@ -28,6 +28,7 @@ $body-bg: $gray-white;
 // font
 $font-family-sans-serif: futura-pt; // Poppins
 $font-family-monospace: roboto; // Roboto
+$font-weight-base: 500;
 
 // general component
 $component-active-bg: $main-brand;
@@ -56,7 +57,7 @@ $btn-border-radius-sm: 2rem;
 // form
 $label-margin-bottom: 0.25rem;
 
-$input-border-radius: 0.75rem;
+$input-border-radius: 1.25rem;
 
 @import '~bootstrap/scss/bootstrap';
 
