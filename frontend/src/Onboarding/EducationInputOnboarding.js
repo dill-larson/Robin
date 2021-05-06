@@ -8,6 +8,8 @@ import './Onboarding.scss';
 import Logo from "../illustrations/Logo";
 import axios from 'axios';
 
+import DateToDBDate from './Util';
+
 export default class EducationInputOnboarding extends React.Component {
     validationSchema = yup.object({
         school: yup.string()
@@ -38,10 +40,11 @@ export default class EducationInputOnboarding extends React.Component {
             school: values.school,
             degree: values.degree, 
             field_of_study: values.field_of_study,
-            start_date: values.start_date,
-            graduation_date: values.graduation_date,
+            start_date: DateToDBDate(values.start_date),
+            graduation_date: DateToDBDate(values.graduation_date),
             gpa:values.gpa
         }
+
         axios.post('http://127.0.0.1:5000/onboard/education',{degree})
             .then(res => {
                 console.log(res.data);
@@ -49,7 +52,7 @@ export default class EducationInputOnboarding extends React.Component {
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
         this.setState({informationPosted: true});
     }
 
