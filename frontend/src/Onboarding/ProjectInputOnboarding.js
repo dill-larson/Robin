@@ -30,6 +30,7 @@ export default class ProjectInputOnboarding extends React.Component {
 
     handleSubmit(values) {
         const position ={
+            email: sessionStorage.getItem('email'),
             name: values.name,
             position: values.position,
             start_date: DateToDBDate(values.start_date),

@@ -37,6 +37,7 @@ export default class EducationInputOnboarding extends React.Component {
 
     handleSubmit(values) {
         const degree = {
+            email: sessionStorage.getItem('email'),
             school: values.school,
             degree: values.degree, 
             field_of_study: values.field_of_study,
@@ -45,7 +46,7 @@ export default class EducationInputOnboarding extends React.Component {
             gpa: `${values.gpa}/4.00`
         }
 
-        axios.post('http://127.0.0.1:5000/onboard/education',{degree})
+        axios.post('http://127.0.0.1:5000/onboard/education',{degree, email})
             .then(res => {
                 console.log(res.data);
                 this.setState({informationPosted: true});

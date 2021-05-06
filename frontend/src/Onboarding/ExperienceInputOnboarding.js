@@ -32,6 +32,7 @@ export default class EducationInputOnboarding extends React.Component {
 
     handleSubmit(values) {
         const position ={
+            email: sessionStorage.getItem('email'),
             company: values.company,
             position: values.position,
             start_date: DateToDBDate(values.start_date),

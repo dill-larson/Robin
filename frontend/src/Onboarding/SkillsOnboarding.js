@@ -21,7 +21,11 @@ export default class SkillsOnboarding extends React.Component {
     handleClick(e){
         e.preventDefault();
         const skills = this.state.skills_array.join(",");
-         axios.post('http://127.0.0.1:5000/onboard/skills',{skills})
+        const data = {
+            email: sessionStorage.getItem('email'),
+            skills: skills,
+        }
+         axios.post('http://127.0.0.1:5000/onboard/skills',{data})
          .then(res => {
             console.log('Printing skills request data')
             console.log(res.data);
