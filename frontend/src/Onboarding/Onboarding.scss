@@ -1,107 +1,107 @@
-@import '../App/App.scss';//for custom colors
+// @import '../App/App.scss';//for custom colors
 
-.onboarding-title{
-    padding-top: 4rem;
-    padding-left: 0.5rem;
-    color: $dark-shade;
-}
+// .onboarding-title{
+//     padding-top: 4rem;
+//     padding-left: 0.5rem;
+//     color: $dark-shade;
+// }
 
-//Onboarding Nav:
-.onboarding-nav {
-    background-color: $light-shade;
-    border-radius: 1rem;
-    padding: 3rem 1rem;
-}
+// //Onboarding Nav:
+// .onboarding-nav {
+//     background-color: $light-shade;
+//     border-radius: 1rem;
+//     padding: 3rem 1rem;
+// }
 
-.onboarding-nav-number {
-    width: 1.75rem;
-    height: 1.75rem;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    display: inline-flex;
-}
+// .onboarding-nav-number {
+//     width: 1.75rem;
+//     height: 1.75rem;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 50%;
+//     display: inline-flex;
+// }
 
-.onboarding-nav-link {
-    font-size: 1.5rem;
-    color: $white;
-    margin: 0.5rem 0rem;
-    .onboarding-nav-number {
-        background-color: $white;
-        color: $light-shade;
-    }   
-}
+// .onboarding-nav-link {
+//     font-size: 1.5rem;
+//     color: $white;
+//     margin: 0.5rem 0rem;
+//     .onboarding-nav-number {
+//         background-color: $white;
+//         color: $light-shade;
+//     }   
+// }
 
-.onboarding-nav-link.disabled {
-    color: $white;
-    .onboarding-nav-number {
-        background-color: $white;
-        color: $light-shade;
-    }   
-}
+// .onboarding-nav-link.disabled {
+//     color: $white;
+//     .onboarding-nav-number {
+//         background-color: $white;
+//         color: $light-shade;
+//     }   
+// }
 
-.onboarding-nav-link.active {
-    color: $main-brand !important;
-    .onboarding-nav-number {
-        background-color: $main-brand !important;
-        color: $white !important;
-    }
-}
+// .onboarding-nav-link.active {
+//     color: $main-brand !important;
+//     .onboarding-nav-number {
+//         background-color: $main-brand !important;
+//         color: $white !important;
+//     }
+// }
 
-.onboarding-nav-link.active:hover, .onboarding-nav-link.active:active {
-    color: darken($main-brand, 15%) !important;
-    .onboarding-nav-number {
-        background-color: darken($main-brand, 15%) !important;
-        color: $white !important;
-    }
-}
+// .onboarding-nav-link.active:hover, .onboarding-nav-link.active:active {
+//     color: darken($main-brand, 15%) !important;
+//     .onboarding-nav-number {
+//         background-color: darken($main-brand, 15%) !important;
+//         color: $white !important;
+//     }
+// }
 
-.onboarding-nav-link.filled {
-    font-size: 1.5rem;
-    color: $light-accent;
-    margin: 0.5rem 0rem;
-    .onboarding-nav-number {
-        background-color: $light-accent;
-        color: $white;
-    }   
-}
+// .onboarding-nav-link.filled {
+//     font-size: 1.5rem;
+//     color: $light-accent;
+//     margin: 0.5rem 0rem;
+//     .onboarding-nav-number {
+//         background-color: $light-accent;
+//         color: $white;
+//     }   
+// }
 
-.onboarding-nav-link.filled:hover, .onboarding-nav-link.filled:active {
-    color: darken($light-accent, 15%);
-    .onboarding-nav-number {
-        background-color: darken($light-accent, 15%);
-        color: $white;
-    }   
-}
+// .onboarding-nav-link.filled:hover, .onboarding-nav-link.filled:active {
+//     color: darken($light-accent, 15%);
+//     .onboarding-nav-number {
+//         background-color: darken($light-accent, 15%);
+//         color: $white;
+//     }   
+// }
 
-//Onboarding Form:
-.onboarding-form-label{
-    color: $dark-shade;
-}
-.onboarding-form-input {
-    //border color adds readability 
-    //border-color: transparent; //valid & invalid form-input use border color
-    border-radius: 0.75rem;
-}
-.onboarding-form-btn {
-    font-weight: bolder;
-    border: 0;
-    border-radius: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    margin-left: 130px;
-}
+// //Onboarding Form:
+// .onboarding-form-label{
+//     color: $dark-shade;
+// }
+// .onboarding-form-input {
+//     //border color adds readability 
+//     //border-color: transparent; //valid & invalid form-input use border color
+//     border-radius: 0.75rem;
+// }
+// .onboarding-form-btn {
+//     font-weight: bolder;
+//     border: 0;
+//     border-radius: 2rem;
+//     padding-left: 2rem;
+//     padding-right: 2rem;
+//     margin-left: 130px;
+// }
 
-//Onboarding Card
-.onboarding-card {
-    width: 100%;
-    border: transparent;
-    margin: 0.5rem 0rem;
-}
+// //Onboarding Card
+// .onboarding-card {
+//     width: 100%;
+//     border: transparent;
+//     margin: 0.5rem 0rem;
+// }
 
-.onboarding-card-display {
-    background-color: $light-shade;
-    border-radius: 1rem;
-    padding: 1rem 2rem;
-    margin-bottom: 1rem;
-}
+// .onboarding-card-display {
+//     background-color: $light-shade;
+//     border-radius: 1rem;
+//     padding: 1rem 2rem;
+//     margin-bottom: 1rem;
+// }
