@@ -158,10 +158,10 @@ export default class SignUp extends React.Component {
                                         />
                                         <Form.Text className="form-error-text">{touched.confirm_password && errors.confirm_password}</Form.Text>
                                     </Form.Group>
-                                    <Row>
+                                    <Form.Group>
                                         <p className="text-white">I already have an account - <Link to="/login" className="text-main-brand">Login</Link></p>
                                         <Button variant="dark-shade" className="form-submit ml-auto" type="submit" id="submit">Next</Button>
-                                    </Row>
+                                    </Form.Group>
                                 </Form>
                             )}
                         </Formik>
