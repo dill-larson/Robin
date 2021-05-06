@@ -3,6 +3,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import UserPool from '../UserPool';
 
 /* styling */
 import './SignUp.scss';
@@ -10,8 +11,11 @@ import './SignUp.scss';
 /* components */
 import Page from '../Page/Page';
 import Logo from "../illustrations/Logo"
+import Header from '../Components/Header';
+
+/* svgs */
 import Checklist from '../illustrations/Checklist';
-import UserPool from '../UserPool';
+
 
 export default class SignUp extends React.Component {
     validationSchema = yup.object({
@@ -66,8 +70,12 @@ export default class SignUp extends React.Component {
         <Page>
             <Col>
                 <Row>
-                    <Col className="signup-logo">
-                        <Logo size="12rem"></Logo>
+                    <Col>
+                        <Header/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
                         <div className="signup-illustration">
                             <Checklist  size="25rem"/>
                         </div>
