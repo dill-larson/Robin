@@ -20,8 +20,19 @@
     .form-label {
         color: white;
     }
-    
+
     .form-error {
+        background-color: var(--danger);
+        border-radius: 1rem;
+        padding: 0.5rem;
+        p {
+            padding: 0.15rem;
+            margin-bottom: 0;
+            color: white;
+        }
+    }
+    
+    .form-error-text {
         color: var(--danger);
     }
     
