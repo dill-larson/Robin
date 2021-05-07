@@ -24,8 +24,10 @@ export default class EducationOnboarding extends React.Component {
         };
     }
     componentDidMount() {
-        const email = sessionStorage.getItem('email');
-        axios.get(`http://127.0.0.1:5000/fetch/education`, {email})
+        const params = {
+            email: sessionStorage.getItem('email')
+        };
+        axios.get(`http://127.0.0.1:5000/fetch/education`, {params})
           .then(res => {
             const educations = res.data;
             this.setState({ educations });
