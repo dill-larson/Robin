@@ -46,7 +46,7 @@ export default class EducationInputOnboarding extends React.Component {
             gpa: `${values.gpa}/4.00`
         }
 
-        axios.post('http://127.0.0.1:5000/onboard/education',{degree, email})
+        axios.post('http://127.0.0.1:5000/onboard/education',{degree})
             .then(res => {
                 console.log(res.data);
                 this.setState({informationPosted: true});
