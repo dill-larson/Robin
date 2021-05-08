@@ -3,9 +3,9 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 
-import Logo from "../illustrations/Logo";
+import Logo from "../../illustrations/Logo";
 import axios from 'axios';
 
 export default class EducationInputOnboarding extends React.Component {

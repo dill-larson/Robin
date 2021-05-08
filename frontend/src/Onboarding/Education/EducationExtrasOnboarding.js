@@ -3,7 +3,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 
 import OnboardingMenu from '../Components/OnboardingMenu';
 import Page from '../Page/Page';
