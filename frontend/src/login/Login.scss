@@ -31,6 +31,10 @@
         color: var(--danger);
     }
 
+    .form-footer {
+        display: flex;
+    }
+
     .form-submit {
         color: var(--dark-shade);
         background-color: white;
