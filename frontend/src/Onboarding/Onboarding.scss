@@ -95,8 +95,11 @@
 //Onboarding Card
 .onboarding-card {
     width: 100%;
-    border: transparent;
     margin: 0.5rem 0rem;
+    .card-btns {
+        margin-top: auto;
+        margin-bottom: 0.5rem;
+    }
 }
 
 .onboarding-card-display {
