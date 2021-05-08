@@ -18,6 +18,19 @@ export default class SkillsOnboarding extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
     }
+    componentDidMount() {
+        const params = {
+            email: sessionStorage.getItem('email')
+        };
+        axios.get(`http://127.0.0.1:5000/fetch/skills`, {params})
+          .then(res => {
+            const skills_array = res.data
+            console.log(skills_array)
+            // const skills_array = res.data;
+            // skills_array = skills_array.split(",").trim()
+            // this.setState({ skills_array });
+          })
+      }
     handleClick(e){
         e.preventDefault();
         const skills = this.state.skills_array.join(",");

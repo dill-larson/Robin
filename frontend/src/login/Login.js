@@ -29,9 +29,22 @@ export default class Login extends React.Component{
         this.state = {
             logedIn: false,
             wrongPassword:false,
-            notConfirmed:false
+            notConfirmed:false,
+            onboarderd: false,
+
         }
     }
+    componentDidMount() {
+        const params = {
+            email: sessionStorage.getItem('email')
+        };
+        axios.get(`http://127.0.0.1:5000/fetch/contact`, {params})
+          .then(res => {
+            const response = res.data;
+            if(response.email != null)
+            this.setState({ onboarderd: true });
+          })
+      }
 
     handleSubmit(value) {
       const user = new CognitoUser({
@@ -70,14 +83,18 @@ export default class Login extends React.Component{
     });
     }
     render(){
+        
         if(this.state.notConfirmed === true){
             return <Redirect to='/verify-email'></Redirect>
         }
         if(this.state.wrongPassword === true){
             return <Redirect to='/login-retry'></Redirect>
         }
-        if(this.state.logedIn === true){
+        if(this.state.logedIn === true && this.state.onboarderd === false){
             return <Redirect to='/onboarding/general'></Redirect>
+        }
+        if(this.state.logedIn === true && this.state.onboarderd === true){
+            return <Redirect to='/search'></Redirect>
         }
         return (
             <div style={pageStyle}>
