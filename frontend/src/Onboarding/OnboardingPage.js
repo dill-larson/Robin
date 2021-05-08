@@ -9,7 +9,7 @@ import ExperienceInputOnboarding from './ExperienceInputOnboarding';
 import ExperienceOnboarding from './ExperienceOnboarding';
 import EducationInputOnboarding from './EducationInputOnboarding';
 import EducationOnboarding from './EducationOnboarding';
-import GeneralOnboarding from './GeneralOnboarding';
+import GeneralOnboarding from './General/GeneralOnboarding';
 import OnboardingMenu from './OnboardingMenu';
 import Page from '../Page/Page';
 import Home from '../Home/Home';

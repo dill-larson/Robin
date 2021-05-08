@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router-dom'
 import axios from 'axios';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 
 export default class GeneralOnboarding extends React.Component {
     validationSchema = yup.object({
