@@ -13,10 +13,10 @@ export default function EducationCard(props) {
                         <Card.Subtitle className="mt-2">GPA: {props.gpa}</Card.Subtitle>
                     </Card.Body>
                 </Col>
-                <Col className="card-btns">
+                {/* <Col className="card-btns">
                     <Button as={Link} to={`/onboarding/education/edit/${props.id}`} className="mb-2" variant="light-shade">Edit</Button>
                     <Button variant="danger">Delete</Button>
-                </Col>
+                </Col> */}
             </Row>
         </Card>
     );
