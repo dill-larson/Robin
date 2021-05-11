@@ -11,14 +11,14 @@ export default class EducationOnboarding extends React.Component {
         super(props);
         this.state = {
             educations: [
-                // {
-                //     degree: 'Bachelors of Science',
-                //     field_of_study: 'Computer Science',
-                //     school: 'San Jose State University',
-                //     gpa: '4.0',
-                //     start_date: 'August 2018',
-                //     graduation_date: 'May 2021'
-                // },
+                {
+                    degree: 'Bachelors of Science',
+                    major: 'Computer Science',
+                    school: 'San Jose State University',
+                    gpa: '4.0',
+                    start_date: 'August 2018',
+                    end_date: 'May 2021'
+                },
             ],
             informationPosted: false
         };
@@ -46,7 +46,7 @@ export default class EducationOnboarding extends React.Component {
         if(this.state.educations.length === 0){
             return(<div>
                 <Row style={{justifyContent:"space-between"}}>
-                    <h1 className="onboarding-title">Degrees</h1>
+                    <h1 className="onboarding-form form-title">Degrees</h1>
                     <Logo size="12rem" ></Logo>
                 </Row>
                 <Row className="onboarding-card-display">
@@ -83,7 +83,7 @@ export default class EducationOnboarding extends React.Component {
                 </Row>
                 <Row className="onboarding-card-display">
                 
-                    {this.state.educations.data.map(edu => {
+                    {this.state.educations.map(edu => {
                         return (
                         <EducationCard 
                             degree={edu.degree}
