@@ -32,6 +32,8 @@ export default function OnboardingPage(props) {
             setFrom(from => [...from, origin]);
         }
     }
+    
+
     if(loggedIn === "true"){
         return(
             <Page>
