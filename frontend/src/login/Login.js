@@ -3,7 +3,6 @@ import { Button, Row, Col, Form } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import axios from 'axios';
 
 /* styling */
 import './Login.scss';
