@@ -11,14 +11,14 @@ export default class EducationOnboarding extends React.Component {
         super(props);
         this.state = {
             jobs: [
-                {
-                    company: 'Google',
-                    title: 'Software Engineer',
-                    city: 'San Francisco',
-                    start_date: 'Jan 2020',
-                    end_date: 'Present',
-                    rel_achievements: ''
-                },
+                // {
+                //     company: 'Google',
+                //     title: 'Software Engineer',
+                //     city: 'San Francisco',
+                //     start_date: 'Jan 2020',
+                //     end_date: 'Present',
+                //     rel_achievements: ''
+                // },
             ],
             informationPosted: false
         };
@@ -48,7 +48,7 @@ export default class EducationOnboarding extends React.Component {
                     <h1 className="form-title">Professional History</h1>
                 </Row>
                 <Row className="onboarding-card-display">
-                    {this.state.jobs.length !== 0 && this.state.jobs.map(job => {
+                    {this.state.jobs.length !== 0 && this.state.jobs.data.map(job => {
                         return (
                         <JobCard 
                             company={job.company}
