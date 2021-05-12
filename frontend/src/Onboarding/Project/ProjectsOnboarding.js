@@ -11,12 +11,12 @@ export default class ProjectsOnboarding extends React.Component {
         super(props);
         this.state = {
             projects: [
-                {
-                    // title: 'Robin',
-                    // start_date: 'January 2020',
-                    // end_date: 'May 2021',
-                    // description: 'Resume Builder'
-                },
+                // {
+                //     title: 'Robin',
+                //     start_date: 'January 2020',
+                //     end_date: 'May 2021',
+                //     description: 'Resume Builder'
+                // },
             ],
         };
     }
