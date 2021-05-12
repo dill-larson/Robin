@@ -48,14 +48,12 @@ export default function JobCard(props) {
                      </Accordion>                    
                 </Col>
                 <Col className="card-btns">
-                    <div>
-                        <Button onClick={handleClick} variant="dark-shade">
-                            Tailored Resume
-                        </Button>
-                        <Button as={Link} to={props.link} variant="light-accent" className="text-white mt-2">
-                            Apply
-                        </Button>
-                    </div>
+                    <Button onClick={handleClick} variant="dark-shade">
+                        Tailored Resume
+                    </Button>
+                    {/* <Button as={Link} to={props.link} variant="light-accent" className="text-white mt-2">
+                        Apply
+                    </Button> */}
                 </Col>
             </Row>
         </Card>

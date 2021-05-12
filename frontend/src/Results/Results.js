@@ -25,6 +25,7 @@ export default class Results extends React.Component {
 
         axios.get(`http://127.0.0.1:5000/scrape`, { params })
             .then(res => {
+                console.log(res.data[0]);
                 const jobs = res.data;
                 this.setState({ jobs });
             });
