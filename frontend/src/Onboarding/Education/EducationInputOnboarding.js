@@ -50,11 +50,12 @@ export default class EducationInputOnboarding extends React.Component {
             field_of_study: values.field_of_study,
             start_date: DateToDBDate(values.start_date),
             graduation_date: DateToDBDate(values.graduation_date),
-            gpa: `${values.gpa}/4.00`,
+            gpa: values.gpa,
             honors: values.honors,
             rel_course_work: values.rel_course_work, 
             activities: values.activities
         }
+        
         axios.post('http://127.0.0.1:5000/onboard/education',{degree})
             .then(res => {
                 console.log(res.data);
