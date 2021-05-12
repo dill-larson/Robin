@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import ProjectsInputOnboarding from './ProjectInputOnboarding';
 import ProjectsOnboarding from './ProjectsOnboarding';
-import SkillsOnboarding from './SkillsOnboarding';
+import SkillsOnboarding from './Skills/SkillsOnboarding';
 import ExperienceInputOnboarding from './Experience/ExperienceInputOnboarding';
 import ExperienceOnboarding from './Experience/ExperienceOnboarding';
 import EducationInputOnboarding from './Education/EducationInputOnboarding';

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Form, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 import axios from 'axios';
 
-import Logo from "../illustrations/Logo";
-import Pill from '../Pill/Pill';
+import Logo from "../../illustrations/Logo";
+import Pill from '../../Pill/Pill';
 
 
 export default class SkillsOnboarding extends React.Component {   
