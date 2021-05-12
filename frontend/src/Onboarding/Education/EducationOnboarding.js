@@ -11,14 +11,22 @@ export default class EducationOnboarding extends React.Component {
         super(props);
         this.state = {
             educations: [
-                {
-                    degree: 'Bachelors of Science',
-                    major: 'Computer Science',
-                    school: 'San Jose State University',
-                    gpa: '4.0',
-                    start_date: 'August 2018',
-                    end_date: 'May 2021'
-                },
+                // {
+                //     degree: 'Bachelors of Science',
+                //     major: 'Computer Science',
+                //     school: 'San Jose State University',
+                //     gpa: '4.0',
+                //     start_date: 'August 2018',
+                //     end_date: 'May 2021'
+                // },
+                // {
+                //     degree: 'Bachelors of Science',
+                //     major: 'Computer Science',
+                //     school: 'San Jose State University',
+                //     gpa: '4.0',
+                //     start_date: 'August 2018',
+                //     end_date: 'May 2021'
+                // }
             ],
             informationPosted: false
         };
@@ -41,49 +49,15 @@ export default class EducationOnboarding extends React.Component {
         console.log(this.state.educations)
         if(this.state.informationPosted){
             return <Redirect to='/onboarding/experience'/>
-        }
-        
-        if(this.state.educations.length === 0){
-            return(<div>
-                <Row style={{justifyContent:"space-between"}}>
-                    <h1 className="onboarding-form form-title">Degrees</h1>
-                    <Logo size="12rem" ></Logo>
-                </Row>
-                <Row className="onboarding-card-display">
-                    <Card className="onboarding-card">
-                        <Row className="py-2 px-5">
-                            <Button
-                                as={Link}
-                                to="/onboarding/education/create"
-                                variant="light-shade" 
-                                className="onboarding-form-btn ml-auto"
-                            >
-                                Add
-                            </Button>
-                        </Row>
-                    </Card>
-                </Row>
-                <Row>
-                    <Button
-                        className="onboarding-form-btn text-white ml-auto" 
-                        variant="light-accent"
-                        onClick={(e) => this.handleSubmit(e)}
-                    >
-                        Next
-                    </Button>
-                </Row>
-            </div>
-            )
-        }else{
+        } 
         return (
             <div>
-                <Row style={{justifyContent:"space-between"}}>
-                    <h1 className="onboarding-title">Degrees</h1>
-                    <Logo size="12rem" ></Logo>
+                <Row className="onboarding-form">
+                    <h1 className="form-title">Degrees</h1>
                 </Row>
                 <Row className="onboarding-card-display">
                 
-                    {this.state.educations.map(edu => {
+                    {this.state.educations.length !== 0 && this.state.educations.data.map(edu => {
                         return (
                         <EducationCard 
                             degree={edu.degree}
@@ -97,30 +71,28 @@ export default class EducationOnboarding extends React.Component {
                     })}
                     {/* Add icon*/}
                     <Card className="onboarding-card">
-                        <Row className="py-2 px-5">
+                        <div className="py-2 px-2" style={{display: "flex"}}>
                             <Button
                                 as={Link}
                                 to="/onboarding/education/create"
                                 variant="light-shade" 
-                                className="onboarding-form-btn ml-auto"
+                                className="ml-auto"
                             >
                                 Add
                             </Button>
-                        </Row>
+                        </div>
                     </Card>
                 </Row>
                 <Row>
                     <Button
-                        className="onboarding-form-btn text-white ml-auto" 
+                        className="text-white ml-auto" 
                         variant="light-accent"
                         onClick={(e) => this.handleSubmit(e)}
                     >
                         Next
                     </Button>
                 </Row>
-            </div>
+            </div>   
         );
     }
-}
-
 }
