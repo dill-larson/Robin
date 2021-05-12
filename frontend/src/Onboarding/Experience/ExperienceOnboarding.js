@@ -11,14 +11,14 @@ export default class EducationOnboarding extends React.Component {
         super(props);
         this.state = {
             jobs: [
-                // {
-                //     company: 'Google',
-                //     position: 'Software Engineer',
-                //     city: 'San Francisco',
-                //     start_date: 'Jan 2020',
-                //     end_date: 'Present',
-                //     rel_achievements: ''
-                // },
+                {
+                    company: 'Google',
+                    title: 'Software Engineer',
+                    city: 'San Francisco',
+                    start_date: 'Jan 2020',
+                    end_date: 'Present',
+                    rel_achievements: ''
+                },
             ],
             informationPosted: false
         };
@@ -42,49 +42,13 @@ export default class EducationOnboarding extends React.Component {
         if(this.state.informationPosted){
             return <Redirect to='/onboarding/skills'/>
         }
-        if(this.state.jobs.length === 0){
-            return (
-                <div>
-                    <Row style={{justifyContent:"space-between"}}>
-                        <h1 className="onboarding-title">Professional History</h1>
-                        <Logo size="12rem" ></Logo>
-                    </Row>
-                    <Row className="onboarding-card-display">
-                        
-                        {/* Add icon*/}
-                        <Card className="onboarding-card">
-                            <Row className="py-2 px-5">
-                                <Button
-                                    as={Link}
-                                    to="/onboarding/experience/create"
-                                    variant="light-shade" 
-                                    className="onboarding-form-btn ml-auto"
-                                >
-                                    Add
-                                </Button>
-                            </Row>
-                        </Card>
-                    </Row>
-                    <Row>
-                        <Button 
-                            className="onboarding-form-btn text-white ml-auto" 
-                            variant="light-accent"
-                            onClick={(e) => this.handleSubmit(e)}
-                        >
-                            Next
-                        </Button>
-                    </Row>
-                </div>
-            );
-        }else{
         return (
             <div>
-                <Row style={{justifyContent:"space-between"}}>
-                    <h1 className="onboarding-title">Professional History</h1>
-                    <Logo size="12rem" ></Logo>
+                <Row className="onboarding-form">
+                    <h1 className="form-title">Professional History</h1>
                 </Row>
                 <Row className="onboarding-card-display">
-                    {this.state.jobs.data.map(job => {
+                    {this.state.jobs.length !== 0 && this.state.jobs.map(job => {
                         return (
                         <JobCard 
                             company={job.company}
@@ -98,21 +62,21 @@ export default class EducationOnboarding extends React.Component {
                     })}
                     {/* Add icon*/}
                     <Card className="onboarding-card">
-                        <Row className="py-2 px-5">
+                        <div className="py-2 px-2" style={{display: "flex"}}>
                             <Button
                                 as={Link}
                                 to="/onboarding/experience/create"
                                 variant="light-shade" 
-                                className="onboarding-form-btn ml-auto"
+                                className="ml-auto"
                             >
                                 Add
                             </Button>
-                        </Row>
+                        </div>
                     </Card>
                 </Row>
                 <Row>
                     <Button 
-                        className="onboarding-form-btn text-white ml-auto" 
+                        className="text-white ml-auto" 
                         variant="light-accent"
                         onClick={(e) => this.handleSubmit(e)}
                     >
@@ -122,5 +86,4 @@ export default class EducationOnboarding extends React.Component {
             </div>
         );
     }
-}
 }
