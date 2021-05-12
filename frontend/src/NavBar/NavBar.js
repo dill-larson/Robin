@@ -60,12 +60,12 @@ export default class NavBar extends React.Component {
 
                     {this.state.loggedIn !== "true" && 
                     <>
-                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">sign up</Nav.Link>
-                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">login</Nav.Link>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/signup">sign up</Nav.Link>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/login">login</Nav.Link>
                     </>
                     }
                     <Nav.Link className="robin-nav-link" as={Link} eventKey="how_it_works" to="/how-it-works">how it works</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="about_us" to="/">about us</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="about_us" to="/about-us">about us</Nav.Link>
                 </Nav>
             </div>
         );
