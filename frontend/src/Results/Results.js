@@ -11,7 +11,6 @@ export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: this.props.match.params.url.replaceAll('%2F', '/'),
             jobs: [],
             informationPosted: false
         };
@@ -20,9 +19,9 @@ export default class Results extends React.Component {
     componentDidMount() {
         const params = {
             email: sessionStorage.getItem('email'),
-            url: this.state.url
+            url: this.props.match.params.url.replaceAll('%2F', '/')
         };
-
+        
         axios.get(`http://127.0.0.1:5000/scrape`, { params })
             .then(res => {
                 console.log(res.data[0]);
