@@ -14,6 +14,8 @@ export default class EducationInputOnboarding extends React.Component {
     validationSchema = yup.object({
         school: yup.string()
             .required("Required"),
+        city: yup.string()
+            .required("Required"),
         degree: yup.string()
             .required("Required"),
         field_of_study: yup.string()
@@ -46,6 +48,7 @@ export default class EducationInputOnboarding extends React.Component {
         const degree = {
             email: sessionStorage.getItem('email'),
             school: values.school,
+            city: values.city,
             degree: values.degree, 
             field_of_study: values.field_of_study,
             start_date: DateToDBDate(values.start_date),
@@ -97,19 +100,34 @@ export default class EducationInputOnboarding extends React.Component {
                 }) => (
                     <Form className="onboarding-form" onSubmit={handleSubmit}>
                         <h1 className="form-title">Degree</h1>
-                        <Form.Group controlId="school">
-                            <Form.Label className="form-label">School</Form.Label>
-                            <Form.Control
-                                className="form-input"
-                                type="text"
-                                value={values.school}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={touched.school && !errors.school}
-                                isInvalid={touched.school && errors.school}
-                            />
-                            <Form.Text className="form-error-text">{touched.school && errors.school}</Form.Text>
-                        </Form.Group>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="school">
+                                <Form.Label className="form-label">School</Form.Label>
+                                <Form.Control
+                                    className="form-input"
+                                    type="text"
+                                    value={values.school}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    isValid={touched.school && !errors.school}
+                                    isInvalid={touched.school && errors.school}
+                                />
+                                <Form.Text className="form-error-text">{touched.school && errors.school}</Form.Text>
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="city">
+                                <Form.Label className="form-label">City</Form.Label>
+                                <Form.Control
+                                    className="form-input"
+                                    type="text"
+                                    value={values.city}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    isValid={touched.city && !errors.city}
+                                    isInvalid={touched.city && errors.city}
+                                />
+                                <Form.Text className="form-error-text">{touched.city && errors.city}</Form.Text>
+                            </Form.Group>
+                        </Form.Row>
                         <Form.Row>
                             <Col>
                                 <Form.Group controlId="degree">
