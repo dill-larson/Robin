@@ -1,51 +1,44 @@
 import React from 'react';
-import { Button, Card, Row, Col, Container } from 'react-bootstrap';
 import './Results.scss';
-import Logo from "../illustrations/Logo"
+import axios from 'axios';
+
 import JobCardResult from "./JobCardResult"
 import Loading from "./Loading"
-import axios from 'axios';
+import Page from '../Page/Page';
+import NavBar from '../NavBar/NavBar';
 
 export default class Results extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: props.searchUrl,
+            url: this.props.match.params.url.replaceAll('%2F', '/'),
             jobs: [],
             informationPosted: false
         };
     }
+
     componentDidMount() {
-        
         const params = {
-            url : this.state.url
+            email: sessionStorage.getItem('email'),
+            url: this.state.url
         };
 
-  
         axios.get(`http://127.0.0.1:5000/scrape`, { params })
-          .then(res => {
-            const jobs = res.data;
-            this.setState({ jobs });
-          })
-      }
-    
-
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.onUserDataUpdate(null, "experience");
-        this.setState({informationPosted: true});
+            .then(res => {
+                const jobs = res.data;
+                this.setState({ jobs });
+            });
     }
-
-    render() {
     
+    render() {
         return !this.state.jobs.length ?
-        <Loading></Loading> :
+        <Loading /> :
         ( 
-            <Container>
-                <Row>
-                    <Logo size="12rem"></Logo>
-                    <h1 className="search-title"> Job Search Results</h1>
-                </Row>
+            <Page>
+                <NavBar/>
+                <div className="results-header">
+                    <h1 className="header-title"> Job Search Results</h1>
+                </div>
                 <div className="results-container">
                 {this.state.jobs.map(job => {
                         return (
@@ -55,14 +48,11 @@ export default class Results extends React.Component {
                             city={job.location}
                             description={job.Description}
                             score={job.score}
-                            //skills={job.skills}
                         />
                         );
                     })}
                 </div>
-                
-            </Container>
-            
+            </Page>
         );
      }
 }
