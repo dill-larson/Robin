@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Card, Row } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 import axios from 'axios'
 
-import Logo from "../illustrations/Logo";
+import Logo from "../../illustrations/Logo";
 import ProjectCard from './ProjectCard';
 export default class ProjectsOnboarding extends React.Component {
     constructor(props) {

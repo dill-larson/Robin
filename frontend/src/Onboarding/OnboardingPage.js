@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
-import ProjectsInputOnboarding from './ProjectInputOnboarding';
-import ProjectsOnboarding from './ProjectsOnboarding';
+import ProjectsInputOnboarding from './Project/ProjectInputOnboarding';
+import ProjectsOnboarding from './Project/ProjectsOnboarding';
 import SkillsOnboarding from './Skills/SkillsOnboarding';
 import ExperienceInputOnboarding from './Experience/ExperienceInputOnboarding';
 import ExperienceOnboarding from './Experience/ExperienceOnboarding';
