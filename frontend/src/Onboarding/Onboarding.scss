@@ -86,6 +86,21 @@
         color: var(--danger);
     }
 
+    /* override bootstrap card */
+    .card {
+        background-color: inherit;
+        border: transparent;
+    }
+    .card-header {
+        border: transparent;
+        background-color: inherit;
+        padding: 0.5rem 0;
+        display: flex;
+    }
+    .card-body {
+        padding: 0;
+    }
+
     .form-footer {
         display: flex;
     }
