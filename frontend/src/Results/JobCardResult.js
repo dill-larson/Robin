@@ -1,7 +1,5 @@
 import React from 'react';
 import { Badge, Button, Card, Col, Row, Accordion } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Scroll from './Scroll';
 import createResume from '../PDF/PDF';
 
 export default function JobCard(props) {
