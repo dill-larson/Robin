@@ -8,7 +8,7 @@ export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: true
+            loggedIn: sessionStorage.getItem('loggedIn')
         }
     }
 
@@ -49,10 +49,23 @@ export default class NavBar extends React.Component {
                     <Nav.Link className="robin-nav-close robin-nav-link" onClick={(e) => this.handleClose(e)} aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="profile" to="/">profile</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="portfolio" to="/">jobs, skills, projects</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="sign_out" to="/">sign out</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="home" to="/">home</Nav.Link>
+
+                    {this.state.loggedIn === "true" && 
+                    <>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
+                        <Nav.Link className="robin-nav-link" as={Link} onClick={() => {sessionStorage.clear()}} eventKey="sign_out" to="/">sign out</Nav.Link>
+                    </>
+                    }
+
+                    {this.state.loggedIn !== "true" && 
+                    <>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">sign up</Nav.Link>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">login</Nav.Link>
+                    </>
+                    }
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="how_it_works" to="/how-it-works">how it works</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="about_us" to="/">about us</Nav.Link>
                 </Nav>
             </div>
         );
