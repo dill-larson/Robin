@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Accordion, AccordionCollapse, Button, Card, Col, Form, Row } from 'react-bootstrap';
-import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Accordion, Button, Card, Col, Form } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import '../Onboarding.scss';
 
 import axios from 'axios';
+import DateToDBDate from '../Util';
 
 let avg_chars_per_word = 6;
 let max_words = 13;
@@ -43,12 +44,13 @@ export default class EducationInputOnboarding extends React.Component {
 
     handleSubmit(values) {
         const degree = {
+            email: sessionStorage.getItem('email'),
             school: values.school,
             degree: values.degree, 
             field_of_study: values.field_of_study,
-            start_date: values.start_date,
-            graduation_date: values.graduation_date,
-            gpa: values.gpa,
+            start_date: DateToDBDate(values.start_date),
+            graduation_date: DateToDBDate(values.graduation_date),
+            gpa: `${values.gpa}/4.00`,
             honors: values.honors,
             rel_course_work: values.rel_course_work, 
             activities: values.activities
