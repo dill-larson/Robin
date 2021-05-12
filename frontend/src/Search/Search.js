@@ -1,14 +1,12 @@
 import React from 'react';
-import { Button, Container, Form, Row, Table,Col } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import axios from 'axios';
+
+import './Search.scss';
+
 import NavBar from '../NavBar/NavBar';
-import '../Home/Home.scss'
-import Results from '../Results/Results'
-import './Search.scss'
-import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Page from '../Page/Page';
 
@@ -23,7 +21,6 @@ export default class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            response: [],
             search: false,
             url:"",
             loggedIn : sessionStorage.getItem('loggedIn'),
@@ -32,19 +29,16 @@ export default class Search extends React.Component {
     }
 
     handleSubmit(value) {
-        console.log(value.skills);
-        console.log(value.position);
-       
         this.setState({ 
-                search:true,
-                url:value.url
-            });
+            search:true,
+            url:value.url
+        });
     }
 
     render() {
         if(this.state.loggedIn === "true"){
             if(this.state.search === true){
-                return(<Results searchUrl={this.state.url}></Results>)
+                return <Redirect to={`/results/${this.state.url.replaceAll('/', '%2F')}`} />
             }
             
             return(
@@ -53,10 +47,7 @@ export default class Search extends React.Component {
                     <div className="search-card">
                         <Formik
                             initialValues={{
-                                skills: '',
-                                position: '',
-                                recommended: false
-            
+                                url: ''
                             }}
                             validationSchema={this.validationSchema}
                             onSubmit={(values) => (this.handleSubmit(values))}
