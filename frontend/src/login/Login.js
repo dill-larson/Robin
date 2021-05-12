@@ -13,7 +13,8 @@ import Page from '../Page/Page';
 import Header from '../Components/Header';
 
 /* svgs */
-import Illustration from "../illustrations/Login_illustration"
+import Illustration from "../illustrations/Login_illustration";
+import ErrorIllustration from "../illustrations/Error_illustration"
 
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPool from '../UserPool';
@@ -91,9 +92,6 @@ export default class Login extends React.Component{
         if(this.state.notConfirmed === true){
             return <Redirect to='/verify-email'></Redirect>
         }
-        if(this.state.wrongPassword === true){
-            return <Redirect to='/login-retry'></Redirect>
-        }
         if(this.state.logedIn === true && this.state.onboarderd === false){
             return <Redirect to='/onboarding/general'></Redirect>
         }
@@ -109,7 +107,8 @@ export default class Login extends React.Component{
                         </Row>
                         <Row>
                             <Col>
-                                <Illustration size = "28rem"/>
+                                {this.state.wrongPassword !== true && <Illustration size = "28rem"/>}
+                                {this.state.wrongPassword === true && <ErrorIllustration size = "28rem"/>}
                             </Col>
                             <Col className="login-form">
                                 <Formik
@@ -130,6 +129,11 @@ export default class Login extends React.Component{
                                     }) => (
                                     <Form onSubmit={handleSubmit} >
                                         <h1 className="form-header">Login</h1>
+                                        { this.state.wrongPassword &&
+                                        <div className="form-error">
+                                            <p>The username and password you entered did not match our records. Double-check and try again.</p>
+                                        </div>
+                                        }
                                         <Form.Group controlId="email">
                                             <Form.Label className="form-label">Email</Form.Label>
                                             <Form.Control

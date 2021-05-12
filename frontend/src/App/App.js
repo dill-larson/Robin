@@ -8,8 +8,6 @@ import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import OnboardingPage from '../Onboarding/OnboardingPage';
 import Verify from '../SignUp/Verify';
-import WrongLogin from '../Login/WrongLogin';
-import Test from '../PDF/Test'; //to be removed
 import Results from '../Results/Results';
 
 
@@ -21,10 +19,8 @@ function App() {
             <Route exact path="/search" component={Search}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/login" component={Login}/>
-            <Route path="/onboarding" component={OnboardingPage}/>
             <Route path="/verify-email" component={Verify}/>
-            <Route path="/login-retry" component={WrongLogin}/>
-            <Route path="/pdf" component={Test}/>
+            <Route path="/onboarding" component={OnboardingPage}/>
             <Route path="/results" component={Results}/>
         </Switch>
     </Router>
