@@ -38,18 +38,7 @@ export default class Login extends React.Component{
 
         }
     }
-    componentDidMount() {
-        const params = {
-            email: sessionStorage.getItem('email')
-        };
-        axios.get(`http://127.0.0.1:5000/fetch/contact`, {params})
-          .then(res => {
-            const response = res.data;
-            if(response.email != null)
-            this.setState({ onboarderd: true });
-          })
-      }
-
+    
     handleSubmit(value) {
       const user = new CognitoUser({
         Username: value.email,
@@ -63,11 +52,10 @@ export default class Login extends React.Component{
 
     user.authenticateUser(authDetails, {
         onSuccess: data => {
-        console.log("onSuccess:", data);
-        sessionStorage.setItem('email', value.email);
-        sessionStorage.setItem('loggedIn', "true");
-        this.setState({logedIn:true});
-        
+            sessionStorage.setItem('email', value.email);
+            sessionStorage.setItem('loggedIn', "true");
+            this.setState({logedIn:true});
+
         },
 
         onFailure: err => {
@@ -92,11 +80,8 @@ export default class Login extends React.Component{
         if(this.state.notConfirmed === true){
             return <Redirect to='/verify-email'></Redirect>
         }
-        if(this.state.logedIn === true && this.state.onboarderd === false){
-            return <Redirect to='/onboarding/general'></Redirect>
-        }
-        if(this.state.logedIn === true && this.state.onboarderd === true){
-            return <Redirect to='/search'></Redirect>
+        if(this.state.logedIn === true){
+            return <Redirect to='/search' />
         }
         return (
             <div className="login-page">
