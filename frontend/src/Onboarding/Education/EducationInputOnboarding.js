@@ -37,8 +37,7 @@ export default class EducationInputOnboarding extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            informationPosted: false,
-            showExtras: false
+            informationPosted: false
         };
     }
 
@@ -65,16 +64,9 @@ export default class EducationInputOnboarding extends React.Component {
         this.setState({informationPosted: true});
     }
 
-    handleExtras() {
-        this.setState({showExtras: true});
-    }
-
     render() {
         if(this.state.informationPosted){
             return <Redirect to='/onboarding/education'/>
-        }
-        if(this.state.showExtras) {
-            return <Redirect to='/onboarding/education/create/extras' />
         }
         return(
             <Formik
