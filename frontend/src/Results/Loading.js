@@ -1,10 +1,7 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
-import Page from '../Page/Page';
-
-export default function Pill(props) {
-
+export default function Loading(props) {
     return (
         <div className="loading-page">
             <div className="loading-box">
