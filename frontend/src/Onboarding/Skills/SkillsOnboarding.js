@@ -21,7 +21,7 @@ export default class SkillsOnboarding extends React.Component {
         const params = {
             email: sessionStorage.getItem('email')
         };
-        axios.get(`http://127.0.0.1:5000/fetch/skills`, {params})
+        axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/skills`, {params})
           .then(res => {
             const skills_array = res.data
             console.log(skills_array)
