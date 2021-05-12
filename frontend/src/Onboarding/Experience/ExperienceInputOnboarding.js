@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import '../Onboarding.scss';
 import axios from 'axios';
 
+import DateToDBDate from './Util';
+
 let avg_chars_per_word = 6;
 let max_words = 13;
 export default class EducationInputOnboarding extends React.Component {
@@ -33,10 +35,11 @@ export default class EducationInputOnboarding extends React.Component {
 
     handleSubmit(values) {
         const position ={
+            email: sessionStorage.getItem('email'),
             company: values.company,
             position: values.position,
-            start_date: values.start_date,
-            end_date: values.end_date,
+            start_date: DateToDBDate(values.start_date),
+            end_date: DateToDBDate(values.end_date),
             relevant_achievements: values.rel_achievements     
         }
         axios.post('http://127.0.0.1:5000/onboard/experience',{position})
