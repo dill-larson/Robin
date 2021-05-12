@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import '../Onboarding.scss';
 import axios from 'axios';
 
-import DateToDBDate from './Util';
+import DateToDBDate from '../Util';
 
 let avg_chars_per_word = 6;
 let max_words = 13;
