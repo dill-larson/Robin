@@ -9,9 +9,9 @@ import './Search.scss';
 import NavBar from '../NavBar/NavBar';
 import Login from '../Login/Login';
 import Page from '../Page/Page';
+import axios from 'axios';
 
 export default class Search extends React.Component {
-    
     validationSchema = yup.object({
         url: yup.string()
             .required("Required")
@@ -24,8 +24,26 @@ export default class Search extends React.Component {
             search: false,
             url:"",
             loggedIn : sessionStorage.getItem('loggedIn'),
+            onboarded: false,
+            checkOnboarding: false
         }
        
+    }
+
+    componentDidMount() {
+        const params = {
+            email: sessionStorage.getItem('email')
+        };
+
+        axios.get(`http://127.0.0.1:5000/fetch/contact`, {params})
+          .then(res => {
+            const response = res.data;
+            
+            if(response.email != null) {
+                this.setState({ onboarded: true });
+            }
+            this.setState({ checkOnboarding: true });
+          })
     }
 
     handleSubmit(value) {
@@ -40,7 +58,9 @@ export default class Search extends React.Component {
             if(this.state.search === true){
                 return <Redirect to={`/results/${this.state.url.replaceAll('/', '%2F')}`} />
             }
-            
+            if(this.state.checkOnboarding === true && this.state.onboarded === false) {
+                return <Redirect to="/onboarding/general"/>
+            }
             return(
                 <Page>
                     <NavBar/>
