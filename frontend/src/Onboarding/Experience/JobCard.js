@@ -6,27 +6,21 @@ export default function JobCard(props) {
     return ( 
         <Card className="onboarding-card">
             <Row>
-                <Col md={7}>
+                <Col md={10}>
                     <Card.Body>
-                        <Card.Title><span className="text-main-brand">{props.position}</span> at {props.company}</Card.Title>
+                        <Card.Title><span className="text-light-accent">{props.position}</span> at {props.company}</Card.Title>
                         <Card.Subtitle>{props.city} - {props.start_date} to {props.end_date}</Card.Subtitle>
                         <Card.Body>{props.rel_achievements}</Card.Body>
                     </Card.Body>
                 </Col>
-                <Col className="mt-3">
-                    <Button 
-                        variant="light-shade" 
-                        className="onboarding-form-btn"
-                    >
+                {/* <Col className="card-btns">
+                <Button as={Link} to={`/onboarding/experience/edit/${props.id}`} className="mb-2" variant="light-shade">
                         Edit
                     </Button>
-                    <Button 
-                        variant="brand-danger" 
-                        className="onboarding-form-btn mt-2"
-                    >
+                    <Button variant="danger">
                         Delete
                     </Button>
-                </Col>
+                </Col> */}
             </Row>
         </Card>
     );
