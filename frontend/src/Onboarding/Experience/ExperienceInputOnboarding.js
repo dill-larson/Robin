@@ -3,9 +3,9 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 import axios from 'axios';
-import Logo from "../illustrations/Logo";
+import Logo from "../../illustrations/Logo";
 
 export default class EducationInputOnboarding extends React.Component {
     validationSchema = yup.object({
