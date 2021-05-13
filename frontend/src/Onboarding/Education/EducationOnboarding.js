@@ -10,24 +10,7 @@ export default class EducationOnboarding extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            educations: [
-                // {
-                //     degree: 'Bachelors of Science',
-                //     major: 'Computer Science',
-                //     school: 'San Jose State University',
-                //     gpa: '4.0',
-                //     start_date: 'August 2018',
-                //     end_date: 'May 2021'
-                // },
-                // {
-                //     degree: 'Bachelors of Science',
-                //     major: 'Computer Science',
-                //     school: 'San Jose State University',
-                //     gpa: '4.0',
-                //     start_date: 'August 2018',
-                //     end_date: 'May 2021'
-                // }
-            ],
+            educations: [],
             informationPosted: false
         };
     }
@@ -36,12 +19,11 @@ export default class EducationOnboarding extends React.Component {
             email: sessionStorage.getItem('email')
         };
         axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/education`, {params})
-          .then(res => {
-            const educations = res.data;
-            this.setState({ educations });
-          })
-      }
-
+            .then(res => {
+                const educations = res.data;
+                this.setState({ educations });
+            })
+    }
     handleSubmit(e) {
         e.preventDefault();
         this.props.onUserDataUpdate(null, "education");
@@ -60,9 +42,10 @@ export default class EducationOnboarding extends React.Component {
                 </Row>
                 <Row className="onboarding-card-display">
                 
-                    {this.state.educations.length !== 0 && this.state.educations.data.map(edu => {
+                    {this.state.educations.length !== 0 && this.state.educations.data.map((edu, index) => {
                         return (
-                        <EducationCard 
+                        <EducationCard
+                            key={index}
                             degree={edu.degree}
                             field_of_study={edu.major}
                             school={edu.school}
