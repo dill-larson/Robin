@@ -23,25 +23,9 @@ export default class Search extends React.Component {
         this.state = {
             search: false,
             url:"",
-            loggedIn : sessionStorage.getItem('loggedIn'),
-            onboarded: false,
-            checkOnboarding: false
+            loggedIn : sessionStorage.getItem('loggedIn')
         }
        
-    }
-
-    componentDidMount() {
-        const params = {
-            email: sessionStorage.getItem('email')
-        };
-
-        axios.get(`http://127.0.0.1:5000/fetch/contact`, {params})
-          .then(res => {
-            if(res.data?.email != null) {
-                this.setState({ onboarded: true });
-            }
-            this.setState({ checkOnboarding: true });
-          })
     }
 
     handleSubmit(value) {
@@ -55,9 +39,6 @@ export default class Search extends React.Component {
         if(this.state.loggedIn === "true"){
             if(this.state.search === true){
                 return <Redirect to={`/results/${this.state.url.replaceAll('/', '%2F')}`} />
-            }
-            if(this.state.checkOnboarding === true && this.state.onboarded === false) {
-                return <Redirect to="/onboarding/general"/>
             }
             return(
                 <Page>

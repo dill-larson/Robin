@@ -3,6 +3,7 @@ import { Button, Row, Col, Form } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
 
 /* styling */
 import './Login.scss';
@@ -33,9 +34,24 @@ export default class Login extends React.Component{
             logedIn: false,
             wrongPassword:false,
             notConfirmed:false,
-            onboarderd: false,
-
+            onboarded: false,
+            checkedOnboarding: false
         }
+    }
+
+    hasOnboarded() {
+        const params = {
+            email: sessionStorage.getItem('email')
+        };
+        console.log(sessionStorage.getItem('email'));
+
+        axios.get(`http://127.0.0.1:5000/fetch/contact`, {params})
+            .then(res => {
+                if(res.data?.email != undefined) {
+                    this.setState({ onboarded: true });
+                }
+                this.setState({ checkedOnboarding: true });
+            })
     }
     
     handleSubmit(value) {
@@ -54,7 +70,7 @@ export default class Login extends React.Component{
             sessionStorage.setItem('email', value.email);
             sessionStorage.setItem('loggedIn', "true");
             this.setState({logedIn:true});
-
+            this.hasOnboarded();
         },
 
         onFailure: err => {
@@ -63,7 +79,6 @@ export default class Login extends React.Component{
             console.error(err)
             this.setState({notConfirmed:true})
         }else{
-            
             this.setState({wrongPassword:true});
         }
         
@@ -79,7 +94,10 @@ export default class Login extends React.Component{
         if(this.state.notConfirmed === true){
             return <Redirect to='/verify-email'></Redirect>
         }
-        if(this.state.logedIn === true){
+        if(this.state.checkedOnboarding === true && this.state.logedIn === true && this.state.onboarded === false){
+            return <Redirect to='/onboarding/general' />
+        }
+        if(this.state.checkedOnboarding === true && this.state.logedIn === true && this.state.onboarded === true){
             return <Redirect to='/search' />
         }
         return (
