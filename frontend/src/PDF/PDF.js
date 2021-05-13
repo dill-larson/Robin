@@ -119,7 +119,7 @@ export default async function createResume(user_email, desc, order = ["education
 }
 
 async function getUserData(user_email, desc) {
-    let data = await axios.get('http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/resume/build', {
+    let data = await axios.get('http://127.0.0.1:5000/resume/build', {
             params: {
                 email: user_email,
                 description: desc
