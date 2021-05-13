@@ -37,9 +37,7 @@ export default class Search extends React.Component {
 
         axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/contact`, {params})
           .then(res => {
-            const response = res.data;
-            
-            if(response.email != null) {
+            if(res.data?.email != null) {
                 this.setState({ onboarded: true });
             }
             this.setState({ checkOnboarding: true });
