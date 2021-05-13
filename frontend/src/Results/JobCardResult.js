@@ -1,58 +1,57 @@
 import React from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import ResultPill from './ResultPill'
+import { Badge, Button, Card, Col, Row, Accordion } from 'react-bootstrap';
+import createResume from '../PDF/PDF';
 
 export default function JobCard(props) {
+    function handleClick(e){
+        e.preventDefault();
+        
+        let email = sessionStorage.getItem('email');
+        createResume(email, props.description);
+    }
+
     return ( 
         <Card className="results-card">
             <Row>
-                <Col md={3}>
-                    <Card.Body>
-                        <Card.Title>
-                            <span className="results-title-company">{props.company}</span> 
-                            <br></br>
-                            <br></br>
-                            <span className="results-title">{props.position}</span> 
-                            <br></br>
-                            <span className="results-title">{props.city}</span>
-                            
-                        </Card.Title>
-                    
+                <Col md={4}>
+                    <Card.Header className="card-header">
+                        <h1 className="company-title">{props.company}</h1>
+                    </Card.Header>
+                    <Card.Body className="card-body">
+                        <h5>
+                            <Badge pill variant="main-brand" className="info">{props.position}</Badge>
+                        </h5>
+                        <h5>
+                            <Badge pill variant="dark-accent" className="info">{props.city}</Badge>
+                        </h5>
+                        <h5>
+                            <Badge pill variant="light-accent" className="info">Percent Match: {props.score}%</Badge>
+                        </h5>
                     </Card.Body>
                 </Col>
-                <Col md={7}>
-                    <Row>
-                        <Card.Body className="result-job-description">{props.description}</Card.Body>
-                    </Row>
-                    <Row>
-                        
-                    {props.skills.map((skill,i) => {
-                        return (
-                        <ResultPill name= {skill} variant="dark-accent"></ResultPill>
-                        );
-                    })}
-                    </Row>
+                <Col md={6}>
+                    <Accordion>
+                        <Card>
+                            <Card.Header className="card-header">
+                                <Accordion.Toggle as={Button} variant="dark-accent" className="text-white" eventKey="1">
+                                    View Description 
+                                </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey="1">
+                                <Card.Body className="card-body job-description y-scrollable">
+                                    {props.description}  
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                     </Accordion>                    
                 </Col>
-                <Col >
-                    <Row>
-                        <Button 
-                            variant="dark-shade" 
-                            className="results-resume-button"
-                        >
-                            See tailored resume
-                        </Button>
-                    </Row>
-                    <Row>
-                        <Button 
-                            variant="light-accent text-white" 
-                            className="results-apply-button"
-                        >
-                            Apply
-                        </Button>
-
-                    </Row>
-                    
+                <Col className="card-btns">
+                    <Button onClick={handleClick} variant="dark-shade">
+                        Tailored Resume
+                    </Button>
+                    {/* <Button as={Link} to={props.link} variant="light-accent" className="text-white mt-2">
+                        Apply
+                    </Button> */}
                 </Col>
             </Row>
         </Card>

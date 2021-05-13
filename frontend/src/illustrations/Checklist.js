@@ -1,6 +1,6 @@
 import React from 'react';
 
-import illustration from '../svgs/undraw_Accept_request_re_d81h.svg';
+import illustration from '../svgs/checklist_illustration.svg';
 
 export default function Checklist(props) {
     return(
