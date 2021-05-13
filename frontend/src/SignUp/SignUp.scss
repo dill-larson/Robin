@@ -1,53 +1,93 @@
-.signup-illustration {
+@import '../App/App.scss';//for custom colors
+
+.illustration {
+    //margin-top: 4.5rem;
     margin-right: 5rem;
     margin-left: 4rem;
 }
 
 .form-signup {
+    margin-top: 6rem;
     padding: 1rem 3rem;
-    background-color: var(--dark-accent);
+    background-color: $dark-accent;
     border-radius: 1rem;
-
-    .form-header {
-        color: white;
-    }
-    
-    .form-label {
-        color: white;
-    }
-
-    .form-error {
-        background-color: var(--danger);
-        border-radius: 1rem;
-        padding: 0.5rem;
-        p {
-            padding: 0.15rem;
-            margin-bottom: 0;
-            color: white;
-        }
-    }
-    
-    .form-error-text {
-        color: var(--danger);
-    }
-
-    .form-footer {
-        display: flex;
-    }
-    
-    .form-submit {
-        color: var(--dark-shade);
-        background-color: white;
-        border: 0;
-    }
-    
-    .form-submit:hover {
-        color: white;
-        background-color: var(--dark-shade);
-    }
 }
 
+.form-header {
+    color: $white;
+}
+
+.form-label {
+    color: $white;
+}
+
+.form-input {
+    border-color: $white;
+    border-radius: 0.75rem;
+}
+
+input[type="checkbox"] {
+    border-radius: 50%;
+}
+
+.form-check-input {
+    border-color: $white;
+    width: 1.25rem;
+    height: 1.25rem;
+    
+}
+
+.form-check-input:active {
+    background-color: $main-brand;
+}
+
+.form-check-input:focus {
+    background-color: $main-brand;
+}
+
+//Override bootstrap invalid color
+.form-control.is-invalid { 
+    border-color: $brand-danger;
+}
+
+.form-error {
+    color: $brand-danger;
+}
+
+.form-link {
+    color: $main-brand;
+}
+
+.form-link:hover, .form-link:active {
+    color: darken($main-brand, 15%);
+}
+
+.form-submit {
+    font-weight: bolder;
+    color: $dark-shade;
+    background-color: $white;
+    border: 0;
+    border-radius: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: 130px;
+}
+
+.form-submit:hover {
+    color: $white;
+    background-color: $dark-shade;
+}
 .verify-email-information{
     justify-content: center;
-    padding-top: 0.5rem;
+    padding-top: 1rem;
+    h1{
+        
+        color: $main-brand;
+    }
+    p {
+       
+        font-size: 1.2em;
+        color: $light-accent;
+    }
+   
 }

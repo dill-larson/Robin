@@ -1,15 +1,15 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
-import NavBar from '../NavBar/NavBar';
-import SignupNav from '../Components/SignupNav';
+import { Row } from 'react-bootstrap';
+import Logo from '../illustrations/Logo';
+import SignupNav from '../Components/SignupNav'
 
-export default function Header() {
+export default function Header(props) {
     return (
-        <Col>
-            <Row>
-                <NavBar/>
-                <SignupNav/>
-            </Row>
-        </Col>
+        <>
+          <Row style={{justifyContent:"space-between"}}>
+              <Logo size="12rem"></Logo>
+              <SignupNav></SignupNav>
+          </Row>
+        </>
     );
 }

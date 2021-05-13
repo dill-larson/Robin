@@ -1,23 +1,21 @@
-import React from 'react';
-import { Button, Row, Col, Form } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import React, { Component,useState } from 'react';
+import { Button, Row, Col, Container, Form, Table } from 'react-bootstrap';
 import { Formik } from 'formik';
+import { Link, Redirect } from 'react-router-dom';
 import * as yup from 'yup';
-
-/* styling */
-import './Login.scss';
-
-/* components */
-import Page from '../Page/Page';
-import Header from '../Components/Header';
-
-/* svgs */
-import Illustration from "../illustrations/Login_illustration";
-import ErrorIllustration from "../illustrations/Error_illustration"
-
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import axios from 'axios';
+import Logo from "../illustrations/Logo"
+import Nav from "../Components/Nav"
+import Illustration from "../illustrations/Login_illustration"
 import UserPool from '../UserPool';
+import Page from '../Page/Page'
+import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
+const pageStyle = {
+    height:"100%",
+    color:"white",
+    backgroundColor:"#d8d8e0"
+}
 export default class Login extends React.Component{
     validationSchema = yup.object({
         email: yup.string()
@@ -26,24 +24,20 @@ export default class Login extends React.Component{
         password: yup.string()
             .required("Required"),
     });
-
     constructor(props) {
         super(props);
         this.state = {
             logedIn: false,
             wrongPassword:false,
-            notConfirmed:false,
-            onboarderd: false,
-
+            notConfirmed:false
         }
     }
-    
+
     handleSubmit(value) {
       const user = new CognitoUser({
         Username: value.email,
         Pool: UserPool
     });
-
     const authDetails = new AuthenticationDetails({
         Username: value.email,
         Password: value.password
@@ -51,10 +45,8 @@ export default class Login extends React.Component{
 
     user.authenticateUser(authDetails, {
         onSuccess: data => {
-            sessionStorage.setItem('email', value.email);
-            sessionStorage.setItem('loggedIn', "true");
-            this.setState({logedIn:true});
-
+        console.log("onSuccess:", data);
+        this.setState({logedIn:true});
         },
 
         onFailure: err => {
@@ -63,7 +55,6 @@ export default class Login extends React.Component{
             console.error(err)
             this.setState({notConfirmed:true})
         }else{
-            
             this.setState({wrongPassword:true});
         }
         
@@ -75,89 +66,94 @@ export default class Login extends React.Component{
     });
     }
     render(){
-        
         if(this.state.notConfirmed === true){
             return <Redirect to='/verify-email'></Redirect>
         }
+        if(this.state.wrongPassword === true){
+            return <Redirect to='/login-retry'></Redirect>
+        }
         if(this.state.logedIn === true){
-            return <Redirect to='/search' />
+            return <Redirect to='/onboarding/general'></Redirect>
         }
         return (
-            <div className="login-page">
-                <Page>
+            <div style={pageStyle}>
+                <Page >
+                <Row >
                     <Col>
-                        <Row>
-                            <Header/>
-                        </Row>
-                        <Row>
-                            <Col>
-                                {this.state.wrongPassword !== true && <Illustration size = "28rem"/>}
-                                {this.state.wrongPassword === true && <ErrorIllustration size = "28rem"/>}
-                            </Col>
-                            <Col className="login-form">
-                                <Formik
-                                    initialValues={{
-                                        email: '',
-                                        password: ''
-                                    }}
-                                    validationSchema={this.validationSchema}
-                                onSubmit={(values) => (this.handleSubmit(values))}
-                                >
-                                    {({
-                                        values,
-                                        errors,
-                                        touched,
-                                        handleChange,
-                                        handleBlur,
-                                        handleSubmit
-                                    }) => (
-                                    <Form onSubmit={handleSubmit} >
-                                        <h1 className="form-header">Login</h1>
-                                        { this.state.wrongPassword &&
-                                        <div className="form-error">
-                                            <p>The username and password you entered did not match our records. Double-check and try again.</p>
-                                        </div>
-                                        }
-                                        <Form.Group controlId="email">
-                                            <Form.Label className="form-label">Email</Form.Label>
-                                            <Form.Control
-                                            className="form-input"
-                                            type="email"
-                                            name="email"
-                                            value={values.email}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            isValid={touched.email && !errors.email}
-                                            isInvalid={touched.email && errors.email}
-                                            />
-                                            <Form.Text className="form-error-text">{touched.email && errors.email}</Form.Text>
-                                        </Form.Group>
-                                        <Form.Group controlId="password">
-                                            <Form.Label className="form-label">Password</Form.Label>
-                                            <Form.Control
-                                            className="form-input"
-                                            type="password"
-                                            name="password"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.password}
-                                            isInvalid={touched.password && errors.password}
-                                            />
-                                            <Form.Text className="form-error-text">{touched.password && errors.password}</Form.Text>
-                                        </Form.Group>
-                                        <div className="form-footer">
-                                            <span>I don't have an account yet - <Link to="/signup" className="form-link"> Sign Up</Link></span>
-                                            <Button variant="dark-shade" className="form-submit ml-auto" type="submit" id="submit">Next</Button>
-                                        </div>
-                                        </Form>
-                                    )}
-                                </Formik>
-                            </Col>
-                        </Row>
+                     <Logo size="12rem"></Logo>
+                    <div className="illustration">
+                        <Illustration size = "28rem"></Illustration>
+                    </div>
                     </Col>
-                </Page>
+                    <Col style={{height:"76vh", marginTop: "10rem"}}>
+                        <Col >
+                        
+                        <Formik
+                            initialValues={{
+                                email: '',
+                                password: ''
+                            }}
+                            validationSchema={this.validationSchema}
+                        onSubmit={(values) => (this.handleSubmit(values))}
+                        >
+                            {({
+                                values,
+                                errors,
+                                touched,
+                                handleChange,
+                                handleBlur,
+                                handleSubmit
+                            }) => (
+                            <Form onSubmit={handleSubmit} >
+                                <h1 style={{color:"#6153ae",fontSize: "3.5em"}}>Login</h1>
+                                <Form.Group controlId="email">
+                                    <Form.Label>Email address</Form.Label>
+                                        <Form.Control
+                                        className="form-input"
+                                        type="email"
+                                        name="email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        isValid={touched.email && !errors.email}
+                                        isInvalid={touched.email && errors.email}
+                                        />
+                                        <Form.Text className="form-error">{touched.email && errors.email}</Form.Text>
+                                    </Form.Group>
+                                    <Form.Group controlId="password">
+                                        <Form.Label >Password</Form.Label>
+                                        <Form.Control
+                                        className="form-input"
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                        isInvalid={touched.password && errors.password}
+                                         />
+                                        <Form.Text className="form-error">{touched.password && errors.password}</Form.Text>
+
+                                       
+                                        
+                                    </Form.Group>
+                                    <Row style={{justifyContent:"space-between"}}>
+                                        <p>I don't have an account yet - <Link to="/signup" className="form-link"> Sign Up</Link></p>
+                                        <Button  variant="light" type="submit" className="form-submit" >
+                                            Next
+                                        </Button>
+                                    </Row>
+                                </Form>
+                            )}
+                        </Formik>
+
+                        </Col>
+
+                    </Col>
+                </Row>
+
+            </Page>
             </div>
-        );
+        )
     }
 
 }

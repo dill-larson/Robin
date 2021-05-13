@@ -1,31 +1,28 @@
-.search-form {
-    .form-header {
-        display: flex;
-        justify-content: center;
-    }
+@import '../App/App.scss';
 
-    .form-title {
-        color: var(--main-brand);
-    }
+.search-title{
+    font-size:3em;
+    margin-top:3rem;
+    margin-left:20%;
+    margin-bottom: 3rem;
+    color: $dark-shade;
 
-    .form-label {
-        color: var(--dark-shade);
-    }
-
-    .form-error-text {
-        color: var(--danger);
-    }
-
-    .form-footer {
-        display: flex;
-    }
 }
-
+.search-heddings{
+    color:$main-brand;
+    font-size: 1.5rem;
+}
 .search-card{
-    background-color: var(--light-shade);
+    background-color: $light-shade;
     padding: 3rem;
     margin-left: 10rem;
     margin-right: 10rem;
-    margin-top: 2rem;
     border-radius: 3rem;
+}
+.search-button{
+    border-radius: 1.5rem !important;
+    font-size: 1.1em !important;
+}
+.search-form-input {
+    border-radius: 0.75rem;
 }

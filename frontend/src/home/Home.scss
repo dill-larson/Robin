@@ -1,33 +1,32 @@
-// Nav styling
+@import '../App/App.scss';//for custom colors
 .signup-nav{
     font-size: 2.5rem;
-    font-weight: 500;
     padding-top: 3rem;
-    color: var(--light-accent);
+    color: $light-accent;
     .signup-nav-link{
-        color:var(--main-brand);
+        color:$main-brand;
     }
 }
-
-// Home styling
-.home-information{
-    justify-content: center;
-}
-.home-message {
-    font-size: 1.5rem;
-    color: var(--main-brand);
-    z-index: 1;
-}
-
-// Footer styling
-.footer {
+.footer{
+    padding-left: 14rem;
     padding-top: 2rem;
+    color:$main-brand;
+    .footer-link{
+        color: $light-accent;
+    }
     ul {
         padding: 0;
         list-style-type: none;
     }
 }
-
+.home-information{
+    justify-content: center;
+    padding-top: 2rem;
+    p{
+        font-size: 1.5em;
+        color: $main-brand;
+    }
+}
 .search-label{
-    color:var(--light-accent);
+    color:$light-accent
 }

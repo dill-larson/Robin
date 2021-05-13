@@ -19,8 +19,6 @@ RUN npm install cypress --save-dev
 RUN npm install --save-dev webpack-cli
 RUN npm install --save amazon-cognito-identity-js
 RUN npm install dotenv
-RUN npm install jspdf --save
-
 
 COPY . ./
 

@@ -1,36 +1,48 @@
 from flask import *
 from flask_cors import CORS
+from flask_cors.core import get_allow_headers
 from util.scrape import crawl
 from util.sort import sort_job_list
 from util.sort import sort_experiences
 from util.sort import sort_projects
+from db.read import *
 import requests
 import mysql.connector
 import os
 
 app = Flask(__name__)
-user_email = 'clouduser@gmail.com'
 CORS(app)
 
 @app.route('/scrape')
 def scrape():
-	'''
-    job_list = [{'Title': 'Software Engineer 1', 'Company': 'Adobe', 'Description': 'Strong hands-on experience with Java Experience with MongoDB, Kafka Problem solving skills & technical troubleshooting Experience with testing frameworks, continuous integration and build tools'}, 
-                {'Title': 'Software Developer', 'Company': 'Sleep Number Labs', 'Description': 'Learn how to work with Python and FLASK, Willing to work in a team atmosphere, C++, Node'},
-                {'Title': 'Product Marketing Intern', 'Company': 'Ring Central', 'Description': 'Digital Marketing, Instagram Facebook, Mailchimp'},
-                {'Title': 'Senior Software Engineer', 'Company': 'IBM', 'Description': 'React JS, Node JS, Frontend development experience, Database Mangement, SQL, MySQL'}]'''
 	job_list = []
-	keywords = ['Software', 'data science', 'Data Science', 'Data science', 'software', 'machine learing', 'intern', 'backend', 'frontend', 'ios', 'android', 'flutter']
-	crawl(request.args["url"], keywords, job_list)
+	#keywords = ['Software', 'data science', 'Data Science', 'Data science', 'software', 'machine learing', 'intern', 'backend', 'frontend', 'ios', 'android', 'flutter']
+	#keywords = temp[0]['skills'].split(', ')
+	# print(request.get_json())
+	# print(request.args)
+	email = request.args['email']
+ 
+	#print(email)
 
 	user_data = {}
-	skills_data = get_skills()
-	experience_data = get_experience()
-	projects_data = get_projects()
+	skills_data = get_single_record(email, 'Skills')
+	experience_data = get_all_records(email, 'Experience')
+	projects_data = get_all_records(email, 'Project')
 
-	user_data['skills'] = skills_data['data']['skills']
-	user_data['experience'] = experience_data['data']
-	user_data['projects'] = projects_data['data']
+ 
+	# print(skills_data)
+	# print(experience_data)
+	# print(projects_data)
+
+	user_data['skills'] = skills_data[0]['skills']
+	keywords = skills_data[0]['skills'].split(',')
+	print(keywords)
+	user_data['experience'] = experience_data[0]['data']
+	user_data['projects'] = projects_data[0]['data']
+
+	crawl(request.args["url"], keywords, job_list)
+
+	# print(job_list)
 
 	job_list = sort_job_list(user_data, job_list)
 
@@ -39,365 +51,159 @@ def scrape():
 
 	return json.dumps(job_list)
 
+
 @app.route('/resume/build')
 def build_resume():
 	job_desc = request.args['description']
+	email = request.args['email']
 	user_data = {}
 
-	contact_data = get_contact()
-	skills_data = get_skills()
-	experience_data = get_experience()['data']
-	projects_data = get_projects()['data']
-	education_data = get_education()
+	contact_data = get_single_record(email, 'Contact_Info')
+	skills_data = get_single_record(email, 'Skills')
+	experience_data = get_all_records(email, 'Experience')
+	projects_data = get_all_records(email, 'Project')
+	education_data = get_all_records(email, 'Education')
+	try:
 
-	experience_data = sort_experiences(experience_data, job_desc)
-	projects_data = sort_projects(projects_data, job_desc)
+		experience_data = sort_experiences(experience_data, job_desc)
+		projects_data = sort_projects(projects_data, job_desc)
+	except Exception as e:
+		print(e)
 
-	user_data['skills'] = skills_data['data']['skills'].split(', ')
-	user_data['experience'] = experience_data
-	user_data['projects'] = projects_data
-	user_data['education'] = education_data['data']
-	user_data['contact'] = contact_data['data']
+	user_data['skills'] = skills_data[0]['skills'].split(', ')
+	user_data['experience'] = experience_data[0]['data']
+	user_data['projects'] = projects_data[0]['data']
+	user_data['education'] = education_data[0]['data']
+	user_data['contact'] = contact_data[0]
 
+	print(user_data)
 	return user_data
+
 
 @app.route('/onboard/contact', methods=['POST'])
 def onboardContact():
-	res = {}
-	global user_email
 	try:
+		print(request.get_json())
+		print(request.args)
 		request_params = request.get_json()
 		conn = get_connection_to_db()
 		cursor = conn.cursor()
-
-		insert_statement = 'INSERT INTO Contact_Info (FullName, Email, PhoneNum, Website, LinkedIn, Github) VALUES (%s, %s, %s, %s, %s, %s)'
+		insert_statement = 'INSERT INTO Contact_Info (name, email, phone, website, linkedIn, github) VALUES (%s, %s, %s, %s, %s, %s)'
 		values_to_insert = (request_params['name'], request_params['email'], request_params['phone'], request_params['website'], request_params['linkedin'], request_params['github'])
-
-		user_email = request_params['email']
 
 		cursor.execute(insert_statement, values_to_insert)
 		conn.commit()
-
 		cursor.close()
 		conn.close()
 
-		res['status'] = flask.Response(status=200)
-		res['message'] = 'Contact successfully added'
-
+		return 'Contact successfully added', 200
 	except Exception as e:
-		res['status'] = flask.Response(status=400)
-		res['message'] = 'Could not add user contact'
-		res['error'] = str(e)
-	
-	finally:
-		return res
+		print(str(e))
+		return str(e), 400
+
 
 @app.route('/onboard/education', methods=['POST'])
 def onboardEducation():
-	res = {}
-	global user_email
 	try:
 		request_params = request.get_json()['degree']
 		conn = get_connection_to_db()
 		cursor = conn.cursor()
-
-		print(request_params)
-		print(user_email)
-
-		insert_statement = 'INSERT INTO Education (NameofSchool, LocationSchool, Degree, FieldOfStudy, GPA, Honors, CourseWork, Achievements, EndDate, StartDate, Activities, Email) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
-		values_to_insert = (request_params['school'], 'USA', request_params['degree'], request_params['field_of_study'], request_params['gpa'], '', '', '', request_params['graduation_date'], request_params['start_date'], '', user_email)
+		insert_statement = 'INSERT INTO Education (school, country, degree, major, gpa, honors, coursework, achievements, end_date, start_date, activities, email) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+		values_to_insert = (request_params['school'], request_params['city'], request_params['degree'], request_params['field_of_study'], request_params['gpa'], request_params['honors'], request_params['coursework'], '', request_params['graduation_date'], request_params['start_date'], request_params['activities'], request_params['email'])
 
 		cursor.execute(insert_statement, values_to_insert)
 		conn.commit()
-
 		cursor.close()
 		conn.close()
-
-		res['status'] = flask.Response(status=200)
-		res['message'] = 'Education successfully added'
-
+      
+		return 'Education successfully added', 200
 	except Exception as e:
-		res['status'] = flask.Response(status=400)
-		res['message'] = 'Could not add user education'
-		res['error'] = str(e)
-	
-	finally:
-		print(res)
-		return res
+         print(str(e))
+         return str(e), 400
+
 
 @app.route('/onboard/experience', methods=['POST'])
 def onboardExperience():
-	global user_email
-	res = {}
-	print(request.get_json())
 	try:
 		request_params = request.get_json()['position']
 		conn = get_connection_to_db()
 		cursor = conn.cursor()
-
-		insert_statement = 'INSERT INTO Experience (CompanyName, Position, Achievements, StartDate, EndDate, Email) VALUES (%s, %s, %s, %s, %s, %s)'
-		values_to_insert = (request_params['company'], request_params['position'],  request_params['relevant_achievements'], request_params['start_date'], request_params['end_date'], user_email)
+		insert_statement = 'INSERT INTO Experience (company, title, achievements, start_date, end_date, email) VALUES (%s, %s, %s, %s, %s, %s)'
+		values_to_insert = (request_params['company'], request_params['position'],  request_params['relevant_achievements'], request_params['start_date'], request_params['end_date'], request_params['email'])
 
 		cursor.execute(insert_statement, values_to_insert)
 		conn.commit()
-
 		cursor.close()
 		conn.close()
 
-		res['status'] = flask.Response(status=200)
-		res['message'] = 'Education successfully added'
-
+		return 'Education successfully added', 200
 	except Exception as e:
-		res['status'] = flask.Response(status=400)
-		res['message'] = 'Could not add user education'
-		res['error'] = str(e)
-	
-	finally:
-		print(res)
-		return res
+		print(str(e))
+		return 'Education could not be added', 400
+
 
 @app.route('/onboard/skills', methods=['POST'])
 def onboardSkills():
-	global user_email
-	res = {}
 	try:
+		print(request.get_json())
 		conn = get_connection_to_db()
 		cursor = conn.cursor()
-
-		insert_statement = 'INSERT INTO Skills (Email, Skills) VALUES (%s, %s)'
-		print(request.get_json()['skills'])
-		values_to_insert = (user_email, request.get_json()['skills'])
+		insert_statement = 'INSERT INTO Skills (email, skills) VALUES (%s, %s)'
+		values_to_insert = (request.get_json()['data']['email'], request.get_json()['data']['skills'])
 
 		cursor.execute(insert_statement, values_to_insert)
 		conn.commit()
-
 		cursor.close()
 		conn.close()
 
-		res['status'] = flask.Response(status=200)
-		res['message'] = 'Skills successfully added'
-
+		return 'Skills successfully added', 200
 	except Exception as e:
-		print(e)
-		res['status'] = flask.Response(status=400)
-		res['message'] = 'Could not add user education'
-		res['error'] = str(e)
-	
-	finally:
-		return res
+		print(str(e))
+		return 'Skills could not be added', 400
+
 
 @app.route('/onboard/project', methods=['POST'])
 def onboardProject():
-	global user_email
-	res = {}
-
 	request_params = request.get_json()['position']
-
 	try:
 		conn = get_connection_to_db()
 		cursor = conn.cursor()
-
-		insert_statement = 'INSERT INTO Project (ProjectName, About, StartDate, EndDate, Email) VALUES (%s, %s, %s, %s, %s)'
-		print(user_email)
-		values_to_insert = (request_params['name'], request_params['about'], request_params['start_date'], request_params['end_date'],  user_email)
+		insert_statement = 'INSERT INTO Project (title, description, start_date, end_date, email) VALUES (%s, %s, %s, %s, %s)'
+		values_to_insert = (request_params['name'], request_params['about'], request_params['start_date'], request_params['end_date'], request_params['email'])
 
 		cursor.execute(insert_statement, values_to_insert)
 		conn.commit() 		
-
 		cursor.close()
 		conn.close()
-
-		res['status'] = flask.Response(status=200)
-		res['message'] = 'Skills successfully added'
-
+		return 'Project successfully added', 200
 	except Exception as e:
-		res['status'] = flask.Response(status=400)
-		res['message'] = 'Could not add user education'
-		res['error'] = str(e)
-	
-	finally:
-		return res
+		print(str(e))
+		return 'Could not add user education', 400
+
 
 @app.route('/fetch/contact')
 def get_contact():
-	res = {}
-	global user_email
-	conn = get_connection_to_db()
-	try:
-		cursor = conn.cursor()
-		query = 'SELECT * FROM Contact_Info WHERE Email = "' + user_email + '"'
-		cursor.execute(query)
-		result = cursor.fetchone()
-		
-		data = {}
-		data['name'] = result[0]
-		data['phone'] = result[1]
-		data['website'] = result[2]
-		data['linkedIn'] = result[3]
-		data['github'] = result[4]
-		data['email'] = result[5]
-
-		cursor.close()
-		conn.close()
-
-		res['data'] = data
-		res['status'] = 200
-	except Exception as e:
-		res['error'] = str(e)
-		res['status'] = 404
-	finally:
-		return res
+    return get_single_record(request.args['email'], 'Contact_Info')
 
 @app.route('/fetch/education')
 def get_education():
-	res = {}
-	global user_email
-	conn = get_connection_to_db()
-	try:
-		cursor = conn.cursor()
-		query = 'SELECT * FROM Education WHERE Email = "' + user_email + '"'
-		cursor.execute(query)
-		result = cursor.fetchall()
-		all_data = []
-
-		for i in range(len(result)):
-			data = {}
-			data['school'] = result[i][0]
-			data['country'] = result[i][1]
-			data['degree'] = result[i][2]
-			data['major'] = result[i][3]
-			data['gpa'] = result[i][4]
-			data['honors'] = result[i][5]
-			data['coursework'] = result[i][6]
-			data['achievements'] = result[i][7]
-			data['end_date'] = result[i][8]
-			data['start_date'] = result[i][9]
-			data['activities'] = result[i][10]
-			data['email'] = result[i][11]
-			all_data.append(data)
-
-		cursor.close()
-		conn.close()
-
-		res['data'] = all_data
-		res['status'] = 200
-	except Exception as e:
-		res['error'] = str(e)
-		res['status'] = 404
-	finally:
-		return res
+    return get_all_records(request.args['email'], 'Education')
 
 @app.route('/fetch/experience')
 def get_experience():
-	res = {}
-	global user_email
-	conn = get_connection_to_db()
-	try:
-		cursor = conn.cursor()
-		query = 'SELECT * FROM Experience WHERE Email = "' + user_email + '"'
-		cursor.execute(query)
-		result = cursor.fetchall()
-		all_data = []
-
-		for i in range(len(result)):
-			data = {}
-			data['company'] = result[i][0]
-			data['title'] = result[i][1]
-			data['start_date'] = result[i][2]
-			data['end_date'] = result[i][3]
-			data['email'] = result[i][4]
-			data['achievements'] = result[i][5]
-			all_data.append(data)
-		
-		cursor.close()
-		conn.close()
-
-		res['data'] = all_data
-		res['status'] = 200
-	except Exception as e:
-		res['error'] = str(e)
-		res['status'] = 404
-	finally:
-		return res
+    return get_all_records(request.args['email'], 'Experience')
 
 @app.route('/fetch/skills')
 def get_skills():
-	res = {}
-	global user_email
-	conn = get_connection_to_db()
-	try:
-		cursor = conn.cursor()
-		query = 'SELECT * FROM Skills WHERE Email = "' + user_email + '"'
-		cursor.execute(query)
-		result = cursor.fetchone()
-
-		data = {}
-		data['skills'] = result[1]
-		data['email'] = result[0]
-		
-		cursor.close()
-		conn.close()
-
-		res['data'] = data
-		res['status'] = 200
-	except Exception as e:
-		res['error'] = str(e)
-		res['status'] = 400
-	finally:
-		return res
+	return get_single_record(request.args['email'], 'Skills')
 
 @app.route('/fetch/projects')
 def get_projects():
-	res = {}
-	global user_email
-	conn = get_connection_to_db()
-
-	try:
-		cursor = conn.cursor()
-		query = 'SELECT * FROM Project WHERE Email = "' + user_email + '"'
-		cursor.execute(query)
-		result = cursor.fetchall()
-		all_data = []
-
-		for i in range(len(result)):
-			data = {}
-			data['title'] = result[i][0]
-			data['description'] = result[i][4]
-			data['start_date'] = result[i][1]
-			data['end_date'] = result[i][2]
-			data['email'] = result[i][3]
-			all_data.append(data)
-
-		cursor.close()
-		conn.close()
-
-		res['data'] = all_data
-		res['status'] = 200
-
-	except Exception as e:
-		res['error'] = str(e)
-		res['status'] = 400
-
-	finally:
-		return res
-
-
-def get_connection_to_db():
-	try:
-		conn = mysql.connector.connect(
-			host='cs160.cri3ntizyxvg.us-east-2.rds.amazonaws.com',
-			user='admin',
-			password='Appli2020',
-			database='Robin'
-		)
-		return conn
-	except Exception as e:
-		print('stress in connecting to db')
-		print(e)
+    return get_all_records(request.args['email'], 'Project')
 
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host ='0.0.0.0', port = 5000)
 	
 	'''
 	job_list = [{'Title': 'Software Engineer 1', 'Company': 'Adobe', 'Description': 'Strong hands-on experience with Java Experience with MongoDB, Kafka Problem solving skills & technical troubleshooting Experience with testing frameworks, continuous integration and build tools'}, 
