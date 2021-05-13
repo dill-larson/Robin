@@ -16,7 +16,11 @@
     background: transparent;
 }
 
-.robin-nav {
+.robin-navbar { //robin logo & hamburger
+    margin-top: 1rem;
+}
+
+.robin-nav { //the expandable navlinks
     height: 100vh;
     width: 0; //hide navbar initially
     position: fixed;

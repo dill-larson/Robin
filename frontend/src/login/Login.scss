@@ -1,15 +1,15 @@
-.signup-illustration {
-    margin-right: 5rem;
-    margin-left: 4rem;
+.login-page {
+    background-color: var(--light-shade);
+    color: white;
+    height: 100vh;
 }
 
-.form-signup {
-    padding: 1rem 3rem;
-    background-color: var(--dark-accent);
-    border-radius: 1rem;
+.login-form {
+    margin-top: 4rem;
 
     .form-header {
-        color: white;
+        color: var(--main-brand);
+        font-size: 3.5rem;
     }
     
     .form-label {
@@ -26,7 +26,7 @@
             color: white;
         }
     }
-    
+
     .form-error-text {
         color: var(--danger);
     }
@@ -34,7 +34,7 @@
     .form-footer {
         display: flex;
     }
-    
+
     .form-submit {
         color: var(--dark-shade);
         background-color: white;
@@ -45,9 +45,4 @@
         color: white;
         background-color: var(--dark-shade);
     }
-}
-
-.verify-email-information{
-    justify-content: center;
-    padding-top: 0.5rem;
 }

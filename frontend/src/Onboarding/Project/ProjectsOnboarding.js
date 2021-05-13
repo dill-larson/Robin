@@ -1,17 +1,22 @@
 import React from 'react';
 import { Button, Card, Row } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 import axios from 'axios'
 
-import Logo from "../illustrations/Logo";
+import Logo from "../../illustrations/Logo";
 import ProjectCard from './ProjectCard';
 export default class ProjectsOnboarding extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             projects: [
-               
+                // {
+                //     title: 'Robin',
+                //     start_date: 'January 2020',
+                //     end_date: 'May 2021',
+                //     description: 'Resume Builder'
+                // },
             ],
         };
     }
@@ -37,47 +42,13 @@ export default class ProjectsOnboarding extends React.Component {
         if(this.state.informationPosted){
             return <Redirect to='/search'/>
         }
-        if(this.state.projects.length === 0){
-            return (
-                <div>
-                    <Row style={{justifyContent:"space-between"}}>
-                        <h1 className="onboarding-title">Projects</h1>
-                        <Logo size="12rem" ></Logo>
-                    </Row>
-                    <Row className="onboarding-card-display">
-                        <Card className="onboarding-card">
-                            <Row className="py-2 px-5">
-                                <Button
-                                    as={Link}
-                                    to="/onboarding/projects/create"
-                                    variant="light-shade" 
-                                    className="onboarding-form-btn ml-auto"
-                                >
-                                    Add
-                                </Button>
-                            </Row>
-                        </Card>
-                    </Row>
-                    <Row>
-                        <Button 
-                            className="onboarding-form-btn text-white ml-auto" 
-                            variant="light-accent"
-                            onClick={(e) => this.handleSubmit(e)}
-                        >
-                            Next
-                        </Button>
-                    </Row>      
-                </div>
-            );
-        } else {
         return (
             <div>
-                <Row style={{justifyContent:"space-between"}}>
-                    <h1 className="onboarding-title">Projects</h1>
-                    <Logo size="12rem" ></Logo>
+                <Row className="onboarding-form">
+                    <h1 className="form-title">Projects</h1>
                 </Row>
                 <Row className="onboarding-card-display">
-                    {this.state.projects.data.map(project => {
+                    {this.state.projects.length !== 0 && this.state.projects.data.map(project => {
                         return (
                         <ProjectCard 
                             name={project.title}
@@ -89,21 +60,21 @@ export default class ProjectsOnboarding extends React.Component {
                     })}
                     {/* Add icon*/}
                     <Card className="onboarding-card">
-                        <Row className="py-2 px-5">
+                        <div className="py-2 px-2" style={{display: "flex"}}>
                             <Button
                                 as={Link}
                                 to="/onboarding/projects/create"
                                 variant="light-shade" 
-                                className="onboarding-form-btn ml-auto"
+                                className="ml-auto"
                             >
                                 Add
                             </Button>
-                        </Row>
+                        </div>
                     </Card>
                 </Row>
                 <Row>
                     <Button 
-                        className="onboarding-form-btn text-white ml-auto" 
+                        className="text-white ml-auto" 
                         variant="light-accent"
                         onClick={(e) => this.handleSubmit(e)}
                     >
@@ -112,5 +83,5 @@ export default class ProjectsOnboarding extends React.Component {
                 </Row>      
             </div>
         );
-    }}
+    }
 }

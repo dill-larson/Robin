@@ -8,7 +8,7 @@ export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: true
+            loggedIn: sessionStorage.getItem('loggedIn')
         }
     }
 
@@ -24,7 +24,7 @@ export default class NavBar extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="robin-navbar">
                 <svg id="nav-logo" width="273" height="84" viewBox="0 0 273 84" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="robin">
                         <path d="M72 77.9H81.8V56.1C81.8 53.3 81.8 49.3 84.5 46.4C86.4 44.4 88.5 44.1 90.6 44.1C91.6 44.1 93.4 44.2 95.6 45.6L99.6 36.7C96.9 35.1 94.3 34.7 91.9 34.7C89.7 34.7 87.8 35 85.9 36.1C84.5 36.9 82.9 38.3 81.8 39.6V35.8H72V77.9Z" fill="#6153AE"/>
@@ -49,10 +49,23 @@ export default class NavBar extends React.Component {
                     <Nav.Link className="robin-nav-close robin-nav-link" onClick={(e) => this.handleClose(e)} aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="profile" to="/">profile</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="portfolio" to="/">jobs, skills, projects</Nav.Link>
-                    <Nav.Link className="robin-nav-link" as={Link} eventKey="sign_out" to="/">sign out</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="home" to="/">home</Nav.Link>
+
+                    {this.state.loggedIn === "true" && 
+                    <>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/search">find jobs</Nav.Link>
+                        <Nav.Link className="robin-nav-link" as={Link} onClick={() => {sessionStorage.clear()}} eventKey="sign_out" to="/">sign out</Nav.Link>
+                    </>
+                    }
+
+                    {this.state.loggedIn !== "true" && 
+                    <>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/signup">sign up</Nav.Link>
+                        <Nav.Link className="robin-nav-link" as={Link} eventKey="find_jobs" to="/login">login</Nav.Link>
+                    </>
+                    }
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="how_it_works" to="/how-it-works">how it works</Nav.Link>
+                    <Nav.Link className="robin-nav-link" as={Link} eventKey="about_us" to="/about-us">about us</Nav.Link>
                 </Nav>
             </div>
         );

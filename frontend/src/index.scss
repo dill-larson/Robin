@@ -1,0 +1,73 @@
+@import url("https://use.typekit.net/nny3ayf.css"); //futura pt font
+
+$light-shade: #d8d8e0;
+$light-accent: #73c1ce;
+$main-brand: #6153ae;
+$dark-accent: #87aecf;
+$dark-shade: #133c8f;
+$gray-white: #f8f7f7;
+$danger: #ff5561;
+$warning: #fdfd96;
+$success: #77dd77;
+
+$theme-colors: (
+    "light-shade": $light-shade,
+    "light-accent": $light-accent,
+    "main-brand": $main-brand,
+    "dark-accent": $dark-accent,
+    "dark-shade": $dark-shade,
+    "gray-white": $gray-white,
+    "danger": $danger,
+    "warning": $warning,
+    "success": $success
+);
+
+// body
+$body-bg: $gray-white;
+
+// font
+$font-family-sans-serif: futura-pt; // Poppins
+$font-family-monospace: roboto; // Roboto
+// $font-weight-base: 500;
+
+// general component
+$component-active-bg: $main-brand;
+
+// anchor
+$link-color: $light-accent;
+
+// headings
+$headings-color: $main-brand;
+
+// update input and button styling -- shared variables
+$btn-padding-y: 0.15rem;
+$btn-padding-x: 1.25rem;
+
+$btn-padding-y-sm: 0.10rem;
+$btn-padding-x-sm: 1rem;
+
+$btn-padding-y-lg: 0.25rem;
+$btn-padding-x-lg: 1.5rem;
+
+// button
+$btn-border-radius: 2rem;
+$btn-border-radius-lg: 2rem;
+$btn-border-radius-sm: 2rem;
+
+// form
+$label-margin-bottom: 0.25rem;
+
+$input-border-radius: 1.25rem;
+
+@import '~bootstrap/scss/bootstrap';
+
+// highlight color -- chrome, safari
+::-moz-selection {
+    background-color: $main-brand;
+    color: white;
+}
+
+::selection {
+    background-color: $main-brand;
+    color: white;
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, Form, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import './Onboarding.scss';
+import '../Onboarding.scss';
 import axios from 'axios';
 
-import Logo from "../illustrations/Logo";
-import Pill from '../Pill/Pill';
+import Pill from '../../Pill/Pill';
 
 
 export default class SkillsOnboarding extends React.Component {   
@@ -76,16 +75,15 @@ export default class SkillsOnboarding extends React.Component {
         }
         return (
             <div>
-                <Row style={{justifyContent:"space-between"}}>
-                    <h1 className="onboarding-title">Skills</h1>
-                    <Logo size="12rem" ></Logo>
+                <Row className="onboarding-form">
+                    <h1 className="form-title">Skills</h1>
                 </Row>
                 <div className="results-container">
-                {this.state.skills_array.map((skill,index)=>{
-                        return (
-                        <Pill name = {skill}  variant="main-brand" array={this.state.skills_array}> </Pill>
-                        );
-                    })}
+                    {this.state.skills_array.map((skill,index)=>{
+                            return (
+                            <Pill name = {skill}  variant="main-brand" array={this.state.skills_array}> </Pill>
+                            );
+                        })}
                 </div>
                 
                 <Form className="onboarding-form" onSubmit={(e) => this.handleSubmit(e)} >
@@ -99,27 +97,19 @@ export default class SkillsOnboarding extends React.Component {
                             onKeyPress={this.handleKeypress}
                             
                         />
-                    </Form.Group>
-                    <Button 
-                           type="submit"
-                            variant="dark-accent" 
-                            className="onboarding-form-btn text-white ml-auto"
-                    >
+                    </Form.Group> 
+                    <div className="form-footer">
+                        <Button type="submit" variant="dark-accent" className="text-white">
                             Add
                         </Button>
-                   
-                    
-                    <Row>
-                        
                         <Button 
                             onClick={this.handleClick}
-                            style={{marginTop:"3rem"}}
                             variant="light-accent" 
-                            className="onboarding-form-btn text-white ml-auto"
+                            className="text-white ml-auto"
                         >
                             Next
                         </Button>
-                    </Row>
+                    </div>
                 </Form>
             </div>
         );

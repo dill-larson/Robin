@@ -121,10 +121,12 @@ export default async function createResume(user_email, desc, order = ["education
 async function getUserData(user_email, desc) {
     let data = await axios.get('http://127.0.0.1:5000/resume/build', {
             params: {
+                email: user_email,
                 description: desc
             }
         })
             .then(res => {
+                console.log(res.data);
                 return res.data;
             })
             .catch(error => {
@@ -233,7 +235,7 @@ function printExperience(job) {
         // job title, start & end date -- on the same line
         doc.setFont(font, "bold"); // bold font
         doc.text(`${job.title} @ ${job.company}, San Francisco, CA`, margin, current_y);
-        doc.text(`${dateToText(job.start_date, "MM-DD-YYYY")} - ${dateToText(job.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
+        doc.text(`${dateToText(job.start_date, "MM-YYYY")} - ${dateToText(job.end_date, "MM-YYYY")}`, doc_width - margin, current_y, {align: "right"});
         doc.setFont(font, "normal"); // unbold font
         update_y();
 
@@ -249,7 +251,7 @@ function printProject(prj) {
         // project name, begin & end date -- on the same line
         doc.setFont(font, "bold"); // bold font
         doc.text(prj.title, margin, current_y);
-        doc.text(`${dateToText(prj.start_date, "MM-DD-YYYY")} - ${dateToText(prj.end_date, "MM-DD-YYYY")}`, doc_width - margin, current_y, {align: "right"});
+        doc.text(`${dateToText(prj.start_date, "MM-YYYY")} - ${dateToText(prj.end_date, "MM-YYYY")}`, doc_width - margin, current_y, {align: "right"});
         doc.setFont(font, "normal"); // unbold font
         update_y();
 
@@ -296,28 +298,20 @@ function dateToText(date, format) {
 
     switch(format) {
         case "MM-DD-YYYY":
-            // check if date matches format
-            if(date.match(/^(\d){1,2}-(\d){1,2}-(\d){4}$/)) {
-                // check if month value is valid
-                if(parseInt(date.substring(0,2)) - 1 >= 0 && parseInt(date.substring(0,2)) - 1 < 12) {
-                    month = months[parseInt(date.substring(0,2)) - 1];
-                }
-                formatted_date = `${month} ${date.substring(6)}`;
-            } else {
-                formatted_date = 'Error: date did not match specified format';
+            // check if month value is valid
+            if(parseInt(date.substring(0,2)) - 1 >= 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                month = months[parseInt(date.substring(0,2)) - 1];
             }
+            formatted_date = `${month} ${date.substring(6)}`;
             break;
         case "MM-YYYY":
-            // check if date matches format
-            if (date.match(/^(\d){1,2}-(\d){4}$/)) {
-                // check if month value is valid
-                if(parseInt(date.substring(0,2)) - 1 > 0 && parseInt(date.substring(0,2)) - 1 < 12) {
-                    month = months[parseInt(date.substring(0,2)) - 1];
-                }
-                formatted_date = `${month} ${date.substring(3)}`;
-            } else {
-                formatted_date = 'Error: date did not match specified format';
+            console.log(date)
+            // check if month value is valid
+            if(parseInt(date.substring(0,2)) - 1 >= 0 && parseInt(date.substring(0,2)) - 1 < 12) {
+                month = months[parseInt(date.substring(0,2)) - 1];
             }
+            
+            formatted_date = `${month} ${date.substring(3)}`;
             break;
         default:
             formatted_date = "Error: unsupported format";

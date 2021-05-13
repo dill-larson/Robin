@@ -1,65 +1,86 @@
-@import '../App/App.scss';//for custom colors
+.loading-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    .loading-box{
+        display: flex;
+        background-color: var(--light-shade);
+        border-radius: 3rem; 
+        padding: 2rem;
+    }
+}
 
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    .header-title {
+        color: var(--dark-shade);
+    }
+}
 
 .results-container{
-    background-color:$light-shade;
+    background-color: var(--light-shade);
     border-radius: 3rem; 
-    padding: 2rem;
-}
-.loading-box{
-    background-color:$light-shade !important;
-    border-radius: 3rem; 
-    padding: 2rem;
-    margin-left: 37%;
-    margin-right: 10rem;
-    margin-top: 10%;
-    color: $main-brand;
-    width: 25%;
+    padding: 0.5rem;
 }
 
 .results-card{
-     background-color: $light-shade;
-     border-radius: 3rem; 
-     padding: 1rem;
-     margin:1rem;
-     border: none;
-     .results-title-company{
-        color: $main-brand;
-        font-size: 2rem;
-    }
-     .results-title{
-         color: $dark-accent;
+    background-color: var(--light-shade);
+    border-radius: 3rem; 
+    padding: 1rem;
+    margin:1rem;
+    border: none;
 
-     }
-     .result-job-description{
-         margin-top:1rem;
-         color:white;
-         font-size: 1.1rem;
+    .company-title{
+        color: var(--dark-shade);
+    }
+
+    .job-description{
+        //  margin-top:1rem;
+         color:var(--white);
          font-weight: normal;
-         
-     }
-     .results-position{
-        margin-top: 1.3rem;
-         color: $main-brand;
-     }
-     .results-location{
-         color: $dark-accent;
-
-     }
-     .results-score{
-         color: $light-accent;
-     }
-     .results-info{
-         color:white
-     }
-     .results-resume-button{
-        //margin-top:2.5rem;
-         border-radius: 2rem  !important;
-         margin-bottom: 1rem;
-     }
-     .results-apply-button{
-        border-radius: 2rem  !important;
     }
 
+    .info{
+        color:white;
+        font-weight: 500;
+    }
+    
+    /* override bootstrap card */
+    .card {
+        background-color: inherit;
+        border: transparent;
+    }
+    .card-header {
+        border: transparent;
+        background-color: inherit;
+        padding: 0.5rem 0;
+        display: flex;
+    }
+    .card-body {
+        padding: 0;
+        display: block;
+    }
 
+    .y-scrollable {
+        overflow-y: auto;
+        max-height: 200px;
+    }
+    
+    /* styling chrome and safari scroll */
+    .y-scrollable::-webkit-scrollbar {
+        width: 8px;
+    }
+       
+    .y-scrollable::-webkit-scrollbar-thumb {
+        background: var(--light-accent);
+        border-radius: 20px;
+    }
+      
+    .y-scrollable::-webkit-scrollbar-track {
+        background: transparent;
+    }
 }

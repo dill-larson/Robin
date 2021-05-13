@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import {Spinner} from 'react-bootstrap'
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
 
-export default function Pill(props) {
-
+export default function Loading(props) {
     return (
-        <div className="loading-box">
-            <Spinner animation="grow" variant="main-brand" />
-             <span style={{ fontSize: "1.7em"}}>
-               Gathering Information
-            </span>
+        <div className="loading-page">
+            <div className="loading-box">
+                <Spinner animation="grow" variant="main-brand" className="mt-2" />
+                <h1 className="ml-2">Gathering Information</h1>
+            </div>
         </div>
     );
 }
