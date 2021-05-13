@@ -55,7 +55,7 @@ export default class EducationInputOnboarding extends React.Component {
             graduation_date: DateToDBDate(values.graduation_date),
             gpa: values.gpa,
             honors: values.honors,
-            rel_course_work: values.rel_course_work, 
+            coursework: values.rel_course_work, 
             activities: values.activities
         }
         
@@ -78,6 +78,7 @@ export default class EducationInputOnboarding extends React.Component {
             <Formik
                 initialValues={{
                     school: '',
+                    city: '',
                     degree: '',
                     field_of_study: '',
                     start_date: '',
