@@ -33,12 +33,14 @@ def nlp_pipeline (data):
     return fdist.keys()
     
 def sort_experiences(experience_data, job_desc):
+    print("sort exper")
     for experience in experience_data:
         experience['score'] = score(nlp_pipeline(experience['achievements']), nlp_pipeline(job_desc))
     experience_data = sorted(experience_data, key = lambda i: i['score'], reverse=True)
     return experience_data
 
 def sort_projects(projects_data, job_desc):
+    print("sort proj")
     for project in projects_data:
         project['score'] = score(nlp_pipeline(project['description']), nlp_pipeline(job_desc))
     projects_data = sorted(projects_data, key = lambda i: i['score'], reverse=True)
