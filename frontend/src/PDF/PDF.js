@@ -306,7 +306,6 @@ function dateToText(date, format) {
             formatted_date = `${month} ${date.substring(6)}`;
             break;
         case "MM-YYYY":
-            console.log(date)
             // check if month value is valid
             if(parseInt(date.substring(0,2)) - 1 >= 0 && parseInt(date.substring(0,2)) - 1 < 12) {
                 month = months[parseInt(date.substring(0,2)) - 1];
