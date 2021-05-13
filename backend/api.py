@@ -71,8 +71,8 @@ def build_resume():
 		print(e)
 
 	user_data['skills'] = skills_data[0]['skills'].split(', ')
-	user_data['experience'] = experience_data[0]['data']
-	user_data['projects'] = projects_data[0]['data']
+	user_data['experience'] = experience_data
+	user_data['projects'] = projects_data
 	user_data['education'] = education_data[0]['data']
 	user_data['contact'] = contact_data[0]
 
