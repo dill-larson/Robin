@@ -188,6 +188,7 @@ function printEducation(edu) {
     
     // print achievements, coursework, activities
     for(const [key, value] of Object.entries(titles)) {
+        console.log(key, value);
         printTitledList(key, value, indent, longest_printed_word);
     }
 }
@@ -203,7 +204,7 @@ function printTitledList(title, list, indent_size = 0, hanging_indent = calcTitl
         let title_length = hanging_indent + 1;  // length of title in mm when printed
                                                 // 1 mm for padding
         // multilined list separated by commas
-        let comma_sep_list = doc.splitTextToSize(list.join(", "), max_line_width - indent_size - title_length);
+        let comma_sep_list = doc.splitTextToSize(list, max_line_width - indent_size - title_length);
         
         lines_to_print = 1 + comma_sep_list.length; // 1 = title
                                                     // length is number of lines to needed to fit list
