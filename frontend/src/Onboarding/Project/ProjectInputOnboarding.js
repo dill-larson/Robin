@@ -40,7 +40,7 @@ export default class ProjectInputOnboarding extends React.Component {
             end_date: DateToDBDate(values.end_date),
             about: values.about        
         }
-        axios.post('http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/onboard/project',{position})
+        axios.post('https://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/onboard/project',{position})
             .then(res => {
                 console.log('in project input onboarding');
                 console.log(res.data);
