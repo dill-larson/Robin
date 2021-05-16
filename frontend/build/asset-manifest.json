@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3a529297.chunk.css",
+    "main.js": "/static/js/main.03750069.chunk.js",
+    "main.js.map": "/static/js/main.03750069.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bd172607.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bd172607.js.map",
+    "static/js/2.cd068285.chunk.js": "/static/js/2.cd068285.chunk.js",
+    "static/js/2.cd068285.chunk.js.map": "/static/js/2.cd068285.chunk.js.map",
+    "static/js/3.e9352f84.chunk.js": "/static/js/3.e9352f84.chunk.js",
+    "static/js/3.e9352f84.chunk.js.map": "/static/js/3.e9352f84.chunk.js.map",
+    "static/js/4.e2c7961a.chunk.js": "/static/js/4.e2c7961a.chunk.js",
+    "static/js/4.e2c7961a.chunk.js.map": "/static/js/4.e2c7961a.chunk.js.map",
+    "static/js/5.e38136e2.chunk.js": "/static/js/5.e38136e2.chunk.js",
+    "static/js/5.e38136e2.chunk.js.map": "/static/js/5.e38136e2.chunk.js.map",
+    "static/js/6.dcf838ee.chunk.js": "/static/js/6.dcf838ee.chunk.js",
+    "static/js/6.dcf838ee.chunk.js.map": "/static/js/6.dcf838ee.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.3a529297.chunk.css.map": "/static/css/main.3a529297.chunk.css.map",
+    "static/js/2.cd068285.chunk.js.LICENSE.txt": "/static/js/2.cd068285.chunk.js.LICENSE.txt",
+    "static/js/3.e9352f84.chunk.js.LICENSE.txt": "/static/js/3.e9352f84.chunk.js.LICENSE.txt",
+    "static/js/4.e2c7961a.chunk.js.LICENSE.txt": "/static/js/4.e2c7961a.chunk.js.LICENSE.txt",
+    "static/js/5.e38136e2.chunk.js.LICENSE.txt": "/static/js/5.e38136e2.chunk.js.LICENSE.txt",
+    "static/media/checklist_illustration.1bbec0e8.svg": "/static/media/checklist_illustration.1bbec0e8.svg",
+    "static/media/error_illustration.3a87c90d.svg": "/static/media/error_illustration.3a87c90d.svg",
+    "static/media/home_illustration.2b26d3fc.svg": "/static/media/home_illustration.2b26d3fc.svg",
+    "static/media/login_illustration.a09fd531.svg": "/static/media/login_illustration.a09fd531.svg",
+    "static/media/mailbox_illustration.3d92957b.svg": "/static/media/mailbox_illustration.3d92957b.svg",
+    "static/media/robin_logo.12215606.svg": "/static/media/robin_logo.12215606.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bd172607.js",
+    "static/js/3.e9352f84.chunk.js",
+    "static/css/main.3a529297.chunk.css",
+    "static/js/main.03750069.chunk.js"
+  ]
+}
