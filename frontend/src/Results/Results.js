@@ -22,7 +22,7 @@ export default class Results extends React.Component {
             url: this.props.match.params.url.replaceAll('%2F', '/')
         };
         
-        axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/scrape`, { params })
+        axios.get(`https://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/scrape`, { params })
             .then(res => {
                 console.log(res.data[0]);
                 const jobs = res.data;
