@@ -21,7 +21,7 @@ export default class SkillsOnboarding extends React.Component {
         const params = {
             email: sessionStorage.getItem('email')
         };
-        axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/skills`, {params})
+        axios.get(`https://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/skills`, {params})
           .then(res => {
             const skills_array = res.data
             console.log(skills_array)
@@ -37,7 +37,7 @@ export default class SkillsOnboarding extends React.Component {
             email: sessionStorage.getItem('email'),
             skills: skills,
         }
-         axios.post('http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/onboard/skills',{data})
+         axios.post('https://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/onboard/skills',{data})
          .then(res => {
             console.log('Printing skills request data')
             console.log(res.data);
