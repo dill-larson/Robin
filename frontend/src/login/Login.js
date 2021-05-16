@@ -45,7 +45,7 @@ export default class Login extends React.Component{
         };
         console.log(sessionStorage.getItem('email'));
 
-        axios.get(`http://127.0.0.1:5000/fetch/contact`, {params})
+        axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/contact`, {params})
             .then(res => {
                 if(res.data?.email != undefined) {
                     this.setState({ onboarded: true });
