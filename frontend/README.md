@@ -1,21 +1,52 @@
-# Running the frontend w/ Docker
+# Frontend
 
-## Build the image
+The frontend was built using React, Bootstrap, and SASS
 
-`docker build -t robin:dev .`
+## Table of Contents
 
-## Run the container
+- [Routes](#routes)
+- [Running the Frontend](#running-the-frontend)
+    <!-- - [Docker](#run-with-docker) -->
+    <!-- - [Locally](#run-locally) -->
+- [Running Cypress Tests](#running-cypress-tests)
 
-`docker run -dp 3000:3000 robin:dev`
+## Routes
 
-## View the frontend
+| Route                           | Component                 |
+|---------------------------------|---------------------------|
+| `/`                             | Home                      |
+| `/signup`                       | SignUp                    |
+| `/login`                        | Login                     |
+| `/verify-email`                 | Verify                    |
+| `/onboarding`                   | OnboardingPage            |
+| `/onboarding/general`           | GeneralOnboarding         |
+| `/onboarding/education`         | EducationOnboarding       |
+| `/onboarding/education/create`  | EducationOnboardingInput  |
+| `/onboarding/experience`        | ExperienceOnboarding      |
+| `/onboarding/experience/create` | ExperienceOnboardingInput |
+| `/onboarding/skills`            | SkillsOnboarding          |
+| `/onboarding/projects`          | ProjectsOnboarding        |
+| `/onboarding/projects/create`   | ProjectsOnboardingInput   |
+| `/search`                       | Search                    |
+| `/results/:link`                | Results                   |
+## Running the frontend
 
-Open [http://localhost:3000](http://localhost:3000)
+1. Open a terminal
+2. Change terminal directory to frontend directory `cd frontend`
+3. Install all npm packages `npm install`
+4. Start an instance `npm start`
+5. View the frontend [http://localhost:3000](http://localhost:3000)
 
-# Testing
+<!-- ### Run with Docker
 
-## Cypress
+3. Build the docker image `docker build -t robin:dev .`
+4. Run the container `docker run -dp 3000:3000 robin:dev`
+5. View the frontend [http://localhost:3000](http://localhost:3000)
 
-The cypress install command has been added to the docker file.
+### Run Locally -->
 
-To open cypress run the command in the frontend folder  :  `npx cypress open`
+## Running Cypress Tests
+
+1. Open Cypress `npx cypress open`
+2. Navigate to `./Testing`
+3. Click on a test to run
