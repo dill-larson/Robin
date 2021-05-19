@@ -4,12 +4,17 @@ The frontend was built using React, Bootstrap, and SASS
 
 ## Table of Contents
 
+- [Wireframes](#wireframes)
 - [Routes](#routes)
 - [Running the Frontend](#running-the-frontend)
     <!-- - [Docker](#run-with-docker) -->
     <!-- - [Locally](#run-locally) -->
 - [Running Cypress Tests](#running-cypress-tests)
 
+
+## Wireframes
+
+The wireframes were designed by [Dillon Larson](https://github.com/dill-larson) and [Laura Hernandez](https://github.com/laurahernandezr) in AdobeXD. You can view the wireframes [here](https://xd.adobe.com/view/4c368606-a18d-44bd-8d73-9a1a89249262-1965/?fullscreen).
 ## Routes
 
 | Route                           | Component                 |
