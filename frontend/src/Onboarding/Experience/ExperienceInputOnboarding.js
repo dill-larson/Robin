@@ -42,7 +42,7 @@ export default class EducationInputOnboarding extends React.Component {
             end_date: DateToDBDate(values.end_date),
             relevant_achievements: values.rel_achievements     
         }
-        axios.post('http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/onboard/experience',{position})
+        axios.post('http://127.0.0.1:5000/onboard/experience',{position})
             .then(res => {
                 console.log(res.data);
                 //this.setState({informationPosted: true});

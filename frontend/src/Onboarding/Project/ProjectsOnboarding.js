@@ -24,7 +24,7 @@ export default class ProjectsOnboarding extends React.Component {
         const params = {
             email: sessionStorage.getItem('email')
         };
-        axios.get(`http://ec2-54-193-142-115.us-west-1.compute.amazonaws.com/fetch/projects`, {params})
+        axios.get(`http://127.0.0.1:5000/fetch/projects`, {params})
           .then(res => {
             const projects = res.data;
             this.setState({ projects });
